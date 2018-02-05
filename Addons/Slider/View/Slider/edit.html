@@ -1,0 +1,77 @@
+<extend name="Public/base"/>
+<block name="style">
+<link rel="stylesheet" type="text/css" href="__STATIC__/bootstrap-fileinput/css/fileinput.css">
+</block>
+<block name="content">
+	<h3>幻灯片管理</h3>
+	<div class="panel panel-default">
+		<div class="panel-heading"><if condition="$_GET['_action'] eq 'add'">新增<else/>编辑</if>幻灯片</div>
+		<div class="panel-body">
+			<!-- 表单 -->
+			<form id="form" action="<{:addons_url('Slider://Slider/update')}>" method="post" class="form-horizontal">
+				<!-- 基础文档模型 -->
+				<div id="tab1" class="tab-pane in tab1">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">标题</label>
+						<div class="col-sm-3">
+							<input type="text" class="text form-control" name="title" value="<{$info.title|default=""}>">
+						</div>
+						<span class="check-tips">请输入幻灯片标题</span>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">链接地址</label>
+						<div class="col-sm-4">
+							<input type="text" class="text form-control" name="link" value="<{$info.link|default=""}>">
+						</div>
+						<span class="check-tips">请填写带http://的全路径</span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">按钮标题</label>
+						<div class="col-sm-3">
+							<input type="text" class="text form-control" name="link_title" value="<{$info.link_title|default=""}>">
+						</div>
+						<span class="check-tips">请输入幻灯片按钮标题</span>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">描述</label>
+						<div class="col-sm-4">
+							<textarea style="width:300px;height:80px;" name="description"><{$info.description|default=""}></textarea>
+						</div>
+						<span class="check-tips">请填写描述</span>
+					</div>
+					<div class="form-group">	
+						<label class="col-sm-2 control-label">封面地址</label>
+						<div class="col-sm-4 mr-xs upimg-inner" style="position:relative;">	
+							<input type="hidden" name="cover_id" 	id="img_file_id" value="">
+							<input type="text" class="form-control" name="img_url" id="cover"  value="<{$info.img_url|default=""}>">			
+							<div class="upload-progr">
+								<div class="up-progress"><div class="upload-bar"></div></div>
+							</div>
+						</div>	
+						<div class="pull-left mr-sm">
+							<a href="javascript:;"  class="up_pic" id="up-img">选择图片</a>
+						</div>	
+						<span class="help-block">可填写外链</span>
+					</div>
+					<{:hook('upload',array('type'=>'img'))}>
+				</div>
+				<input type="hidden" name="id" value="<{$info.id}>"/>
+				<div class="form-group">
+					<div class="col-sm-4 col-sm-offset-2">
+						<button class="btn btn-primary ajax-post" target-form="form-horizontal" type="submit">保存</button>
+						<input class="btn btn-return" type="reset" value="重置" />
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</block>
+<block name="script">
+<script type="text/javascript" src="__STATIC__/webuploader/webuploader.min.js"></script>
+<script type="text/javascript" src="__JS__/other.js?v=0.1"></script>
+<script type="text/javascript">			
+highlight_subnav("<{:U('Addons/adminList/name/Slider')}>");
+</script>
+</block>

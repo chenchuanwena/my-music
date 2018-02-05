@@ -1,0 +1,3 @@
+<?php
+//000000072000a:5:{i:0;a:3:{s:2:"id";s:1:"1";s:4:"name";s:12:"国语专辑";s:11:"description";s:0:"";}i:1;a:3:{s:2:"id";s:1:"2";s:4:"name";s:12:"欧美专辑";s:11:"description";s:0:"";}i:2;a:3:{s:2:"id";s:1:"3";s:4:"name";s:12:"日韩专辑";s:11:"description";s:0:"";}i:3;a:3:{s:2:"id";s:1:"4";s:4:"name";s:8:"DJ舞曲";s:11:"description";s:0:"";}i:4;a:3:{s:2:"id";s:1:"5";s:4:"name";s:13:"JYmusic精选";s:11:"description";s:0:"";}}
+?>

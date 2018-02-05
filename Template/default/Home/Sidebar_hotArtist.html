@@ -1,0 +1,15 @@
+<h2 class="pt_10">音乐人<a href="<{:U('Artist/index')}>" class="">/更多</a></h2>
+<hr>
+<div class="sidebar_content">
+	<JY:artist result="v" limit="10" cache_time="86400" order="hits">
+	<div class="clearfix ">
+		<img src="<{$v['cover_url']}>" alt="" class="f_left circle mr_15" height="50" width="50">
+		<a href="<{$v['url']}>" class="d_block "><{$v['name']}></a>
+		<p class="scheme_color">
+			<span class="f_left"><i class="jy jy-fire"></i> <{$v['hits']}></span>
+			<a href="<{$v['url']}>" class=" button_type_19  f_right tr_delay_hover  bg_dark_color">详细</a>					
+		</p>		
+	</div>
+	<hr class="mb_15">
+	</JY:artist>
+</div>	

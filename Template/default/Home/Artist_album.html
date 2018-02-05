@@ -1,0 +1,112 @@
+<extend name="Public/common"/>
+<block name="content">
+
+<div class="page_content_offset">
+	<div class="container">	
+		<div class="row clearfix">
+			<aside class="col-sm-4">
+				<figure class="t_align_c">
+					<div class="circle wrapper team_photo mb_15">
+						<img src="<{$data['cover_url']}>" alt="<{$data.name}>" height="200" width="200">
+					</div>
+					<figcaption>
+						<h2 class="mb_10 mt_10"><{$data.name}></h2>
+						<button class="btn_1  tr_all_hover mb_5 music-action-btn" data-id="<{$data['id']}>" data-action="like"  data-type="artist" ><i class="jy jy-like"></i>喜欢 (<{$data.likes}>)</button>
+						<button class="btn_1  tr_all_hover mb_5 music-action-btn" data-id="<{$data['id']}>" data-action="fav"  data-type="artist" ><i class="jy jy-fav"></i>收藏 (<{$data.favtimes}>)</button>
+						<ul class="horizontal_list l_width_divider row clearfix pt_10">
+							<li class="f_md_none  t_align_c col-lg-4">
+								<strong><JY:count artist_id="$data['id']" /></strong>
+								<span>首歌曲</span>
+							</li>
+							<li class="f_md_none t_align_c col-lg-4">
+								<strong><JY:count name="album" artist_id="$data['id']" /></strong>
+								<span>张专辑</span>							
+							</li>
+							<li class="f_md_none col-lg-4 t_align_c">
+								<strong><{$data['hits']}></strong>
+								<span>次浏览</span>									
+							</li>
+						</ul>
+						<hr class="mb_10 ">
+					</figcaption>	
+				</figure>
+				<div class="sidebar_content">
+					<div class="mb_15 pt_10">
+						<p class="d_inline_b mr_20">所属类别: <{$data.type_name}></p>
+					
+						<p class="d_inline_b">所属地区: <{$data.region}></p>
+					</div>	
+					
+				</div>
+				
+			</aside>
+			<!--右侧歌曲列表-->			
+			<section class="col-sm-8 mb_10">
+				<div class="clearfix  pt_10">
+					<h3 class="f_left"><{$data['name']}>- 全部专辑</h3>
+					<ul class="tabs_nav f_right">
+						<li ><a href="<{$data['url']}>" >歌曲列表</a></li>
+						<li class="active"><a data-toggle="tab" role="tab"  href="#song-list">专辑列表</a></li>
+						<li><a data-toggle="tab" role="tab"  href="#info">详细介绍</a></li>
+					</ul>
+				</div>
+				<hr>
+				<div class="tab-content">
+					<div id="song-list" class="tab-pane fade in active">						
+						<JY:album result="vo" limit="12" artist_id="$data['id']" page="true" order="update_time">
+						<div class="row clearfix a_list">
+							<div class="col-sm-3 col-xs-4">
+								<a href="<{$vo['url']}>"  target="_album" class="s_animate animate_ftr a_cover">										
+									<img src="<{$vo['cover_url']}>" class="tr_all_hover" alt="<{$vo.name}>">
+								</a>
+							</div>
+							<div class="col-sm-6 col-xs-8">
+								<h3 class="mb_15"><{$vo.name}></h3>
+								<p class="scheme_color mb_15">
+									发行时间：<empty name="vo['pub_time']">未知<else /><{$vo['pub_time']}></empty> 唱片公司：<empty name="vo['company']">暂无<else /><{$vo['company']}></empty> 
+								</p>
+								<p class="a_list_info"><{$vo.introduce|msubstr=0,100}> <a href="<{$vo['url']}>" class="ml_10" target="_album">详细</a></p>
+							</div>
+							
+							<div class="col-sm-3 t_align_r ">
+								<p class="scheme_color mb_15"><span class="fw_medium"><i class="jy jy-time"></i> <{$vo.add_time|time_format='Y-m-d'}></span></p>
+								<p class="scheme_color mb_15">
+									<a href="<{$vo['artist_url']}>" target="_singer"><{$vo['artist_name']}></a>
+									<a href="javascript:;"><{$vo.type_name}></a>
+								</p>
+								<button class="album_play btn_4 tr_all_hover mb_15" title="<{$vo.name}>" data-id="<{$vo.id}>">播放专辑</button><br class="d_sm_none">
+								<button class="btn_1 tr_all_hover f_right ml_5 music-action-btn <if condition="is_fav($vo['id'],3)"> on</if>"  data-id="<{$vo['id']}>" data-action="fav" data-type="album" href="javascript:;">
+									<i class="jy jy-fav"></i>
+								</button>
+								<button class="btn_1 tr_all_hover f_right music-action-btn"  data-id="<{$vo['id']}>" data-action="like" data-type="album" href="javascript:;">
+									<i class="jy jy-like"></i>
+								</button>
+							</div>
+						
+						</div>
+						<hr class="mb_10">
+						</JY:album>
+						<div class="row clearfix mb_15">
+							<div class="col-sm-4">
+								<span class="page_total">共<{$vo_total}>张专辑</span>
+							</div>
+							<div class="col-sm-8 t_align_r">
+								<ul class="horizontal_list clearfix ml_10 page_list"><{$vo_page}></ul>
+							</div>
+						</div>
+
+					</div>
+
+					<div id="info" class="tab-pane fade">
+						<p>简介：<empty name="data['introduce']">暂无<else /> <{$data.introduce}></empty></p>
+					</div>
+
+								
+				</div>
+			
+			</section>
+		</div>
+	</div>
+</div>
+</block>
+<block name="player"><include file="Player/default"/></block> 

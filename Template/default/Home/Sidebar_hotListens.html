@@ -1,0 +1,23 @@
+
+<h2 class="pt_10">热门试听</h2>
+<hr>
+<div class="sidebar_content">
+	<JY:songs result="v" limit="15" cache_time="86400" order="listens">
+	<div class="mb_10 clearfix relative play_box">
+		<div class="row clearfix song_list">								
+			<span class="col-sm-7 col-xs-8">	
+				<span class="ls_num <lt name="i" value="4">ls_num_top</lt>"><{$i}></span>									
+				<a class="text-ellipsis" target="_play" title="<{$v['name']}>" href="<{$v['url']}>"><{$v['name']}></a>									
+			</span>
+			<span class="col-sm-3 col-xs-4 hidden-xs">							
+				<a class="text-ellipsis" href="<{$v['artist_url']}>" target=_singer" title="<{$v['artist_name']}>"><{$v['artist_name']}></a>
+			</span>
+			<span class="col-sm-2 col-xs-4 ls_btns">							
+				<a class="jp-play-me" data-id="<{$v['id']}>" href="javascript:;"><i class="jy jy-play"></i>	</a>
+			</span>
+		</div>
+		<hr class="l_hr">
+	</div>
+	</JY:songs>
+</div>
+

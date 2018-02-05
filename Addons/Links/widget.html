@@ -1,0 +1,23 @@
+											
+<if condition="$addons_config.link_type eq 1"><!-- 普通友情链接 -->
+  <volist name="list" id="vo">
+	<li style="margin:5px; display: inline-block;"><a href="<{$vo.link}>" target="_blank"><{$vo.title}></a></li>
+  </volist>
+<elseif condition="$addons_config.link_type eq 2"/>
+<volist name="list" id="vo">
+   <li style="margin:5px; display: inline-block;">
+		<a href="<{$vo.link}>" target="_blank" >
+			<img src="<{$vo.cover_link}>" style="max-height:60px" title="<{$vo.title}>"/>
+		</a>
+	</li>
+  </volist>
+<else/><!-- 图片友情链接 -->
+  <volist name="list" id="vo">
+   <li style="margin:5px; display: inline-block;">
+		<a href="<{$vo.link}>" target="_blank">
+			<div><img  height="50"  src="<{$vo.cover_link}>"></div>
+			<span style="width:100%; display:block; text-align:center"><{$vo.title}></span>
+		</a>		
+   </li>	
+  </volist>
+</if>

@@ -1,0 +1,20 @@
+<volist name="list" id="v">
+<li id="song-<{$v['id']}>" >
+	<a href="javascript:;" data-id="<{$v['id']}>" class="item-link item-content item-play">
+		<!--div class="item-media"><img src="<{$v['cover_url']|default="/Public/static/images/cover.png"}>" style='width: 2rem;'></div-->          
+		<div class="item-inner">
+			<div class="item-title-row">
+				<div class="item-title"><{$v['name']}></div>
+				
+			</div>
+			<div class="item-subtitle"><{$v['artist_name']}></div>
+		</div>
+	</a>
+	<span class="play-gif"></span>
+	<a class="song-more open-vertical-modal" href="javascript:;">操作</a>
+</li>			
+</volist>
+
+
+
+

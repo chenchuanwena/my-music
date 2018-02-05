@@ -1,0 +1,19 @@
+<extend name="Home/common" />
+
+<block name="content">
+<div class="row">
+	<div class="col-sm-12">
+		<div class="user-fans">
+			<div class="header">TA的粉丝</div>
+			<ul class="clearfix">
+				<li>
+					<div class="image"><a href=""><img alt="" src="<{:get_user_avatar($user['uid'])}>"></a></div>
+					<div class="name"><a href=""><{$user['nickname']}></a></div>
+				</li>
+
+			</ul>
+		</div>
+	</div>
+</div>
+</block>
+

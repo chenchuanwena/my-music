@@ -1,0 +1,18 @@
+
+<volist name="list" id="v" >
+<div class="tm_div al_ls">
+	<div class="tm_pro">
+		<a href="<{:U('Album/'.$v['id'])}>']}>"><img class="tm_img"  src="<{$v['cover_url']|default="/Public/static/images/album_cover.png"}>"></a>
+		<div class="tm_title">
+			<div class="tm_title_bg"></div>
+			<div class="tm_title_con">
+				<div class="tm_title_con_1"><a href="<{:U('Album/'.$v['id'])}>"><{$v['name']}></a></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="tm_price">
+		<a href="<{:U('Artist/'.$v['artist_id'])}>"><{$v['artist_name']}></a>
+	</div>
+</div>
+</volist>

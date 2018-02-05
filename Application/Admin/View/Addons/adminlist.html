@@ -1,0 +1,122 @@
+<extend name="Public/base"/>
+<block name="content">
+<h3 class="col-md-4"><{$title}>管理--<a class="btn btn-labeled btn-success" href="<{:U('config/?name='.$_GET['name'])}>">设置</a></h3>
+<div class="col-lg-4"></div>
+<div class="col-md-4">
+	<div class="input-group mb-lg search-form">
+    	<input type="text" placeholder="请输入内容" value="<{:I('title')}>" name="<{$model['search_key']|default='title'}>" class="form-control search-input">
+    	<a url="<{:U('adminList','name='.$name,false)}>" id="search" class="input-group-addon btn">
+        	<i class="fa-search fa"></i>
+    	</a>
+	</div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+    	<div class="panel panel-default">
+			<empty name="custom_adminlist">
+       		<div class="panel-heading"><{$title}>--内容列表
+				<div class="btn-group pull-right">
+				</div>			
+			</div>
+    		<div class="table-responsive">				
+				<!-- 数据列表 -->
+		        <table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th style="width: 5%" class="check-all">
+								<div data-toggle="tooltip" data-title="全选" class="checkbox c-checkbox">
+									<label>
+										<input type="checkbox">
+										<span class="fa fa-check"></span>
+									</label>
+								</div>
+							</th> 
+							<th>ID</th>
+							<volist name="list_grid" id="vo">
+								<th><{$vo.title}></th>
+							</volist>
+						</tr>
+					</thead>
+					<tbody>
+						<volist name="_list" id="lv" key="vo">
+						<tr>
+							<td>
+								<div class="checkbox c-checkbox">
+									<label>
+									<input type="checkbox" class="ids" value="<{$lv.id}>" name="id[]">
+									<span class="fa fa-check"></span>
+									</label>
+								</div>
+							</td>
+							<td><{$lv.id}></td>
+							<volist name="list_grid" id="lk">
+								<td><{:get_addonlist_field($lv, $lk, $name)}></td>
+							</volist>
+						</tr>
+						</volist>
+					</tbody>
+				</table>
+    		</div>
+			<else />
+			<present name="custom_adminlist">
+				<{$custom_adminlist}>
+			</present>
+			</empty>
+    		<!-- 结束 表格 -->
+    		<div class="panel-footer">
+    			<div class="row">
+					<ul class="pagination">
+					<{$_page}>
+					</ul>
+				 </div>
+            </div>    		
+    	</div>
+	</div>
+</div>
+</block>
+<block name="script">
+<script type="text/javascript">
+highlight_subnav("<{:U('Addons/index')}>","<{:U('Addons/adminList/name/'.$name)}>");
+$(function(){
+	//全选节点
+	$('.check-all').on('change',function(){
+		$('.ids').prop('checked',this.checked);
+	});
+	
+	$('.btn-del').click(function(e){
+		e.preventDefault();
+		var that	= $(this);
+		var parent	= that.parents('tr');
+		$.get(that.attr('href'),function(data){
+			if (data.status){
+				topAlert(data.info,'success');
+				parent.remove();
+			}else{
+				topAlert(data.info);
+			}
+		})
+			
+	})
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+		var query  = $('.search-form').find('input').serialize();
+		query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+		query = query.replace(/^&/g,'');
+		if( url.indexOf('?')>0 ){
+			url += '&' + query;
+		}else{
+			url += '?' + query;
+		}
+		window.location.href = url;
+	});
+	$('.data-table th:last').attr('width',70);
+	//回车自动提交
+	$('.search-form').find('input').keyup(function(event){
+		if(event.keyCode===13){
+			$("#search").click();
+		}
+	});
+})
+</script>
+</block>

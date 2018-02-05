@@ -1,0 +1,9 @@
+[ 2017-08-16T11:47:28+08:00 ]  
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8] Undefined index: REQUEST_METHOD D:\WAMP\www\www.my-music.cn\ThinkPHP\Library\Think\App.class.php 第 31 行.
+NOTIC: [8] Undefined index: REQUEST_URI D:\WAMP\www\www.my-music.cn\ThinkPHP\Library\Think\Dispatcher.class.php 第 137 行.
+ERR: 无法加载模块:Login
+

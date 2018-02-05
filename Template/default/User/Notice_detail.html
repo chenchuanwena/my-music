@@ -1,0 +1,31 @@
+<extend name="Public/common" />
+
+<block name="warp">
+<div class="tabbable tabbable-custom tabbable-reversed">
+	<ul class="nav nav-tabs">
+		<li>
+			<a href="<{:U('index')}>">我的消息</a>
+		</li>
+		<li class="active">
+			<a href="<{:U('notice')}>">系统提醒</a>
+		</li>
+	</ul>
+	<div class="tab-content clearfix">
+		<ul class="media-list">
+			<li class="media">
+			  	<div class="media-body">
+			    	<h4 class="media-heading"><{$data['title']}></h4>
+			    	<{$data['content']}>
+			    	<div class="media-footer">
+			    		<span class="m-time pull-left"><i class="jy jy-clock-o"></i><{$data['create_time']|beforeTime}></span>
+			  		</div>
+			  	</div>
+			  	
+			</li>
+		</ul>
+
+
+	</div>
+</div>
+</block>
+

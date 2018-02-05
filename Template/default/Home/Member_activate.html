@@ -1,0 +1,98 @@
+<extend name="Public/common"/>
+<block name="content">
+<div class="page_content_offset">
+	<div class="container">
+		<div class="row clearfix">
+			<!--left content column-->
+			<section class="col-sm-6 col-sm-offset-3 login-box">
+				<h3 style="line-height:30px"><{$title}></h3><br>
+				
+				<empty name="toactivate">
+				<form class="form-horizontal" action="<{:U()}>">
+					<div class="form-group">
+						<label class="col-lg-2 control-label">邮箱<span class="scheme_color">*</span></label>
+						<div class="col-lg-8">
+							<input type="email" name="email" class="form-control" placeholder="请使用正确的E-mail">
+						</div>                               	                           	
+					</div>
+					
+					
+					 <div class="form-group">
+						<label class="control-label col-lg-2">验证码<span class="scheme_color">*</span></label>
+						<div class="col-lg-8">
+							<input type="text" id="inputPassword" class="form-control" placeholder="请输入验证码" name="verify">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-lg-2"></label>
+						<div class="col-lg-8">
+							<img class="verifyimg reloadverify" alt="点击切换" src="<{:U('verify')}>" style="cursor:pointer;">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-offset-1 col-sm-10">
+							<button class="btn_8 mr_20">重新激活</button>或者使用第三方登录
+						</div>
+					</div>
+										
+				</form>
+				<else/>
+				<br>
+				<br>
+				<p><a class="btn_8 ml_20" href="<{$mail_url}>" >登录邮箱</a></p><br>
+				<br>
+				<p>未收到邮件？</p>
+				<p class="ml_20">1.激活邮件将在1小时候失效！</p>
+				<p class="ml_20">2.检测邮件是否在垃圾及邮件中!</p>
+				<p class="ml_20">3.邮箱可能不是常用邮箱，建议使用常用邮箱注册!</p>				
+				</empty>	
+			</section>
+		</div>
+	</div>
+</div>
+</block>
+<block name="script">
+	<script type="text/javascript">
+    	$(document)
+	    	.ajaxStart(function(){
+	    		$("button:submit").addClass("log-in").attr("disabled", true);
+	    	})
+	    	.ajaxStop(function(){
+	    		$("button:submit").removeClass("log-in").attr("disabled", false);
+	    	});
+
+
+    	$("form").submit(function(){
+    		var self = $(this);
+    		$.post(self.attr("action"), self.serialize(), success, "json");
+    		return false;
+
+    		function success(data){
+    			if(data.status){
+    				infoAlert(data.info + ' 页面即将自动跳转~',true);
+                   	setTimeout(function(){
+                        if (data.url) {
+                            location.href=data.url;
+                        }
+                    },1500);
+    			} else {
+    				infoAlert(data.info);
+    				//刷新验证码
+    				$(".reloadverify").click();
+    			}
+    		}
+    	});
+
+		$(function(){
+			var verifyimg = $(".verifyimg").attr("src");
+            $(".reloadverify").click(function(){
+                if( verifyimg.indexOf('?')>0){
+                    $(".verifyimg").attr("src", verifyimg+'&random='+Math.random());
+                }else{
+                    $(".verifyimg").attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
+                }
+            });
+		});
+	</script>
+</block>

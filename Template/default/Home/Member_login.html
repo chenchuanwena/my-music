@@ -1,0 +1,113 @@
+<extend name="Public/common"/>
+<block name="content">
+<div class="page_content_offset">
+	<div class="container">
+		<div class="row clearfix">
+			<section class="col-sm-4 col-sm-offset-4 col-xs-10 col-xs-offset-1 login-box" >
+				<h2 class="mb_20"><i class="jy jy-login mr_20"></i>用户登录</h2>
+				<hr>
+				<!--login form-->
+				<form method="post" name="validator-form" action="<{:U('member/login')}>" class="form-horizontal">
+					<ul>
+						<li class="clearfix mb_15">
+							<div class=" type_2 f_left col-sm-12">
+								<label class="mb_5 " for="username">用户名</label>
+								<input type="text" class="form-control mb_5" name="username" id="username">
+								
+							</div>
+						</li>
+						<li class="clearfix mb_15">
+							<div class="type_2 f_left col-sm-12">
+								<label class="mb_5" for="pass">密码</label>
+								<input type="password" class="form-control mb_5" name="password" id="pass">										
+							</div>
+						</li>
+						
+						<if condition="C('VERIFY_OFF') eq '1' ">
+						<li class="mb_15">
+							<label  class="mb_5">验证码</label><br>
+							<input type="text" name="verify"  class=" full_width">
+						</li>
+											
+						<li class="mb_15">                  		
+							<img class="verifyimg reloadverify" width="100%" alt="点击切换" src="<{:U('Member/verify')}>" style="cursor:pointer;">              		
+						</li>
+						<script type="text/javascript">
+						$(function(){
+							var verifyimg = $(".verifyimg").attr("src");
+							$(".reloadverify").click(function(){
+								if( verifyimg.indexOf('?')>0){
+									$(".verifyimg").attr("src", verifyimg+'&random='+Math.random());
+								}else{
+									$(".verifyimg").attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
+								}
+							});
+						});
+						</script>
+						</if>
+						<li class="mb_15">
+							<input type="checkbox" id="checkbox_4" name="autologin" class="f_left"><label for="checkbox_4">记住我</label>
+							
+							<span><a class="f_right ml_10" href="<{:U('Member/findpwd')}>">忘记密码?</a></span>
+						</li>
+						<li>
+							<button class="btn_8">登录</button>
+							<a class="sina-btn" href="<{:U('Oauth/login?type=sina')}>" class="color_dark"><i class="jy jy-sina"></i></a>
+							<a class="qq-btn" href="<{:U('Oauth/login?type=qq')}>" class="color_dark"><i class="jy jy-qq"></i></a>	
+						</li>
+					</ul>
+				</form>		
+				
+			</section>
+		</div>
+	</div>
+</div>
+</block>
+<block name="script">
+	<script type="text/javascript">
+    	$(document)
+	    	.ajaxStart(function(){
+	    		$("button:submit").addClass("log-in").attr("disabled", true);
+	    	})
+	    	.ajaxStop(function(){
+	    		$("button:submit").removeClass("log-in").attr("disabled", false);
+	    	});
+
+    	$("form").submit(function(){
+    		var self = $(this);
+    		$.post(self.attr("action"), self.serialize(), success, "json");
+    		return false;
+
+    		function success(data){
+    			if(data.status){
+    				if(data.url){
+    					infoAlert(data.info + ' 页面即将自动跳转~',true);
+	                   	setTimeout(function(){
+	                        if (data.url) {
+	                            location.href=data.url;
+	                        }
+	                    },1500);
+                	}else{
+                		infoAlert(data.info,true);
+                	}
+    			} else {
+    				infoAlert(data.info);
+    				//刷新验证码
+    				//$(".reloadverify").click();
+    			}
+				self.find("button").html("登录").attr("disabled", false);
+    		}
+    	});
+
+		$(function(){
+			var verifyimg = $(".verifyimg").attr("src");
+            $(".reloadverify").click(function(){
+                if( verifyimg.indexOf('?')>0){
+                    $(".verifyimg").attr("src", verifyimg+'&random='+Math.random());
+                }else{
+                    $(".verifyimg").attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
+                }
+            });
+		});
+	</script>
+</block>

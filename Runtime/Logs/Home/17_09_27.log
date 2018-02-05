@@ -1,0 +1,215 @@
+[ 2017-09-27T13:16:22+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `jy_hooks` [ RunTime:0.1200s ]
+SQL: SELECT `name`,`addons` FROM `jy_hooks`  [ RunTime:0.0560s ]
+SQL: SHOW COLUMNS FROM `jy_addons` [ RunTime:0.0570s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('Links')  [ RunTime:0.0550s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('Attachment')  [ RunTime:0.0560s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('SocialComment','Attachment')  [ RunTime:0.0570s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('Baidushare')  [ RunTime:0.0560s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('Attachment')  [ RunTime:0.0560s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('Editor')  [ RunTime:0.0560s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('EditorForAdmin')  [ RunTime:0.0560s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('Justup')  [ RunTime:0.0560s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('SyncLogin','Ads')  [ RunTime:0.0560s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('Editor')  [ RunTime:0.0560s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('JYslider','slider','Slider')  [ RunTime:0.0550s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('Ftp','Parser')  [ RunTime:0.0550s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('Template')  [ RunTime:0.0550s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('SyncLogin')  [ RunTime:0.0560s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('SyncLogin')  [ RunTime:0.0580s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('Collect')  [ RunTime:0.0550s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('Ads')  [ RunTime:0.0560s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('indexPay','Pay')  [ RunTime:0.0610s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:2.101120s ]
+INFO: [ app_init ] --END-- [ RunTime:2.103120s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `jy_config` [ RunTime:0.0570s ]
+SQL: SELECT `type`,`name`,`value` FROM `jy_config` WHERE `status` = 1  [ RunTime:0.0670s ]
+
+[ 2017-09-27T13:16:22+08:00 ] 127.0.0.1 /index.php?s=/Member/getUser.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-09-27T13:16:28+08:00 ] 127.0.0.1 /index.php?s=/genre/3.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
+
+[ 2017-09-27T13:16:29+08:00 ] 127.0.0.1 /index.php?s=/genre/3.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.003000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-09-27T13:16:29+08:00 ] 127.0.0.1 /index.php?s=/genre/3.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.003000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-09-27T13:16:30+08:00 ] 127.0.0.1 /index.php?s=/genre/5.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-09-27T13:16:32+08:00 ] 127.0.0.1 /index.php?s=/artist.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-09-27T13:16:32+08:00 ] 127.0.0.1 /index.php?s=/Member/getUser.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-09-27T13:16:36+08:00 ] 127.0.0.1 /index.php?s=/album.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-09-27T13:16:37+08:00 ] 127.0.0.1 /index.php?s=/artist.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.003000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-09-27T13:16:37+08:00 ] 127.0.0.1 /index.php?s=/tag.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001001s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002001s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-09-27T13:16:41+08:00 ] 127.0.0.1 /index.php?s=/genre/4.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-09-27T13:16:41+08:00 ] 127.0.0.1 /index.php?s=/ranks.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.003000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
+
+[ 2017-09-27T13:16:42+08:00 ] 127.0.0.1 /index.php?s=/artist/2.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-09-27T13:16:43+08:00 ] 127.0.0.1 /index.php?s=/Member/getUser.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-09-27T13:16:48+08:00 ] 127.0.0.1 /index.php?s=/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-09-27T13:16:48+08:00 ] 127.0.0.1 /index.php?s=/Member/getUser.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-09-27T13:16:58+08:00 ] 127.0.0.1 /index.php?s=/genre/2.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-09-27T13:16:58+08:00 ] 127.0.0.1 /index.php?s=/Member/getUser.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-09-27T13:17:03+08:00 ] 127.0.0.1 /index.php?s=/music/2.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-09-27T13:17:04+08:00 ] 127.0.0.1 /index.php?s=/Music/getdata.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `jy_songs` [ RunTime:0.0610s ]
+SQL: SELECT a.id,a.server_id,a.name,a.artist_id,a.artist_name,a.album_id,a.album_name,a.cover_url,a.up_uid,a.up_uname,b.lrc,b.listen_url FROM jy_songs a LEFT JOIN jy_songs_extend b ON a.id= b.mid  WHERE `id` = 2 LIMIT 1   [ RunTime:0.0570s ]
+SQL: UPDATE `jy_songs` SET `listens`=listens+1 WHERE `id` = 2 [ RunTime:0.0550s ]
+

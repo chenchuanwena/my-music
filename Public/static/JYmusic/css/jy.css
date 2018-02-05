@@ -1,0 +1,476 @@
+
+@font-face {font-family: "jy";
+  src: url('../font/iconfont.eot'); /* IE9*/
+  src: url('../font/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../font/iconfont.woff') format('woff'), /* chrome, firefox */
+  url('../font/iconfont.ttf') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('../font/iconfont.svg#jy') format('svg'); /* iOS 4.1- */
+}
+
+.jy {
+  font-family:"jy" !important;
+  display: inline-block;
+  font-style: normal;
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;  
+}
+
+/* makes the font 33% larger relative to the icon container */
+.jy-lg {
+  font-size: 1.33333333em;
+  line-height: 0.75em;
+  vertical-align: -15%;
+}
+.jy-2x {
+  font-size: 2em;
+}
+.jy-3x {
+  font-size: 3em;
+}
+.jy-4x {
+  font-size: 4em;
+}
+.jy-5x {
+  font-size: 5em;
+}
+.jy-fw {
+  width: 1.28571429em;
+  text-align: center;
+}
+.jy-ul {
+  padding-left: 0;
+  margin-left: 2.14285714em;
+  list-style-type: none;
+}
+.jy-ul > li {
+  position: relative;
+}
+.jy-li {
+  position: absolute;
+  left: -2.14285714em;
+  width: 2.14285714em;
+  top: 0.14285714em;
+  text-align: center;
+}
+.jy-li.jy-lg {
+  left: -1.85714286em;
+}
+.jy-border {
+  padding: .2em .25em .15em;
+  border: solid 0.08em #eeeeee;
+  border-radius: .1em;
+}
+.pull-right {
+  float: right;
+}
+.pull-left {
+  float: left;
+}
+.jy.pull-left {
+  margin-right: .3em;
+}
+.jy.pull-right {
+  margin-left: .3em;
+}
+.jy-spin {
+  -webkit-animation: spin 2s infinite linear;
+  -moz-animation: spin 2s infinite linear;
+  -o-animation: spin 2s infinite linear;
+  animation: spin 2s infinite linear;
+}
+@-moz-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(359deg);
+  }
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+  }
+}
+@-o-keyframes spin {
+  0% {
+    -o-transform: rotate(0deg);
+  }
+  100% {
+    -o-transform: rotate(359deg);
+  }
+}
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+.jy-rotate-90 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+.jy-rotate-180 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.jy-rotate-270 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  -o-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+.jy-flip-horizontal {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1);
+  -webkit-transform: scale(-1, 1);
+  -moz-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  -o-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+}
+.jy-flip-vertical {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1);
+  -webkit-transform: scale(1, -1);
+  -moz-transform: scale(1, -1);
+  -ms-transform: scale(1, -1);
+  -o-transform: scale(1, -1);
+  transform: scale(1, -1);
+}
+
+.jy-play-o:before { content: "\e604"; }
+.jy-pause-o:before { content: "\e605"; }
+.jy-unlock-f:before { content: "\e60a"; }
+.jy-tt:before { content: "\e600"; }
+.jy-fav-f:before { content: "\e656"; }
+.jy-fav:before { content: "\e67f"; }
+.jy-location-f:before { content: "\e609"; }
+.jy-location:before { content: "\e63d"; }
+.jy-comment-f:before { content: "\e674"; }
+.jy-comment:before { content: "\e675"; }
+.jy-like-f:before { content: "\e676"; }
+.jy-like:before { content: "\e677"; }
+.jy-volume-f:before { content: "\e690"; }
+.jy-volume:before { content: "\e6ca"; }
+.jy-order:before { content: "\e6eb"; }
+.jy-trash-f:before { content: "\e6c9"; }
+.jy-cart:before { content: "\e6cc"; }
+.jy-trash:before { content: "\e6cd"; }
+.jy-cart-f:before { content: "\e6cf"; }
+.jy-message:before { content: "\e680"; }
+.jy-vip-o:before { content: "\e63f"; }
+.jy-film:before { content: "\e657"; }
+.jy-pc:before { content: "\e614"; }
+.jy-peg:before { content: "\e658"; }
+.jy-forward:before { content: "\e61d"; }
+.jy-backward:before { content: "\e61e"; }
+.jy-play:before { content: "\e61f"; }
+.jy-pause:before { content: "\e625"; }
+.jy-stop:before { content: "\e626"; }
+.jy-prev:before { content: "\e627"; }
+.jy-next:before { content: "\e628"; }
+.jy-mute-f:before { content: "\e6d8"; }
+.jy-edit-f:before { content: "\e60f"; }
+.jy-repeat-one-2:before { content: "\e631"; }
+.jy-l-music:before { content: "\e606"; }
+.jy-playlist:before { content: "\e639"; }
+.jy-voice:before { content: "\e6d9"; }
+.jy-voice-f:before { content: "\e603"; }
+.jy-repeat:before { content: "\e66e"; }
+.jy-mobile:before { content: "\e65b"; }
+.jy-lock-f:before { content: "\e610"; }
+.jy-css3:before { content: "\e636"; }
+.jy-notice-f:before { content: "\e678"; }
+.jy-notice:before { content: "\e679"; }
+.jy-female:before { content: "\e67a"; }
+.jy-male:before { content: "\e67b"; }
+.jy-down-pc:before { content: "\e689"; }
+.jy-gift-fill:before { content: "\e617"; }
+.jy-shake:before { content: "\e601"; }
+.jy-send:before { content: "\e61a"; }
+.jy-time:before { content: "\e60d"; }
+.jy-cloud-down-f:before { content: "\e62f"; }
+.jy-hongbao:before { content: "\e61b"; }
+.jy-tingzhi:before { content: "\e6a6"; }
+.jy-pause-f:before { content: "\e6a7"; }
+.jy-edit-music:before { content: "\e60e"; }
+.jy-playlist-add:before { content: "\e63c"; }
+.jy-repeat-list:before { content: "\e66f"; }
+.jy-shuffle:before { content: "\e616"; }
+.jy-more:before { content: "\e61c"; }
+.jy-music-file:before { content: "\e68b"; }
+.jy-send-f:before { content: "\e63a"; }
+.jy-pic-up:before { content: "\e646"; }
+.jy-sort:before { content: "\e623"; }
+.jy-search:before { content: "\e638"; }
+.jy-order-play:before { content: "\e62d"; }
+.jy-left:before { content: "\e60c"; }
+.jy-history:before { content: "\e6a8"; }
+.jy-right:before { content: "\e620"; }
+.jy-community:before { content: "\e64c"; }
+.jy-email-f:before { content: "\e6d1"; }
+.jy-email:before { content: "\e6d2"; }
+.jy-rss:before { content: "\e655"; }
+.jy-calendar:before { content: "\e683"; }
+.jy-user-o:before { content: "\e671"; }
+.jy-share:before { content: "\e642"; }
+.jy-turn:before { content: "\e643"; }
+.jy-vip-card:before { content: "\e644"; }
+.jy-integral:before { content: "\e645"; }
+.jy-home:before { content: "\e647"; }
+.jy-pic:before { content: "\e649"; }
+.jy-fire:before { content: "\e64b"; }
+.jy-hot-o:before { content: "\e64e"; }
+.jy-new-o:before { content: "\e64f"; }
+.jy-warning-o:before { content: "\e650"; }
+.jy-toup:before { content: "\e652"; }
+.jy-foot:before { content: "\e653"; }
+.jy-qrcode:before { content: "\e654"; }
+.jy-user:before { content: "\e672"; }
+.jy-user-add:before { content: "\e681"; }
+.jy-users:before { content: "\e686"; }
+.jy-window:before { content: "\e667"; }
+.jy-no-download:before { content: "\e68a"; }
+.jy-tag-f:before { content: "\e607"; }
+.jy-tag:before { content: "\e6ee"; }
+.jy-rank:before { content: "\e65a"; }
+.jy-cd:before { content: "\e651"; }
+.jy-cloud-up:before { content: "\e608"; }
+.jy-cloud-down:before { content: "\e62c"; }
+.jy-music-fm:before { content: "\e611"; }
+.jy-fav-music:before { content: "\e612"; }
+.jy-lrc-o:before { content: "\e641"; }
+.jy-digg:before { content: "\e602"; }
+.jy-fc-music:before { content: "\e613"; }
+.jy-link:before { content: "\e66a"; }
+.jy-clock:before { content: "\e6a3"; }
+.jy-sad:before { content: "\e66c"; }
+.jy-smile:before { content: "\e66d"; }
+.jy-adjust:before { content: "\e670"; }
+.jy-mv:before { content: "\e615"; }
+.jy-repeat-one:before { content: "\e66b"; }
+.jy-power:before { content: "\e68c"; }
+.jy-undigg:before { content: "\e62b"; }
+.jy-down:before { content: "\e6aa"; }
+.jy-upload:before { content: "\e6ab"; }
+.jy-set:before { content: "\e632"; }
+.jy-gift:before { content: "\e634"; }
+.jy-Profile:before { content: "\e6ac"; }
+.jy-vip:before { content: "\e666"; }
+.jy-message-f:before { content: "\e684"; }
+.jy-listen:before { content: "\e618"; }
+.jy-unlisten:before { content: "\e619"; }
+.jy-bullhorn:before { content: "\e68d"; }
+.jy-link1:before { content: "\e68e"; }
+.jy-out-o:before { content: "\e6ad"; }
+.jy-logout:before { content: "\e6ae"; }
+.jy-login:before { content: "\e6af"; }
+.jy-rocket:before { content: "\e67e"; }
+.jy-lv1:before { content: "\e637"; }
+.jy-lv2:before { content: "\e65c"; }
+.jy-lv3:before { content: "\e660"; }
+.jy-lv4:before { content: "\e661"; }
+.jy-lv5:before { content: "\e662"; }
+.jy-lv6:before { content: "\e663"; }
+.jy-lv7:before { content: "\e664"; }
+.jy-lv8:before { content: "\e665"; }
+.jy-anzhuo:before { content: "\e682"; }
+.jy-html5:before { content: "\e696"; }
+.jy-hot-s:before { content: "\e695"; }
+.jy-sm-music:before { content: "\e621"; }
+.jy-screen:before { content: "\e6b0"; }
+.jy-full-screen:before { content: "\e6b1"; }
+.jy-bars-f:before { content: "\e6b2"; }
+.jy-bezier:before { content: "\e6b3"; }
+.jy-blockmenu:before { content: "\e6b4"; }
+.jy-document-f:before { content: "\e6b5"; }
+.jy-lists-f:before { content: "\e6b6"; }
+.jy-music-f:before { content: "\e6b7"; }
+.jy-nextfast-f:before { content: "\e6b8"; }
+.jy-next-f:before { content: "\e6b9"; }
+.jy-pause-f1:before { content: "\e6ba"; }
+.jy-play-f:before { content: "\e6bb"; }
+.jy-prevfast-f:before { content: "\e6bc"; }
+.jy-prev-f:before { content: "\e6bd"; }
+.jy-random-f:before { content: "\e6be"; }
+.jy-refresh-f:before { content: "\e6bf"; }
+.jy-retweet-f:before { content: "\e6c0"; }
+.jy-sliders-f:before { content: "\e6c1"; }
+.jy-cloud-up-f:before { content: "\e673"; }
+.jy-left-f:before { content: "\e6c4"; }
+.jy-right-f:before { content: "\e6c5"; }
+.jy-htmal5icon23:before { content: "\e6c6"; }
+.jy-baidu:before { content: "\e63e"; }
+.jy-douban:before { content: "\e640"; }
+.jy-kaixinwang:before { content: "\e699"; }
+.jy-kongjian:before { content: "\e69a"; }
+.jy-pengyouquan:before { content: "\e69c"; }
+.jy-qq:before { content: "\e69d"; }
+.jy-sina:before { content: "\e69e"; }
+.jy-weibo:before { content: "\e69f"; }
+.jy-weixin:before { content: "\e6a0"; }
+.jy-zhifubao:before { content: "\e6a1"; }
+.jy-round-music:before { content: "\e624"; }
+.jy-user1:before { content: "\e6c8"; }
+.jy-cdcover:before { content: "\e668"; }
+.jy-userpic-the:before { content: "\e6da"; }
+.jy-tag-the:before { content: "\e6db"; }
+.jy-user-card:before { content: "\e6dc"; }
+.jy-reset-pwd:before { content: "\e6dd"; }
+.jy-iphone:before { content: "\e69b"; }
+.jy-music-f1:before { content: "\e6ec"; }
+.jy-unmusic-f:before { content: "\e6ed"; }
+.jy-new-s:before { content: "\e697"; }
+.jy-radio-f:before { content: "\e60b"; }
+.jy-radio:before { content: "\e629"; }
+.jy-square:before { content: "\e62a"; }
+.jy-check-sf:before { content: "\e62e"; }
+.jy-check-so:before { content: "\e633"; }
+.jy-del:before { content: "\e63b"; }
+.jy-del-f:before { content: "\e648"; }
+.jy-del-o:before { content: "\e64a"; }
+.jy-add-o:before { content: "\e64d"; }
+.jy-add:before { content: "\e659"; }
+.jy-add-f:before { content: "\e65d"; }
+.jy-minus:before { content: "\e65e"; }
+.jy-warning-f:before { content: "\e65f"; }
+.jy-warning-o1:before { content: "\e669"; }
+.jy-wenhao-f:before { content: "\e67c"; }
+.jy-wenhao-o:before { content: "\e67d"; }
+.jy-check:before { content: "\e685"; }
+.jy-round-o:before { content: "\e687"; }
+.jy-check-f:before { content: "\e688"; }
+.jy-check-o:before { content: "\e691"; }
+.jy-service:before { content: "\e692"; }
+.jy-kefu:before { content: "\e693"; }
+.jy-scan:before { content: "\e630"; }
+.jy-shezhi:before { content: "\e635"; }
+.jy-clock-f:before { content: "\e6a2"; }
+.jy-clock-o:before { content: "\e6a4"; }
+.jy-my-f:before { content: "\e6a5"; }
+.jy-my:before { content: "\e6c2"; }
+.jy-sort-up:before { content: "\e6c3"; }
+.jy-up:before { content: "\e6c7"; }
+.jy-arrow-up-o:before { content: "\e6d7"; }
+.jy-sort-down:before { content: "\e6de"; }
+.jy-below:before { content: "\e6df"; }
+.jy-arow-below:before { content: "\e6e0"; }
+.jy-arrow-down-o:before { content: "\e6e1"; }
+.jy-arrow-right-o:before { content: "\e6e3"; }
+.jy-right-f1:before { content: "\e6e4"; }
+.jy-right-o:before { content: "\e6e5"; }
+.jy-arrow-left-o:before { content: "\e6e7"; }
+.jy-list-ul:before { content: "\e6e8"; }
+.jy-menu:before { content: "\e6e9"; }
+.jy-edit:before { content: "\e68f"; }
+.jy-play-list:before { content: "\e694"; }
+.jy-play-list-f:before { content: "\e6a9"; }
+.jy-fire1:before { content: "\e698"; }
+.jy-more1:before { content: "\e6ea"; }
+.jy-mute:before { content: "\e622"; }
+.jy-link-o:before { content: "\e6ef"; }
+.jy-arow-up:before { content: "\e6f0"; }
+/*tip message start*/
+.tip_message{
+
+	position:absolute;
+	font-family:Arial,Simsun,"Arial Unicode MS",Mingliu,Helvetica;
+	font-size:14px;
+
+}
+.tip_message .tip_message_content{
+	position:relative; 
+	background-color:#fff;
+	border:1px solid #dedede;
+	box-shadow: 0 0 3px #dedede;
+	border-radius:2px;
+	border-top: 2px solid  #e73c31;
+}
+.tip_message .tip_message_title {
+	background-color:#fafafa;
+  border-bottom: 1px solid #f2f2f5;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 38px;
+  padding: 0 0 0 16px;
+  vertical-align: middle;
+}
+.tip_message  .tip_message_close {
+  font-size: 18px;
+  position: absolute;
+  right: 12px;
+  top: 9px;
+  z-index: 2;
+  font-size: 28px;
+  font-family: Helvetica,STHeiti;
+}
+
+.tip_message  .tip_message_close:hover {
+  color:#dd5862;
+}
+.tip_message  .tip_content{
+	max-width: 670px;
+    padding: 15px 20px;
+	word-break:keep-all;
+	white-space:nowrap;
+	font-size:14px;
+}
+
+.tip_message .message_icon{
+	display:block;
+	overflow:hidden;
+	text-align:center;
+}
+.tip_message .message_icon span{
+	display: inline-block;
+	height: 42px;
+    width: 38px;
+}
+
+.tip_message .tip_ico_succ,
+.tip_message .tip_ico_warn,
+.tip_message .tip_ico_fail,
+.tip_message .tip_ico_hits{
+	background-image:url(../images/tip_message.png);
+}
+
+.tip_message .tip_ico_succ{
+	background-position:-36px 0;
+	background-repeat:no-repeat;
+}
+.tip_message .tip_ico_fail{
+	background-position:-36px -150px;
+	background-repeat:no-repeat;
+}
+.tip_message .tip_ico_warn{
+	background-position:-36px -100px;
+	background-repeat:no-repeat;
+}
+.tip_message .tip_ico_ask{
+	background-position:-36px -50px;
+	background-repeat:no-repeat;
+}
+.tip_message .message_content {
+  line-height: 18px;
+  padding-top: 8px;
+  word-wrap: break-word;
+  text-align:center;
+}
+/* tip message end */

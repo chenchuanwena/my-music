@@ -1,0 +1,79 @@
+<extend name="Public/common"/>
+<block name="content">
+<div class="page_content_offset">
+	<div class="container">	
+		<div class="row clearfix">
+			<!--左侧专辑列表-->
+			<section class="col-sm-8 pt_10">				
+				<div class="row clearfix">					
+					<div class="col-sm-4 col-xs-5 t_align_l">
+						<h2 class="pt_10"><i class="jy jy-cdcover mr_10"></i><{$data['name']}></h2>
+					</div>
+					<div class="col-sm-8 col-xs-7 t_align_l ">
+						<div class="clearfix ml_10">
+							<div class="custom_select relative f_right t_align_l">
+								<div class="select_title  relative color_dark"><{$data['name']}> </div>
+								<ul class="select_list d_none">
+									<li class="tr_delay_hover"><a href="<{:U('/Album')}>">全部专辑</a></li>
+									<JY:altype result="vo" cache_time="72000" >
+										<li class="tr_delay_hover"><a href="<{$vo['url']}>"><{$vo.name}></a></li>
+									</JY:altype>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr class="mb_10">
+				<JY:album result="vo" type_id="$data['id']" limit="12"  page="1" order="update_time">
+				<div class="row clearfix a_list">
+					<div class="col-sm-3 col-xs-4">
+						<a href="<{$vo['url']}>"  target="_album" class="s_animate animate_ftr a_cover">										
+							<img src="<{$vo['cover_url']}>" class="tr_all_hover" alt="<{$vo.name}>">
+						</a>
+					</div>
+					<div class="col-sm-6 col-xs-8">
+						<h3 class="mb_15"><{$vo.name}></h3>
+						<p class="scheme_color mb_15">
+							发行时间：<empty name="vo['pub_time']">未知<else /><{$vo['pub_time']}></empty> 唱片公司：<empty name="vo['company']">暂无<else /><{$vo['company']}></empty> 
+						</p>
+						<p class="a_list_info"><{$vo.introduce|msubstr=0,100}> <a href="<{$vo['url']}>" class="ml_10" target="_album">详细</a></p>
+					</div>
+					
+					<div class="col-sm-3 t_align_r ">
+						<p class="scheme_color mb_15"><span class="fw_medium"><i class="jy jy-time"></i> <{$vo.add_time|time_format='Y-m-d'}></span></p>
+						<p class="scheme_color mb_15">
+							<a href="<{$vo['artist_url']}>" target="_singer"><{$vo['artist_name']}></a>
+							<a href="javascript:;"><{$vo.type_name}></a>
+						</p>
+						<button class="album_play btn_4 tr_all_hover mb_15" title="<{$vo.name}>" data-id="<{$vo.id}>">播放专辑</button><br class="d_sm_none">
+						<button class="btn_1  tr_all_hover f_right  ml_5 music-action-btn"  data-id="<{$vo['id']}>" data-action="fav" data-type="album" href="javascript:;">
+							<i class="jy jy-fav"></i>
+						</button>
+						<button class="btn_1 tr_all_hover f_right music-action-btn"  data-id="<{$vo['id']}>" data-action="like" data-type="album" href="javascript:;">
+							<i class="jy jy-like"></i>
+						</button>
+					</div>
+				
+				</div>
+				<hr class="mb_10">
+				</JY:album>
+				<div class="row clearfix mb_15">
+					<div class="col-sm-4">
+						<span class="page_total">共<{$vo_total}>张专辑</span>
+					</div>
+					<div class="col-sm-8 t_align_r">
+						<ul class="horizontal_list clearfix d_inline_middle ml_10 page_list"><{$vo_page}></ul>
+					</div>
+				</div>
+			</section>
+			<!--侧边栏-->
+			<aside class="col-sm-4">
+			<include file="Sidebar/hotListens"/>
+			<include file="Sidebar/adver"/>
+			<include file="Sidebar/hotArtist"/>
+			</aside>
+		</div>	
+	</div>
+</div>
+</block>
+<block name="player"><include file="Player/default"/></block> 

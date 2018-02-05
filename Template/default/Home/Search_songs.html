@@ -1,0 +1,61 @@
+<extend name="Public/common"/>
+<block name="content">
+
+<div class="page_content_offset">
+	<div class="container">	
+		<div class="row clearfix">
+			<!--搜索列表-->			
+			<section class="col-sm-10 col-sm-offset-1">
+				<div class="clearfix">
+					<h3 class="f_left pt_10"> [ <{$keys}> ]</span>的相关音乐</h3>
+					<ul class="tabs_nav f_right">
+						<li class="active"><a href="javascript:;" class="d_block ">歌曲</a></li>
+						<li><a href="<{:U('search/index','type=3&keys='.$keys)}>" class="d_block ">搜索相关专辑</a></li>
+						<li><a href="<{:U('search/index','type=2&keys='.$keys)}>" class="d_block ">搜索相关艺人</a></li>
+					</ul>
+				</div>
+				<hr>
+				<div class="tab-content mt_20">							
+					<div class="tab-pane fade in active">
+					<present name="list">
+						<volist name="list" id="v">
+						<div class="mb_10 clearfix relative play_box">
+							<div class="row clearfix song_list">								
+								<span class="col-sm-5 col-xs-8">	
+									<span class="ls_num <lt name="i" value="4">ls_num_top</lt>"><{$i}></span>									
+									<a class="text-ellipsis" target="_play" href="<{$v['url']}>"><{$v['name']}></a>									
+								</span>
+								<span class="col-sm-3 col-xs-2 p_hr_0">
+									<a class="text-ellipsis singer" target="_sing" href="<{$v['artist_url']}>"><{$v['artist_name']}></a>	
+								</span>
+								<span class="col-sm-2 hidden-xs singer"><a href="<{$v['genre_url']}>"><{$v['genre_name']}></a></span>
+								<span class="col-sm-2 col-xs-2 ls_btns">	
+									<a class="hidden-xs" target="_down" href="<{$v['down_url']}>"><i class="jy jy-cloud-down-f"></i></a>								
+									<a <if condition="is_fav($v['id'],1)">class="on"</if> data-id="<{$v['id']}>" data-action="fav" href="javascript:;"><i class="jy jy-like"></i></a>
+									<a class="jp-play-me " data-id="<{$v['id']}>" href="javascript:;"><i class="jy jy-play"></i>							</a>
+								</span>
+							</div>
+							<hr class="l_hr">
+						</div>
+						</volist>
+						
+						<div class="row clearfix mb_5">
+							<div class="col-sm-6">
+								<span class="page_total">共查询相关歌曲【<{$_total}>】个</span>
+							</div>
+							<div class="col-sm-6 t_align_r">
+								<ul class="horizontal_list pull-right page_list"><{$_page}></ul>
+							</div>
+						</div>
+					<else />
+						很抱歉，没有找到相关的结果						 
+					</present> 
+					</div>
+				</div>
+			</section>
+			<!--侧边栏-->
+		</div>
+	</div>
+</div>
+</block>
+<block name="player"><include file="Player/default"/></block> 

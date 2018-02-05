@@ -1,0 +1,118 @@
+<!doctype html>
+<!--[if IE 9 ]><html class="ie9" lang="en"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en"><!--<![endif]-->
+<head>	
+	<title><{$meta_title}></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta content="telephone=no" name="format-detection">
+	<meta name="author" content="JYmusic音乐管理系统">
+	<meta name="keywords" content="<{$meta_keywords}>">
+	<meta name="description" content="<{$meta_description}>">
+	<link type="image/x-ico; charset=binary" rel="JYmusic icon" href="__TMPL__/images/favicon.ico">
+	<!--Css-->
+	<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="__STATIC__/JYmusic/css/jy.css?1.0.0">
+	<link rel="stylesheet" type="text/css" href="__TMPL__/css/plugs.min.css" media="all">
+	<link rel="stylesheet" type="text/css" href="__TMPL__/css/style.css" media="all">
+	<link rel="stylesheet" type="text/css" href="__TMPL__/css/article.css" media="all">
+	<!--js-->
+    <script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script>
+	<script src="//cdn.bootcss.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript">(function(){window.JY = {"ROOT"   : "__ROOT__","APP": "__APP__","PUBLIC" : "__PUBLIC__","DEEP"   : "<{:C('URL_PATHINFO_DEPR')}>","MODEL": ["<{:C('URL_MODEL')}>", "<{:C('URL_CASE_INSENSITIVE')}>", "<{:C('URL_HTML_SUFFIX')}>"],"VAR": ["<{:C('VAR_MODULE')}>", "<{:C('VAR_CONTROLLER')}>","<{:C('VAR_ACTION')}>"]}})();
+	</script>
+	<block name="style"></block>
+</head>
+<body>
+	<!--布局-->
+	<div class="wide_layout relative w_xs_auto">
+		<!--[if (lt IE 9) | IE 9]>
+			<div style="background:#fff;padding:8px 0 10px;">
+			<div class="container" style="width:1170px;"><div class="row wrapper"><div class="clearfix" style="padding:9px 0 0;float:left;width:83%;"><i class="fa fa-exclamation-triangle scheme_color f_left mr_10" style="font-size:25px;color:#e74c3c;"></i><b style="color:#e74c3c;">注意!这个页面可能不会正确显示。</b> <b>您使用Internet Explorer版本不支持html5。 请使用最新版IE 360/火狐/谷歌等浏览器浏览本站。</b></div><div class="t_align_r" style="float:left;width:16%;"><a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode" class="button_type_4  bg_scheme_color color_light t_align_c" target="_blank" style="margin-bottom:2px;">立即更新!</a></div></div></div></div>
+		<![endif]-->
+		<!-- 头部 -->
+		<block name="head"><include file="Public/header"/></block>
+		<!-- /头部 -->
+		<!-- 主体 -->
+		<block name="content"></block>
+		<!-- /主体 -->
+		<!-- 底部 -->
+		<block name="footer"><include file="Public/footer"/></block>
+		<!-- /底部 -->
+	</div>
+	<block name="player"></block>
+	<script type="text/javascript" src="__STATIC__/JYmusic/js/jy.js?0.1"></script>
+	<script type="text/javascript" src="__TMPL__/js/plugs.min.js"></script>
+	<script type="text/javascript" src="__TMPL__/js/common.js?v=1.0"></script>		
+	<block name="script"></block> 
+	<div class="hidden"><!-- 用于加载统计代码等隐藏元素 -->
+		<block name="hidden"><{:C('WEB_SITE_STAT')}></block>
+	</div>
+	<ul class="social_widgets ">
+		<!--二维码 -->
+		<li class="relative d_xs_none">
+			<button class="sw_button t_align_c facebook"><i class="jy jy-qrcode"></i></button>
+			<div class="sw_content">
+				<h3 class="mb_20">扫描二维码</h3>
+				<img src="__TMPL__/images/jyuu.png" alt="JYmusic">
+			</div>
+		</li>
+	</ul>	
+	<!--弹出登录-->
+	<div class="popup_wrap d_none" id="login_popup">
+		<section class="popup  shadow">
+			<button class="bg_tr close "><i class="jy jy-remove"></i></button>
+			<h3 class="mb_20"><i class="jy jy-login  mr_20"></i> 用户登录</h3>
+			<form method="post" name="validator-form" id="loginFormBox" action="<{:U('/Member/login')}>" class="form-horizontal"> 
+				<ul>
+					<li class="mb_15">
+						<label for="username" class="mb_5">用户名</label><br>
+						<input class="form-control"  type="text" name="username" id="username" class=" full_width">
+					</li>
+					<li class="mb_15">
+						<label for="password" class="mb_5">密码</label><br>
+						<input class="form-control"  type="password" name="password" id="password" class=" full_width">
+					</li>
+					<if condition="C('VERIFY_OFF') eq '1' ">
+					<li class="mb_15">
+						<label  class="mb_5">验证码</label><br>
+						<input class="form-control"  type="text" name="verify"  class=" full_width">
+					</li>
+										
+					<li class="mb_15">                  		
+                    	<img class="verifyimg reloadverify" width="100%" alt="点击切换" src="<{:U('Member/verify')}>" style="cursor:pointer;">              		
+                	</li>
+                	<script type="text/javascript">
+					$(function(){
+						var verifyimg = $(".verifyimg").attr("src");
+			            $(".reloadverify").click(function(){
+			                if( verifyimg.indexOf('?')>0){
+			                    $(".verifyimg").attr("src", verifyimg+'&random='+Math.random());
+			                }else{
+			                    $(".verifyimg").attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
+			                }
+			            });
+					});
+					</script>
+					</if>					
+					<li class="mb_15">
+						<input type="checkbox" class="f_left mr_10" name="autologin" id="checkbox_10"><label for="checkbox_10">记住我</label>						
+						<a class="f_right" href="<{:U('/Member/findpwd')}>" class="color_dark">忘记密码?</a>				
+					</li>
+					<li class="clearfix mb_30">
+						<input type="submit" class="ajax-login  btn_4 tr_all_hover  f_left bg_scheme_color color_light  " value="登录">
+						
+						<a class="sina-btn" href="<{:U('/Oauth/login?type=sina')}>" class="color_dark"><i class="jy jy-sina"></i></a>
+						<a class="qq-btn" href="<{:U('/Oauth/login?type=qq')}>" class="color_dark"><i class="jy jy-qq"></i></a>	
+					</li>
+				</ul>
+			</form>
+			<footer class=" t_mxs_align_c">
+				<h3 class="d_inline_middle  ">新用户注册?</h3>
+				<a href="<{:U('/Member/register')}>" role="button" class="tr_all_hover ">申请一个新帐号</a>
+			</footer>
+		</section>
+	</div>
+	<button id="go_to_top" class="type_2 tr_all_hover animate_ftl"><i class="jy jy-rocket"></i></button>
+</body>
+</html>

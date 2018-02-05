@@ -1,0 +1,45 @@
+<extend name="Public/common"/>
+<block name="content">
+<div class="page_content_offset">
+	<div class="container">	
+		<div class="row clearfix">
+			<!--左侧列表-->
+			<section class="col-sm-8 pt_10">
+				<div class="row clearfix pt_10">					
+					<div class="col-lg-5 col-md-4 col-sm-4 col-xs-5 t_align_l ">
+						<h2 class=" "><i class="jy jy-tag mr_6"></i>热门标签</h2>
+					</div>
+				</div>
+				<hr class="mb_20 ">
+				<section class="list_type clearfix mb_20">						
+					<JY:tag  result="v" limit="20" order="count">
+					<a class="tr_delay_hover btn_1 f_left mr_5 mt_5" target="_tag" href="<{:U('tag/'.$v['alias'])}>"><{$v['name']}></a>
+					</JY:tag>
+				</section>		
+				
+				<JY:tag  result="tag" tree="true">
+					<notempty name="tag['tags']">
+					<div class="row clearfix pt_10">					
+						<div class="col-lg-5 col-md-4 col-sm-4 col-xs-5 ">
+							<h3 class=""><{$tag.tag_group}></h3>
+						</div>
+					</div>
+					<hr class="mb_20 ">
+					<section class="list_type clearfix mb_20">						
+						<volist name="tag['tags']" id="t">
+																		
+						<a href="<{:U('tag/'.$t['alias'])}>" target="_tag" class="btn_1 f_left mr_5 mt_5"><{$t['name']}></a>
+							
+						</volist>
+					</section>
+					</notempty>
+				</JY:tag>
+			</section>
+			<!--侧边栏-->
+			<aside class="col-sm-4">
+			<include file="Sidebar/hotDown,Sidebar/adver"/>
+			</aside>
+		</div>	
+	</div>
+</div>
+</block>

@@ -1,0 +1,116 @@
+<!doctype html>
+<!--[if IE 9 ]><html class="ie9" lang="en"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en"><!--<![endif]-->
+<head>
+	<title><{$meta_title}></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" 		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="author" 		content="JYmusic音乐管理系统">
+	<meta name="keywords" 		content="<{$meta_keywords}>">
+	<meta name="description" 	content="<{$meta_description}>">
+	<link type="image/x-ico; charset=binary" rel="JYmusic icon" href="__TMPL__/images/favicon.ico">
+	<!--Css-->
+	<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="__STATIC__/JYmusic/css/jy.css">
+	<link rel="stylesheet" type="text/css" href="__TMPL__/css/style.css" media="all">
+	<link rel="stylesheet" type="text/css" href="__TMPL__/css/user.css" media="all">
+	<!--js-->
+    <script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script>
+	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	(function(){window.JY = {"ROOT"   : "__ROOT__","APP": "__APP__","PUBLIC" : "__PUBLIC__","DEEP"   : "<{:C('URL_PATHINFO_DEPR')}>","MODEL": ["<{:C('URL_MODEL')}>", "<{:C('URL_CASE_INSENSITIVE')}>", "<{:C('URL_HTML_SUFFIX')}>"],"VAR": ["<{:C('VAR_MODULE')}>", "<{:C('VAR_CONTROLLER')}>","<{:C('VAR_ACTION')}>"]}})();
+	</script>
+	<block name="style"></block>
+</head>
+<body id="">
+<div class="relative w_xs_auto">
+	<block name="footer"><include file="Public/header"/></block>
+	<!-- /头部 -->
+	<section class="content-wrap">
+		<block name="content">
+		<div class="container mb_20">
+			<div class="row">
+				<block name="topnav">
+				<div class="col-md-12">
+					<div class="personaltop clearfix">
+
+						<ul class="nav nav-tabs">
+							<li class="title">个人中心</li>
+							<li <if condition="CONTROLLER_NAME eq 'Account' ">class="active" </if>>
+								<a title="我的账户" target="_self" href="<{:U('/user/account')}>">我的账户</a>
+							</li>
+							<li <if condition="CONTROLLER_NAME eq 'Profile' ">class="active" </if>>
+								<a title="个人资料" target="_self" href="<{:U('/user/profile')}>">个人资料</a>
+							</li>
+							<li <if condition="CONTROLLER_NAME eq 'Music' ">class="active" </if>>
+								<a title="我的音乐" target="_self" href="<{:U('/user/music')}>">我的音乐</a>
+							</li>
+							<li <if condition="CONTROLLER_NAME eq 'Favs' ">class="active" </if>>
+								<a title="我的收藏" target="_self" href="<{:U('/user/favs')}>">我的收藏</a>
+							</li>
+							<li <if condition="CONTROLLER_NAME eq 'Relation' ">class="active" </if>>
+								<a title="我的关系" target="_self" href="<{:U('/user/relation')}>">我的关系</a>
+							</li>
+							<li  <if condition="CONTROLLER_NAME eq 'Album' ">class="active" </if>>
+								<a title="我的专辑" target="_self" href="<{:U('/user/album')}>">我的专辑</a>
+							</li>
+							<li  <if condition="CONTROLLER_NAME eq 'Msgcenter' ">class="active" </if>>
+								<a title="消息中心" target="_self" href="<{:U('/user/msgcenter')}>">消息中心</a>
+							</li>
+
+							<li class="reture">
+								<a  href="<{:U('music/share')}>">分享音乐</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				</block>
+
+				<div class="col-md-3">
+					<div class="new-warpl">
+						<dl class="user-info">
+							<dt>
+								<img src="<{:get_user_avatar(UID,32)}>" alt="<{$user['nickname']}>">
+							</dt>
+					      	<dd class="name"><{$user['nickname']}></dd>
+
+							<dd class="hy_no">
+								<span>
+									<p><{$user['follows']}></p>
+									<p class="pt_10">关注</p>
+								</span>
+								<span>
+									<p><{$user['fans']}></p>
+									<p class="pt_10">粉丝</p>
+								</span>
+								<span class="last">
+									<p><{$user['songs']}></p>
+									<p class="pt_10">分享</p>
+								</span>
+						    </dd>
+						</dl>
+					</div>
+				</div>
+
+				<div class="col-md-9">
+					<block name="warp"></block>
+				</div>
+
+			</div>
+		</div>
+		</block>
+		<!-- /主体 -->
+	</section>
+	<!-- 底部 -->
+	<block name="footer"><include file="Public/footer"/></block>
+	<!-- /底部 -->
+	<div class="hidden"><!-- 用于加载统计代码等隐藏元素 -->
+		<block name="hidden"><{:C('WEB_SITE_STAT')}></block>
+	</div>
+</div>
+<script type="text/javascript" src="__STATIC__/JYmusic/js/jy.js"></script>
+<script type="text/javascript" src="__TMPL__/js/uplugs.js"></script>
+<script type="text/javascript" src="__TMPL__/js/user.js?v=1.0"></script>
+<block name="script"></block>
+</body>
+</html>

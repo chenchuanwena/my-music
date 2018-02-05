@@ -1,0 +1,52 @@
+<switch name="addons_config.comment_type">
+	<case value="1">
+		<!-- CHANYAN BEGIN -->
+		<div id="SOHUCS" sid="<{$param['type']}><{$param['id']}>"></div>
+		<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
+		<script type="text/javascript">
+			window.changyan.api.config({
+				appid: '<{$addons_config.comment_appid_changyan}>',
+				conf: '<{$addons_config.comment_appkey_changyan}>'
+			});
+		</script> <!-- CHANGYAN END -->
+		<style><{$addons_config.comment_css_changyan}></style>
+	</case>
+	<case value="2">
+		<!-- UY BEGIN -->
+
+		<div id="uyan_frame"></div>
+		<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=<{$addons_config.comment_uid_youyan}>"></script>
+		<script type="text/javascript">
+			$.post("<{:addons_url('SocialComment://Sso/uysso')}>");
+			$(function(){
+			var listobj  = $('#uyan_frame').find('#uyan_cmt_list');			
+				$("a[href='http://www.uyan.cc']").css({'display': 'none'});
+			})							
+		</script>
+		<style><{$addons_config.comment_css_youyan}></style>
+		<!-- UY END -->
+	</case>
+	<case value="3">
+		<!-- Duoshuo Comment BEGIN -->
+		<div class="ds-thread" data-thread-key="<{$param['type']}><{$param['id']}>" data-form-positon="<{$addons_config.comment_form_pos_duoshuo}>" data-limit="<{$addons_config.comment_data_list_duoshuo}>" data-order="<{$addons_config.comment_data_order_duoshuo}>"></div>
+		<script type="text/javascript">
+			var duoshuoQuery = {
+				short_name: "<{$addons_config.comment_short_name_duoshuo}>",
+				sso: { 
+				   login: "<{:U('/Member/login')}>",
+				   logout: "<{:U('/Member/logout')}>/from=<{:U('/')}>"
+			   }
+			};
+			(function() {
+				var ds = document.createElement('script');
+				ds.type = 'text/javascript';ds.async = true;
+				ds.src = 'http://static.duoshuo.com/embed.js';
+				ds.charset = 'UTF-8';
+				(document.getElementsByTagName('head')[0]
+				|| document.getElementsByTagName('body')[0]).appendChild(ds);
+			})();
+		</script>
+		<style><{$addons_config.comment_css_duoshuo}></style>
+		<!-- Duoshuo Comment END -->
+	</case>
+</switch>

@@ -1,0 +1,82 @@
+<extend name="Public/common" />
+
+<block name="warp">
+<div class="tabbable tabbable-custom tabbable-reversed">
+	<ul class="nav nav-tabs">
+		<li class="active">
+			<a href="<{:U('index')}>">我的消息</a>
+		</li>
+		<li>
+			<a href="<{:U('notice')}>">系统提醒</a>
+		</li>
+	</ul>
+	<div class="tab-content clearfix">
+		<ul class="media-list">
+			<li class="media">
+			  	<div class="media-left">
+				    <a href="<{:U('/user/'.$data['post_uid'])}>">
+				      <img class="media-object" src="<{:get_user_avatar($data['post_uid'],64)}>" alt="<{$data['post_uname']}>">
+				    </a>
+			  	</div>
+			  	<div class="media-body">
+			    	<h4 class="media-heading"><{$data['title']}></h4>
+			    	<{$data['content']}>
+			    	<div class="media-footer">
+			    		<span class="m-time pull-left"><i class="jy jy-clock-o"></i><{$data['create_time']|beforeTime}></span>
+			  		</div>
+			  	</div>
+			  	
+			</li>
+			
+			<li class="media">
+			  	<div class="media-left">
+				    <a href="<{:U('/user/'.$user['uid'])}>">
+				      <img class="media-object" src="<{:get_user_avatar($user['uid'],64)}>" alt="<{$user['nickname']}>">
+				    </a>
+			  	</div>
+			  	<div class="media-body">
+					<form class="form-horizontal" action="<{:U('send')}>" method="post" id="msg-form">
+						<textarea  id="msg-content"  rows="3" name="content"></textarea>
+						<input	type="hidden" name="reply_id" value="<{$data['id']}>">
+						<button class="btn btn-success" id="send-msg">发送</button>
+					<form >
+			  	</div>
+			  	
+			</li>
+		</ul>
+
+
+	</div>
+</div>
+<block name="script">
+<script script type="text/javascript">
+$().ready(function() {
+	$("#msg-form").validate({
+		rules: {
+			content:{
+				required: true,
+				rangelength:[2,400]
+			},
+			reply_id: {
+				required: true,
+				digits: true
+			}
+
+		},
+		messages: {
+			content: {
+				required: '信息不能为空',
+				rangelength:'信息长度2-400个字符'
+			},
+			reply_id: {
+				required: "你回复的消息不存在",
+				digits: "你回复的消息不存在"
+			}
+
+		}
+	});
+});
+</script>
+</block>
+</block>
+

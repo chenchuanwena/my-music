@@ -1,0 +1,54 @@
+<extend name="Public/common"/>
+<block name="content">
+
+<div class="page_content_offset">
+	<div class="container">	
+		<div class="row clearfix">
+			<!--搜索列表-->			
+			<section class="col-sm-10 col-sm-offset-1">
+				<div class="clearfix">
+					<h3 class="f_left pt_10"> [ <{$keys}> ]</span>的搜索结果</h3>
+					<ul class="tabs_nav f_right">
+						<li><a href="<{:U('search/index','type=1&keys='.$keys)}>" class="tr_delay_hover d_block">搜索相关歌曲</a></li>
+						<li class="active"><a href="JavaScript:;" class="tr_delay_hover d_block ">专辑</a></li>
+						<li><a href="<{:U('search/index','type=2&keys='.$keys)}>" class="tr_delay_hover d_block">搜索[ <{$keys}> ]相关艺人</a></li>
+					</ul>
+				</div>
+				<hr>
+				<div class="tab-content">							
+					<div class="tab-pane fade in active">
+					<present name="list">
+						<nav class="mb_0">
+							<ul class="horizontal_list clearfix  t_align_c">
+								<volist name="list" id="vo">
+								<li class="mr_15 mb_15">
+									<a class="d_block photoframe tr_all_hover shadow" title="<{$vo['name']}>" href="<{$vo['url']}>">
+										<span class="d_block wrapper">
+											<img alt="<{$vo['name']}>" src="<{$vo['cover_url']}>" height="138" width="138" class="tr_all_long_hover">
+										</span>
+										<{$vo['name']}>
+									</a>
+								</li>
+								</volist>
+							</ul>
+						</nav>	
+
+						<hr class="mb_10 ">
+						<div class="row clearfix mb_5">
+							<div class="col-sm-6">
+								<span class="page_total">共查询到相关专辑【<{$_total}>】个</span>
+							</div>
+							<div class="col-sm-6">
+								<ul class="horizontal_list pull-right page_list"><{$_page}></ul>
+							</div>
+						</div>
+						<else />
+							很抱歉，没有找到相关的结果						 
+					</present> 
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+</block>

@@ -1,0 +1,83 @@
+<extend name="Public/common" />
+<block name="style">
+<style>
+.container {
+  position: relative;
+}
+.error-container {
+	margin:40px auto;
+	width: 500px;
+
+}
+.error-container .error-code {
+  color: #666;
+  float: left;
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 130px;
+  text-align: center;
+  width: 100%;
+}
+.error-container .error-text {
+  float: left;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 24px;
+  margin-top: 10px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 100%;
+}
+.error-container .error-subtext {
+  color: #aaa;
+  float: left;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 30px 0 10px;
+  text-align: center;
+  width: 100%;
+}
+.error-container .error-actions {
+  float: left;
+  margin-top: 10px;
+  width: 100%;
+}
+</style>
+</block>
+<block name="content">
+<!--content-->
+<div class="page_content_offset">
+	<div class="container">
+        <div class="error-container">
+            <div class="error-text text-success"><?php echo($message); ?></div>
+            <div class="error-subtext"><p class="jump text-sm font-bold">
+							页面将在<b id="wait" class="text-success"><?php echo($waitSecond); ?></b>秒后自动 <a id="href"  href="<?php echo($jumpUrl); ?>">跳转</a></div>
+            <div class="error-actions">                                
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn btn-info btn-block btn-sm" onClick="document.location.href = '/';">返回首页</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-primary btn-block btn-sm" onClick="history.back();">联系客服</button>
+                    </div>
+                </div>                                
+            </div>
+            <div class="error-subtext"> Powered by JYmusic© 2016</div>
+        </div>   
+	</div>
+</div>
+		<script type="text/javascript">
+		(function(){
+			var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+			var interval = setInterval(function(){
+				var time = --wait.innerHTML;
+				if(time <= 0) {
+					location.href = href;
+					clearInterval(interval);
+				};
+			}, 1000);
+		})();
+		</script>		
+</block>
+

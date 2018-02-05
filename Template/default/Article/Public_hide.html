@@ -1,0 +1,67 @@
+	<ul class="social_widgets ">
+		<!--二维码 -->
+		<li class="relative d_xs_none">
+			<button class="sw_button t_align_c facebook"><i class="jy jy-qrcode"></i></button>
+			<div class="sw_content">
+				<h3 class="mb_20">扫描二维码</h3>
+				<img src="__TMPL__/images/jyuu.png" alt="JYmusic">
+			</div>
+		</li>
+
+	</ul>	
+	<!--弹出登录-->
+	<div class="popup_wrap d_none" id="login_popup">
+		<section class="popup  shadow">
+			<button class="bg_tr tr_all_hover text_cs_hover close "><i class="jy jy-remove"></i></button>
+			<h3 class="mb_20"><i class="jy jy-login  mr_20"></i> 用户登录</h3>
+			<form method="post" name="validator-form" id="loginFormBox" action="<{:U('Member/login')}>" class="form-horizontal"> 
+				<ul>
+					<li class="mb_15">
+						<label for="username" class="mb_5">用户名</label><br>
+						<input type="text" name="username" id="username" class=" full_width">
+					</li>
+					<li class="mb_15">
+						<label for="password" class="mb_5">密码</label><br>
+						<input type="password" name="password" id="password" class=" full_width">
+					</li>
+					<if condition="C('VERIFY_OFF') eq '1' ">
+					<li class="mb_15">
+						<label  class="mb_5">验证码</label><br>
+						<input type="text" name="verify"  class=" full_width">
+					</li>
+										
+					<li class="mb_15">                  		
+                    	<img class="verifyimg reloadverify" width="100%" alt="点击切换" src="<{:U('Member/verify')}>" style="cursor:pointer;">              		
+                	</li>
+                	<script type="text/javascript">
+					$(function(){
+						var verifyimg = $(".verifyimg").attr("src");
+			            $(".reloadverify").click(function(){
+			                if( verifyimg.indexOf('?')>0){
+			                    $(".verifyimg").attr("src", verifyimg+'&random='+Math.random());
+			                }else{
+			                    $(".verifyimg").attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
+			                }
+			            });
+					});
+					</script>
+					</if>					
+					<li class="mb_15">
+						<input type="checkbox" class="d_none f_right" name="autologin" id="checkbox_10"><label for="checkbox_10">记住我</label>						
+						<a class="f_right" href="<{:U('Member/findpwd')}>" class="color_dark">忘记密码?</a>				
+					</li>
+					<li class="clearfix mb_30">
+						<input type="submit" class="ajax-login  btn_4 tr_all_hover  f_left bg_scheme_color color_light  " value="登录">
+						
+						<a class="sina-btn" href="<{:U('Oauth/login?type=sina')}>" class="color_dark"><i class="jy jy-sina"></i></a>
+						<a class="qq-btn" href="<{:U('Oauth/login?type=qq')}>" class="color_dark"><i class="jy jy-qq"></i></a>	
+					</li>
+				</ul>
+			</form>
+			<footer class=" t_mxs_align_c">
+				<h3 class="d_inline_middle  ">新用户注册?</h3>
+				<a href="<{:U('Member/register')}>" role="button" class="tr_all_hover ">申请一个新帐号</a>
+			</footer>
+		</section>
+	</div>
+	<button id="go_to_top" class="type_2 tr_all_hover animate_ftl"><i class="jy jy-rocket"></i></button>

@@ -1,0 +1,146 @@
+<extend name="Public/base"/>
+<block name="content">
+<h3 class="col-md-4">认证管理</h3>
+<div class="row">
+    <div class="col-lg-12">
+    	<div class="panel panel-default">
+       		<div class="panel-heading">认证列表
+			<div class="btn-group ml-lg">
+       				[<if condition="I('status')"> 
+						<a href="<{:U('index')}>" class="mr-sm ml-sm"> 全部</a>
+						<a href="<{:U('index?status=1')}>" class="mr-sm ml-sm <if condition="I('status') eq 1">text-danger</if>">已审核</a>
+						<a href="<{:U('index?status=2')}>" class="ml-sm mr-sm <if condition="I('status') eq 2">text-danger</if>">待审核</a>
+					<else/>
+						<a href="<{:U('index')}>" class="mr-sm ml-sm text-danger"> 全部</a>
+						<a href="<{:U('index?status=1')}>" class="mr-sm ml-sm ">已审核</a>
+						<a href="<{:U('index?status=2')}>" class="ml-sm mr-sm ">待审核</a>
+					</if>]
+       			</div>
+       			<div class="btn-group pull-right">
+	       			<!--a class="btn btn-labeled btn-success ajax-post "  href="<{:U('setStatus',array('status'=>1))}>" target-form="ids">批量审核</a--> 
+	       			<!--a class="btn btn-labeled btn-success ajax-post "  href="<{:U('disable')}>" target-form="ids">未通过</a-->             
+	                <!--a class="btn btn-labeled btn-danger ajax-post" href="<{:U('del')}>" target-form="ids">删除</a-->
+	         	</div>  			
+       		</div>
+    		<div class="table-responsive">
+        		<table class="table table-striped table-bordered table-hover">           
+            		<thead>
+                		<tr>
+                			<!--th style="width: 5%" class="check-all">
+                          		<div data-toggle="tooltip" data-title="全选" class="checkbox c-checkbox">
+                             		<label>
+                                		<input type="checkbox">
+                                		<span class="fa fa-check"></span>
+                             		</label>
+                          		</div>
+                       		</th-->                   			
+                			<th>ID</th>
+                			<th>真实姓名</th>
+                			<th>身份证号</th>
+                			<th>手机号</th>                			
+                			<th>查看照片</th>
+							<th>认证理由</th>
+							<th style="width: 5%">状态</th>
+             				<th>添加时间</th>
+             				<th class="text-center">操作</th>
+             			</tr>
+            		</thead>
+        			<tbody role="alert" aria-live="polite" aria-relevant="all">
+        				<notempty name="list">
+            			<volist name="list" id="data" key="k">
+        				<tr>           
+                        	<!--td>
+                          		<div class="checkbox c-checkbox">
+                             		<label>
+                                	<input type="checkbox" class="ids" value="<{$data.id}>" name="ids[]">
+                                	<span class="fa fa-check"></span>
+                             		</label>
+                          		</div>
+                       		</td-->
+                        	<td><{$data.id}></td>
+                        	<td class='m-name'><{$data.realname}></td>
+                        	<td><{$data.idcard}></td>
+                        	<td><{$data.phone}></td>
+                        	<td>
+								<a  herf="javascript:;" url="<{$data['attach_id']|get_cover}>" class="btn btn-labeled btn-sm btn-view">查看</a>					
+							</td>
+                        	<td><{$data.reason}></td>
+							<td><{$data.status|get_status_title}></td>
+                        	<td><{$data.create_time|time_format='Y-m-d'}></td>
+                    		<td class="text-center">
+								<eq name="data['status']" value="2">
+	                            <a class="btn btn-labeled btn-sm ajax-get" href="<{:U('pass?uid='.$data['uid'])}>">通过</a>
+	                            <a class="btn btn-labeled btn-sm btn-sh" href="<{:U('disable?id='.$data['id'])}>" >驳回</a>
+								<else/>
+	                            <a class="btn btn-labeled btn-sm btn-danger btn-del" herf="javascript:;" url="<{:U('del',array('id'=>$data['id']))}>">取消</a>
+								</eq>
+							</td>
+                		</tr>
+                		</volist>
+						<else/>
+						<td colspan="12" class="text-center">暂时还没有内容! </td>
+						</notempty>
+                	</tbody>
+                </table>
+    		</div>
+    		<!-- 结束 表格 -->
+    		<div class="panel-footer">
+    			<div class="row">
+					<ul class="pagination">
+					<{$_page}>
+					</ul>
+				 </div>
+            </div>    		
+    	</div>
+	</div>
+</div>
+</block>
+<block name="script">
+<div id="ViewModal" tabindex="-1" role="dialog"  class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content radius-clear">
+			<div class="modal-header bg-primary">
+				<button type="button" data-dismiss="modal" aria-hidden="false" class="close modal-close">×</button>
+				<h4 class="modal-title" id="group-modal-title">证件照片</h4>
+			</div>
+			<div class="modal-body clearfix text-center" id="view-content">
+				
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+//导航高亮
+highlight_subnav("<{:U('Audit/index')}>");
+
+$(function(){
+	$('.btn-sh').click(function () {
+		var that = $(this);
+		$.ajax({ 
+			type: "POST",
+			url:$(this).attr('url'), 
+			data:"id="+$(this).attr('data-id')+"&uid="+$(this).attr('data-uid'),
+			success: function(data){
+				topAlert('操作成功！','success');
+				that.parents('tr').remove();
+				//window.location.reload(); // 刷新页面
+			},
+			error:function() {
+				topAlert('请求失败！');
+			}
+			
+		});
+		//alert($("select option:selected").val());
+		return false;
+	}) 
+	$('.btn-view').click(function (e) {
+		e.preventDefault();
+		var src = $(this).attr('url');		
+		$('#view-content').html('<img style="max-width:400px" src='+src+'>');
+		$('#ViewModal').modal('show');
+	})
+})
+</script>
+</block>	
+
+

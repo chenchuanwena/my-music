@@ -1,0 +1,33 @@
+<script src="__STATIC__/jquery-2.0.3.min.js"></script>
+<script src="__TMPL__/js/layer/layer.js"></script>
+
+
+
+<!--<iframe src="http://121.40.178.43:3000?username=<{$username}>" width="50%" height="50%">-->
+
+<!--</iframe>-->
+<script>
+    layer.open({
+        type: 2 //此处以iframe举例
+        ,title: '当你选择该窗体时，即会在最顶端'
+        ,area: ['390px', '330px']
+        ,shade: 0
+        ,offset: [ //为了演示，随机坐标
+           $(window).height()-300
+            ,$(window).width()-390
+        ]
+        ,maxmin: true
+        ,content: 'http://121.40.178.43:3000?username=<{$username}>'
+        ,btn: ['继续弹出', '全部关闭'] //只是为了演示
+        ,yes: function(){
+            $(that).click(); //此处只是为了演示，实际使用可以剔除
+        }
+        ,btn2: function(){
+            layer.closeAll();
+        }
+        ,zIndex: layer.zIndex //重点1
+        ,success: function(layero){
+            layer.setTop(layero); //重点2
+        }
+    });
+</script>

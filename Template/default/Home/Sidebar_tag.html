@@ -1,0 +1,14 @@
+
+	<figure class="widget shadow  wrapper mb_30">
+		<figcaption>
+			<h3 class="color_light">热门标签</h3>
+		</figcaption>
+		<div class="sidebar_content">
+			<div class="">
+				<JY:tag  result="v" limit="20" order="count">
+				<a class="tr_delay_hover mr_5 mb_5  button_type_19 bg_light_color_2 " target="_tag" href="<{:U('Tag/detail?id='.$v['id'])}>"><{$v['name']}></a>
+				</JY:tag>
+			</div>
+		</div>
+
+	</figure>

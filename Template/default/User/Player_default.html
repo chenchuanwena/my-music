@@ -1,0 +1,96 @@
+<link rel="stylesheet" href="__TMPL__/css/player.css?v=1.0" type="text/css" />
+<div class="jy-player-f" id="footer-player">
+	<!--div id="p-artist" class="artist hidden-xs hidden-sm "> 
+		<img alt="" class="dker f_right" src="/Uploads/Picture/cover.png">
+	</div-->
+	<div id="jy-player">	
+		<div class="play-wrap clearfix container">			
+			<div class="play-wrap-btns">
+				<a class="jp-cover"><img id="play-cover" src="__STATIC__/JYmusic/images/cover.jpg"></a>	
+				<a class="jp-previous"><i class="jy jy-prev"></i></a>			
+				<a class="jp-play"><i class="jy jy-play-o"></i></a>
+				<a class="jp-pause hid"><i class="jy jy-pause-o"></i></a>		
+				<a class="jp-next"><i class="jy jy-next"></i></a>
+			</div>
+			
+			<div class="play-wrap-info">
+				<div class="jp-progress">
+					<div class="jp-title"></div>
+					<div class="jp-seek-bar dk" id="jp-seek-bar">
+						<div class="jp-play-bar">
+							<span class="play-bar-alpha"></span>
+						</div>									
+					</div>
+				</div>
+			</div>
+				
+			<div class="play-wrap-action hidden-sm">			
+				<div class="jp-current-time text-xs text-muted"></div>
+				<div class="hidden-xs hidden-sm jp-duration text-xs text-muted"></div>
+				<div class="hidden-xs hidden-sm">
+					<a class="jp-mute" title="静音"><i class="jy jy-volume"></i></a>
+					<a class="jp-unmute hid" title="取消静音"><i class="jy jy-mute"></i></a>
+				</div>
+				<div class="hidden-xs hidden-sm jp-volume">
+					<div class="jp-volume-bar dk">
+						<div class="jp-volume-bar-value lter">
+							<span class="volume-bar-alpha"></span>
+						</div>
+					</div>
+				</div>
+				<!--div>
+					<a class="jp-shuffle" title="随机"><i class="fa fa-random text-muted"></i></a>
+					<a class="jp-shuffle-off hid" title="关闭 随机"><i class="fa fa-random text-lt"></i></a>
+				</div-->
+				<div class="play-list-action">
+					<a class="jp-repeat-off" href="javascript:;" title="单曲重复">
+						<i class="jy jy-repeat-one"></i>
+					</a>
+					<a class="jp-repeat"  href="javascript:;"  title="顺序播放"><i class="jy jy-sort"></i></a>
+					<a href="javascript:;" id="list-btn"><i class="jy jy-play-list"></i></a>
+					<a href="javascript:;" id="lrc-btn"><i class="jy jy-lrc-o"></i></a>
+				</div>
+			</div>
+			<div id="lrc-wramp" >
+				<div class="lrc-title">
+					<span id="l-title" ></span>
+					<a  id="l-close" href="javascript:;" title="关闭"><i class="jy jy-del-f "></i></a>
+				</div>
+				<div class="lrc_content">
+					<ul id="lrc_list">
+						<li>动态歌词……</li>
+					</ul>
+				</div>
+			</div>
+
+			<div id="play-list-wramp" >
+				<div class="play-list-title">
+					<span id="pl-title">播放列表</span>
+					<a  id="pl-close" href="javascript:;" title="关闭"><i class="jy jy-del-f "></i></a>
+				</div>
+				<div class="play_list_content">
+					<ul id="play_lists">
+
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="player-off">
+				<a class="lock-on" id="player-dw" href="javascript:;" title=""><i class="jy jy-unlock-f"></i></a>
+				<!--a class="lock-off" href="javascript:;" title=""><i class="jy jy-unlock"></i></a-->
+			</div>
+
+		<div class="jp-no-solution hide">
+			<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+	</div>
+
+</div>
+<div id="JYplayer" class="hide"></div>
+<textarea id="lrc_content" name="textfield" cols="70" rows="10" style="display:none;"></textarea>
+<script type="text/javascript" src="__STATIC__/player/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="__TMPL__/js/jyplayer.js?1.01" ></script>
+
+
+	

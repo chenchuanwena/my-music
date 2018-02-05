@@ -1,0 +1,121 @@
+<extend name="Public/common"/>
+<block name="style"><link rel="stylesheet" href="__TMPL__/css/player.css?v=1.0" type="text/css" /></block>
+<block name="content">
+<div class="page_content_offset">
+	<div class="container">
+		<!--<div class="row clearfix">-->
+			<!--<section class="col-sm-8" style="margin-left:-150px;	">-->
+				<!--<{$data['introduce']}>-->
+		    <!--</section>-->
+
+		<!--</div>-->
+		<div class="row clearfix">
+			<!--左侧详细页面-->
+			<section class="col-sm-8">
+				<div class="row clearfix mb_20">
+					<div class="clearfix mt_10">
+						<div class=" thumbnail mb_0">
+							<{$data['introduce']}>
+						</div>
+					</div>
+				</div>
+					<div class="row clearfix mb_20">
+
+						<div class="col-sm-4">
+							<div class="photoframe shadow wrapper mb_10">
+								<div class=" thumbnail mb_0">
+									<a  href="<{$data['user_url']}>"><img src="<{$data['up_uid']|get_user_avatar="256"}>" class="tr_all_hover"></a>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-8">
+							<h2 class="pt_10 text-ellipsis">
+								<a class="jp-play-me play" id="one-play" href="javascript:;" data-id="<{$data.id}>">
+								<i class="jy jy-play-f"></i></a><{$data.artist_name}> - <{$data.name}>
+							</h2>
+							<div class="clearfix mt_10">
+								<ul class="">
+									<li class="mb_10">分享:<a href="<{$user['url']}>"><{$user['nickname']}></a></li>
+									<li class="mb_10">点击:<{$data['listens']}></a></li>
+									<li class="mb_10">标签:
+										<JY:tag result="t" song_id="$data['id']" key="k">
+										<neq name="k" value="1">/</neq>
+										<a href="<{$t['url']}>"><{$t['name']}></a>
+										</JY:tag>
+									</li>
+								</ul>
+							</div>
+
+							<div class="clearfix mb_20">
+								<ul class="horizontal_list l_width_divider">
+									<li class="mr_15">专辑:<a href="<{$data['album_url']}>"><{$data.album_name|default="单曲"}></a></li>
+									<li class="mr_15">歌手:<a href="<{$data['artist_url']}>"><{$data.artist_name}></a></li>
+									<li class="mr_15">类别:<a href="<{$data['genre_url']}>"><{$data.genre_name}></a></li>
+								</ul>
+							</div>
+							<ul class="horizontal_list clearfix mb_10">
+								<li class="mr_5">
+									<a href="javascript:;"  class="btn_1 f_right relative music-action-btn <if condition="is_fav($data['id'])"> on</if>" data-id="<{$data['id']}>" data-action="fav">
+										<span class="tooltip tr_all_hover">收藏[<span class="num"><{$data.favtimes}></span>]</span>
+										<i class="jy jy-fav-music"></i>
+									</a>
+								</li>
+
+								<li class="mr_5">
+									<a href="javascript:;"  class="btn_1 f_right relative music-action-btn" data-id="<{$data['id']}>" data-action="like">
+										<span class="tooltip tr_all_hover">喜欢[<span class="num"><{$data.likes}></span>]</span>
+										<i class="jy jy-like"></i>
+									</a>
+								</li>
+								<li class="mr_5">
+									<a href="javascript:;"  class="btn_1 f_right relative music-action-btn" data-id="<{$data['id']}>" data-action="digg">
+										<span class="tooltip tr_all_hover">赞[<span class="num"><{$data.digg}></span>]</span>
+										<i class="jy jy-digg"></i>
+									</a>
+								</li>
+								<li class="mr_5">
+									<a class="down btn_1 f_right relative tr_delay_hover" target="_down" href="<{:U('Down/index?id='.$data['id'])}>">
+										<span class="tooltip tr_all_hover">下载[<span class="num"><{$data.download}></span>]</span>
+										<i class="jy jy-cloud-down"></i>
+									</a>
+								</li>
+
+								<li class="f_right mt_10">
+								<JY:next  data="data">
+									<a class="btn_1" href="<{$next['url']}>" class="btn pull-right jp-next">下一曲</a>
+								</JY:next>
+								</li>
+								<li class="f_right mr_5 mt_10">
+								<JY:prev data="data">
+									<a class="btn_1"href="<{$prev['url']}>" class="btn pull-right jp-previous">上一曲</a>
+								</JY:prev>
+								</li>
+							</ul>
+							<div class="d_inline_middle"><{:hook('pageBody',array('widget'=>'Baidushare'))}></div>
+
+						</div>
+					</div>
+
+					<div class="clearfix">
+						<{:hook('documentDetailAfter',array('type'=>'song','id'=>$data['id']))}>
+					</div>
+
+			</section>
+			<aside class="col-sm-4">
+				<notempty name="data['lrc']">
+
+
+				</notempty>
+
+				<include file="Sidebar/newUp"/>
+			</aside>
+		</div>
+	</div>
+</div>
+</block>
+<block name="player"><include file="Player/default"/></block>
+<block name="script">
+<script type="text/javascript">
+	$(function () {$('#one-play').click();})
+</script>
+</block>

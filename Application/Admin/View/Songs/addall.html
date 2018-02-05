@@ -1,0 +1,231 @@
+<extend name="Public/base"/>
+<block name="style">
+<link rel="stylesheet" type="text/css" href="__STATIC__/bootstrap-3.1.1/tagsinput/bootstrap-tagsinput.css">
+</block>
+<block name="content">
+<h3>歌曲管理</h3>
+<div class="panel panel-default">
+	<div class="panel-heading">批量添加歌曲</div>
+ 	<div class="panel-body">
+		<div class="alert alert-success text-center">水平线以上为公用参数，可无限添加，注意：中途可修改任意参数</div>
+		<div class="clearfix form-horizontal  mb-sm" id="show-song">
+			
+		</div>	
+        <form class="form-horizontal" id="all-form" enctype="multipart/form-data" action="<{:U()}>" name="songs"  method="post">	
+			<div class="form-group">	
+    			<label class="col-sm-2 control-label">所属艺术家</label>
+    			<div class="col-sm-2">				
+    				<div class="input-group">
+    					<input type="text" class="hide" id="artist-id" name="artist_id" value="<{$data.artist_id|default='0'}>">	
+    					<input type="text" class="form-control" id="artist-name" name="artist_name"  value="<{$data.artist_name|default=''}>">	
+						<a href="#" class="input-group-addon ajax-find" rel="artist">
+                         	<span class="fa-search fa"></span>
+                    	</a>
+                    </div>
+					<span class="help-block">可以填写，自动新增</span>
+    			</div>	
+    		    <label class="col-sm-1 control-label">所属专辑</label>			
+    			<div class="col-sm-2">
+   					<div class="input-group">
+    					<input type="text"  class="hide" name="album_id" id="album-id" value="<{$data.album_id|default='0'}>">
+    					<input type="text" class="form-control"  name="album_name" id="album-name" value="<{$data.album_name|default=''}>">
+						<a href="<{:U('Album/find')}>" class="input-group-addon ajax-find"  rel="album">
+                         	<span class="fa-search fa"></span>
+                    	</a>
+                    </div>
+					<span class="help-block">可以填写，自动新增</span>
+    			</div>	
+				<label class="col-sm-1 control-label">用户[ID]</label>
+    			<div class="col-sm-1">
+    				<div class="input-group">	
+    					<input type="text" class="form-control"  name="up_uid"  value="<{$data.up_uid|default='0'}>">								
+				   </div> 		
+    			</div>							    		
+    		</div>
+			
+			<div class="form-group">	
+				<label class="col-sm-2 control-label">所属服务器</label>
+				<div class="col-sm-2">
+					<select name="server_id" class="form-control">
+					<option class="no-server" id="no-server" value="0">无服务器</option>
+	        		<volist name=":get_server()" id="s">						
+	            		<option id="server-<{$s['id']}>" data-listen="<{$s['listen_url']}>" data-down="<{$s['down_url']}>" value="<{$s.id}>">
+							<{$s.name}>						
+						</option>
+	        		</volist>
+					</select>
+				</div>	
+	
+				<label class="col-sm-1 control-label">所属曲风</label>
+				<div class="col-sm-2">
+					<select name="genre_id" class="form-control">					
+	        		<volist name=":get_genre_tree()" id="genre">	        			
+	            		<option <notempty name="data['genre_id']"> <if condition="$data['genre_id'] eq $genre['id'] ">selected='selected'</if></notempty> value="<{$genre.id}>"><{$genre.title_show}></option>
+	        		</volist>
+					</select>
+				</div>	
+				<label class="col-sm-1 control-label">所属标签</label>	
+				<div class="col-sm-4">
+					<div class="input-group inline">
+						<input type="text" class="form-control" name="tags" id="tagsinput" value="<notempty name="data['id']"> <volist name=":get_music_tag($data['id'])" id="vo" key="k" ><{$vo}>,</volist></notempty>">
+                    </div>
+                    <a href="javascript:;" class="btn btn-default inline find-tag">
+                         <span class="fa-search fa"></span>
+                    </a>
+                    <div class="tag-box" style="display:none">
+                    	<button class="close tag-close mr-xl" type="button">×</button>
+                    	<div class="box-placeholder tag-content m0 p">
+                  		</div>
+                  	</div>		
+				</div>
+			</div>
+			
+			<div class="form-group">						
+    			<label class="col-sm-2 control-label ">试听次数</label>
+    			<div class="col-sm-2 controls">
+    				<input type="text" class="form-control"  value="<{$data.listens|default=''}>" name="listens">
+    			</div>	
+		
+    			<label class="col-sm-1 control-label ">下载次数</label>
+    			<div class="col-sm-2">
+    				<input type="text" class="form-control input-mini"  value="<{$data.download|default='0'}>" name="download">    				
+    			</div>
+				
+				<label class="col-sm-1 control-label ">下载积分</label>
+    			<div class="col-sm-1">
+    				<input type="text" class="form-control input-mini"  value="<{$data.score|default='0'}>" name="score">    				
+    			</div>			    							
+    		</div>
+			
+			
+			<hr>
+			
+			<div class="form-group">	
+				<label class=" col-sm-2 control-label">歌曲名称</label>
+				<div class="col-sm-3">
+					<input  type="text"  name="name" value="" class="form-control">					
+				</div>
+				<span class="help-block">此项不能为空</span>
+			</div>	
+			<div class="form-group">	
+				<label class="col-sm-2 control-label">试听地址</label>
+				<div class="col-sm-5 music-dir">
+					<div class="input-group">
+						<input type="hidden" name="listen_file_id" id="listen_file_id" value="">						
+						<input type="text" class="form-control" name="listen_url"  id="songs_url"  value="<empty name="data['music_url']"><{$data.listen_url|default=""}><else/> <{$data.music_url}></empty>">						
+						<a href="#" class="input-group-addon up_music" id="up-music" rel_url="#songs_url" rel_fileid="#listen_file_id">                        	
+							<span class="fa fa-cloud-upload"></span>
+						</a>
+						<div class="upload-progr"><div class="up-progress"><div class="upload-bar"></div></div></div>
+					</div> 									
+				</div>
+
+				<span class="help-block">可填写外链地址</span>
+			</div>		
+
+			<div class="form-group">	
+				<label class="col-sm-2 control-label">下载地址</label>
+				<div class="col-sm-5 music-dir">
+					<div class="input-group">
+						<input type="hidden" name="down_file_id" id="down_file_id" value="">
+						<input type="text"  class="form-control" name="down_url" id="music-down" value="<empty name="data['music_down']"><{$data.down_url|default=""}><else/> <{$data.music_down}></empty>">
+						<a href="#" class="input-group-addon up_music" id="down-music"  rel_url="#music-down" rel_fileid="#down_file_id">
+							<span class="fa fa-cloud-upload"></span>
+						</a>
+						<div class="upload-progr"><div class="up-progress"><div class="upload-bar"></div></div></div>
+					</div> 
+				</div>
+				<span class="help-block">留空同试听地址</span>
+			</div>
+			<{:hook('upload',array('type'=>'song'))}>
+    		<div class="form-group">
+    			<input type="hidden" name="status" value="<{$data.status|default=''}>">       		
+    			<input type="hidden" name="id" value="<{$data.id|default=''}>">
+            	<div class="col-sm-4 col-sm-offset-2">
+                	<button class="btn btn-primary addall-post" target-form="form-horizontal" type="submit">确认添加</button>
+            	</div>
+        	</div>
+        </form>
+	</div>
+</div>
+
+ 
+</block>
+
+<block name="script">
+<script type="text/javascript" src="__STATIC__/bootstrap-3.1.1/tagsinput/bootstrap-tagsinput.min.js"></script>
+<script type="text/javascript" src="__JS__/other.js?v=0.1"></script>
+<script type="text/javascript">			
+highlight_subnav("<{:U('Songs/index')}>");		
+var findUrl		=	"<{:U('Ajax/findData')}>",
+	savePath 	= 	"<{:trim(C('ADMIN_UPMUSIC_PATH'))}>",
+	savePicPath	=	"<{:trim(C('ADMIN_UPPIC_PATH'))}>";
+
+$(function () {		
+	<notempty name="data['server_id']"> 
+	showServer(<{$data['server_id']}>);
+	<else />
+	showServer(<{:C('DT_SERVER_ID')}>);
+	</notempty>
+		
+
+	$('#tagsinput').tagsinput({maxTags: 5});
+	$(document).on("click",'.add-tag', function(e){
+		var tag = $(this).text();
+		$('#tagsinput').tagsinput('add',tag);
+		$(this).addClass('disabled').attr('autocomplete','off');
+	});
+	
+	$('.find-tag').click(function () {	
+		if($('.add-tag').length){
+			$('.tag-box').slideDown('normal');
+		}else{
+			var box = $('.tag-content');
+			box.html('<p class="csspinner ringed">正在获取数据.....</p>');
+			$('.tag-box').slideDown('normal');
+			$.get("<{:U('Tag/showTag')}>", function(data){			
+				box.html(data);
+				box.slimScroll({ height: '200px'});
+			});	
+		}		
+	});	
+	$('.tag-close').click(function () {	$('.tag-box').slideUp("slow");});
+	
+	$('#all-form').submit(function(e){
+		e.preventDefault();
+		var that = $(this);
+		$.post(that.attr('action'),that.serialize(),function(data){
+			if (data.status){
+				var song = '<div class="form-group">'+
+					'<label class="col-sm-2 control-label"><span class="text-success">添加成功</span></label>'+
+					'<div class="col-sm-4">'+			
+						'<input  type="text"  disabled="value" value="'+data.name+'" class="form-control">'+				
+					'</div>'+
+				'</div>';
+				$('#show-song').append(song);
+				$("input[name='name']").val("");
+				$("input[name='cover_url']").val("");
+				$("input[name='listen_url']").val("");
+				$("input[name='down_url']").val("");				
+			}else{
+				topAlert(data.info);
+			}
+	
+		})		
+		
+	})
+})
+
+function showServer($id){	
+	var that = $('#server-'+$id)	
+	if ( that.length > 0){		
+		that[0].selected = true;
+	}else{
+		$('#no-server')[0].selected = true;
+	}
+}
+</script>
+
+</block>	
+
+

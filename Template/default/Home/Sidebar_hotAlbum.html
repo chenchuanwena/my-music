@@ -1,0 +1,23 @@
+		
+<div class="clearfix mb_10">
+	<h2 class="f_left">热门专辑</h2>
+	<div class="more">
+		<a href="<{:U('Album/index')}>">更多>></a>
+	</div>
+</div>
+<hr>
+<JY:album result="v" limit="5" order="hits" cache_time="86400">
+<div class="clearfix row">
+	<div class="col-sm-4 col-xs-5">
+		<a href="<{$v['url']}>" target="_album" class="f_left a_cover">
+			<img class="s_animate animate_ftr" src="<{$v['cover_url']|default="/Uploads/Picture/album_cover.jpg"}>" alt="<{$v['name']}>">
+		</a>
+	</div>
+	<div class="col-sm-8 col-xs-7 pl_0">
+		<h4 class="mb_5 mt_5 text-ellipsis"><a href="<{$v['url']}>" target="_album" ><{$v['name']}></a></h4>
+		<p class="mb_5 mt_5"><{$v['add_time']|time_format='Y-m-d'}> ，<{$v['hits']}>次浏览</p>
+		<p><{$v['description']|msubstr=0,30}> <a class="ml_10" href="<{$v['url']}>" target="_album" >详细</a></p>
+	</div>				
+</div>
+<hr>
+</JY:album>

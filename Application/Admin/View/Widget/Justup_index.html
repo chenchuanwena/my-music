@@ -1,0 +1,174 @@
+<div class="form-group">	
+	<label class="col-sm-2 control-label">封面地址</label>
+	<div class="col-sm-5">
+		<div class="input-group">
+			<input type="text" class="form-control" name="cover_url" id="cover"  value="<{$data.cover_url|default=""}>">
+			<a href="javascript:;"  class="input-group-addon up_pic" rel_url="#cover" rel_fileid="#cover_id" url="<{:U('File/uploadPicture',array('session_id'=>session_id(),'type'=>$dtype))}>">
+				<span class="fa fa-cloud-upload"></span>
+			</a>
+			<notempty name="data['cover_url']">
+			<a href="javascript:;" class="input-group-addon look_pic" >预览</a>
+			</notempty>
+		</div>    				
+	</div>
+	<span class="help-block">本地上传自动获取URL,可填写外链</span>
+</div>  
+<eq name="dtype" value="1">
+	<div class="form-group">	
+		<label class="col-sm-2 control-label">试听地址</label>
+		<div class="col-sm-3 pr0 server" style="display:none">
+			<input type="text" class="form-control" id="server-listen"  readonly="true">
+		</div>	
+		<div class="col-sm-5 music-dir">
+			<div class="input-group">
+				<input type="hidden" name="listen_file_id" id="listen_file_id" value="">						
+				<input type="text" class="form-control" name="listen_url"  id="songs_url"  value="<empty name="data['music_url']"><{$data.listen_url|default=""}><else/> <{$data.music_url}></empty>">						
+				<a href="#" class="input-group-addon up_music"  url="<{:U('File/uploadMusic',array('session_id'=>session_id()))}>" rel_url="#songs_url" rel_fileid="#listen_file_id">                        	
+					<span class="fa fa-cloud-upload"></span>
+				</a>
+			</div> 									
+		</div>
+		<div class="col-sm-3"> </div>
+		<span class="help-block">本地上传自动获取URL,可填写外链</span>
+	</div>		
+
+	<div class="form-group">	
+		<label class="col-sm-2 control-label">下载地址</label>
+		<div class="col-sm-3 pr0 server" style="display:none">
+			<input type="text" class="form-control" id="server-down" readonly="true">
+		</div>	
+		<div class="col-sm-5 music-dir">
+			<div class="input-group">
+				<input type="hidden" name="down_file_id" id="down_file_id" value="">
+				<input type="text"  class="form-control" name="down_url" id="music-down" value="<empty name="data['music_down']"><{$data.down_url|default=""}><else/> <{$data.music_down}></empty>">
+				<a href="#" class="input-group-addon up_music" url="<{:U('File/uploadMusic',array('session_id'=>session_id()))}>"  rel_url="#music-down" rel_fileid="#down_file_id">
+					<span class="fa fa-cloud-upload"></span>
+				</a>    					
+			</div> 
+		</div>
+		<span class="help-block">留空同试听地址</span>
+	</div>
+</eq>
+<script type="text/javascript" src="__STATIC__/webuploader/webuploader.min.js"></script>
+<script type="text/javascript">
+$(function($){
+	var upOptions = {
+		pick: {
+			id: '#filePicker',
+			label: '<em class="fa fa-cloud-upload fa-2x"></em>'
+		},
+		formData: {
+			name: 'user_file'
+		},
+		swf: JY.ROOT+'/Public/static/webuploader/Uploader.swf',
+		dnd:'#upload-drop',
+		chunked: false,//分片上传
+		auto:true,
+		//sendAsBinary:true,
+		chunkSize: 5 * 1024* 1024, //分片大小
+		disableGlobalDnd: true,
+		fileNumLimit: 300, //队列长度限制
+		fileSizeLimit: 1000 * 1024 * 1024,    // 1G 总大小限制
+		fileSingleSizeLimit: 200 * 1024 * 1024    // 200 M 单个最大限制
+	}	
+	//显示音乐上传窗口
+	$('.up_music').click(function () {		
+		var opts = {accept :{
+			title: 'Images',
+			extensions: 'mp3,MP3,ogg,m4a,mp4,wav',
+			mimeTypes: 'audio/*'
+		}};
+		handelUp($(this),opts,showServer);
+	});
+
+	 //显示图片上传窗口
+	$('.up_pic').click(function () {			
+		var opts ={accept : {
+			title: 'Images',
+			extensions: 'gif,jpg,jpeg,bmp,png',
+			mimeTypes: 'image/*'
+		}};
+		handelUp($(this),opts);
+	});
+
+	function handelUp(that,opts,callback){
+		var parent = that.parent(),
+			upUrl = that.attr('url'),
+			resultUrlObj =  $(that.attr('rel_url'));
+		var options = $.extend(opts,upOptions);
+		//创建上传区域
+		var fileInput = $(
+			'<div class="box-placeholder text-center mt-sm mb-sm" id="upload-drop">'+
+				'<div id="filePicker">dfdsf </div>'+
+				'点击或将文件拖拽到此处'+
+			'</div>'			
+		);
+		var progress = $(
+			'<div class="progress progress-striped progress-xs" id="upload-progress" >'+
+				 '<div class="progress-bar progress-bar-success">'+
+				 '</div>'+
+			'</div>	'
+		);
+		//百度上传控件没有销毁 先验证后是否存在/删除重建了
+		if ( $('#upload-drop').size() > 0){
+			$('#upload-drop').remove();
+			$('#upload-progress').remove();			
+		}
+		progress.insertAfter(parent);	
+		fileInput.insertAfter(parent);			
+		// 实例化
+		var uploader = WebUploader.create(options);
+		uploader.option( 'server', upUrl);
+		
+		//选择文件错误
+		uploader.onError = function( code ) {
+			var text;
+			switch( code ) {
+				case 'F_EXCEED_SIZE':
+					text = '单个文件大小超出限制';
+					break;
+
+				case 'Q_TYPE_DENIED':
+					text = '文件类型错误';
+
+				default:
+					text = '上传失败，请重试';
+					break;
+			}
+			topAlert(text);
+		};
+		
+		// 文件上传过程中创建进度条实时显示。
+		uploader.on( 'uploadProgress', function( file, percentage ) {			
+			progress.find('.progress-bar').css( 'width', percentage * 100 + '%' );			
+		});
+		
+		//上传成功
+		uploader.on( 'uploadSuccess', function( file , response) {
+			if (response.status){
+				var path = response['path'] || response['url'] ;
+				resultUrlObj.val(path);
+				fileInput.remove();
+				progress.remove();
+				if(typeof callback == "function"){ 
+					callback(response['server_id']);
+				}
+			}else{
+				topAlert(response.info);
+			}		
+		});
+		//上传出错
+		uploader.on( 'uploadError', function( file ) {
+			topAlert('上传出错');
+		});
+		//上传完成
+		uploader.on( 'uploadComplete', function( file ) {
+			progress.fadeOut();
+			fileInput.fadeOut();
+		});
+	}
+})
+</script>
+
+
+	

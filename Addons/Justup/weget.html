@@ -1,0 +1,336 @@
+<if condition="$param['type'] eq 'img'">
+<script type="text/javascript" src="__STATIC__/webuploader/webuploader.min.js"></script>
+<script type="text/javascript">
+$(function($){
+	var uploader = WebUploader.create({
+		// swf文件路径
+		swf: JY.ROOT+'/Public/static/webuploader/Uploader.swf',
+		// 文件接收服务端。
+		server	: '<{:U('File/uploadPicture',array('session_id'=>session_id(),'type'=>$dtype))}>',
+		formData: {name: 'user_file'},
+		accept : {
+			title: 'Images',
+			extensions: 'gif,jpg,jpeg,bmp,png',
+			mimeTypes: 'image/*'
+		},
+		// 选择文件的按钮。可选。
+		pick: '#up-img',		
+		chunked: false,//分片上传
+		// 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+		resize: true,
+		auto:true,
+		disableGlobalDnd: true,
+		fileSingleSizeLimit: 10 * 1024 * 1024    // 10M 单个最大限制
+	});
+	var progress = $('#up-img').prev().find('.upload-progr');	
+	
+	//当开始上传流程时触发。
+	uploader.on( 'startUpload', function( file, percentage ) {			
+		progress.show();			
+	});		
+	// 文件上传过程中创建进度条实时显示。
+	uploader.on( 'uploadProgress', function( file, percentage ) {			
+		progress.find('.upload-bar').css( 'width', percentage * 100 + '%' );			
+	});		
+	//上传成功
+	uploader.on( 'uploadSuccess', function( file , response) {
+		if (response.status){
+			var path = response['path'] || response['url'] ;
+			$('#cover').val(path);	
+			$('#img_file_id').val(response['id'])
+			progress.hide();
+		}else{
+			topAlert(response.info);
+		}		
+	});
+
+	//上传出错
+	uploader.on( 'uploadError', function( file ) {
+		topAlert('上传出错');
+	});
+	//上传完成
+	uploader.on( 'uploadComplete', function( file ) {
+		topAlert('图片上传成功','success');
+	});
+	//选择文件错误
+	uploader.onError = function( code ) {
+		var text;
+		switch( code ) {
+			case 'F_EXCEED_SIZE':
+				text = '单个文件大小超出限制';
+				break;
+
+			case 'Q_TYPE_DENIED':
+				text = '文件类型错误';
+
+			default:
+				text = '上传失败，请重试';
+				break;
+		}
+		topAlert(text);
+	};
+})
+</script>
+<else/>
+	<eq name="config['up_on']" value="1">
+		<if condition="$config['up_type'] eq 1">
+			<!-- ftp-->
+		
+		<elseif condition="$config['up_type'] eq 2"/>
+		<script type="text/javascript">
+		var  url = 'http://<{$config['alioss_host']}>';
+		$(document).ready(function(){
+			var obj = $.ajax({
+				url: "<{:addons_url('Justup://Call/alioss')}>",
+				async: false,
+				dataType:'json'
+			}).responseJSON;
+			
+			
+			var multipart_params = {
+				'key' 			: obj['dir']+'${filename}',
+				'policy'		: obj['policy'],
+				'OSSAccessKeyId': obj['accessid'],
+				'success_action_status' : '200', //让服务端返回200,不然，默认会返回204
+				'signature'		: obj['signature'],
+			};
+			
+			//设置试听
+			uploadListen.setOption({'multipart_params': multipart_params});
+			uploadListen.bind('BeforeUpload', function(up, file) {
+				var btn 	= $(uploadListen.getOption('browse_button'));
+				btn.next('.upload-progr').show();				
+				//显示要上传的服务器
+				setServer(obj['server_id'],obj['server_name']);	
+			});
+			
+			uploadListen.bind('FileUploaded', function(up, file,info) {
+				var btn 	= uploadListen.getOption('browse_button');
+				uploaded( btn, file,info,obj);				
+			});
+			
+			//设置下载			
+			uploadDown.setOption({'multipart_params': multipart_params});
+			uploadDown.bind('BeforeUpload', function(up, file) {
+				var btn 	= $(uploadDown.getOption('browse_button'));
+				btn.next('.upload-progr').show();				
+				//显示要上传的服务器
+				setServer(obj['server_id'],obj['server_name']);	
+			});
+			
+			uploadDown.bind('FileUploaded', function(up, file,info) {
+				var btn 	= uploadDown.getOption('browse_button');
+				uploaded( btn, file,info,obj);				
+			});
+		});
+		function uploaded (btn, file,info,obj) {				
+			var button 	= $(btn);			
+			var rel_url	= $(button.attr('rel_url'));
+			if (info.status == 200){
+				var  path 	= obj['dir']+ file['name'] ;				
+				rel_url.val(path);
+				topAlert('上传成功','success');					
+			}else{
+				topAlert('阿里云oss上传出错');
+			}
+			setTimeout(function(){button.next('.upload-progr').hide()},2000);	
+		}
+		</script>
+		<elseif condition="$config['up_type'] eq 3"/>
+		<script type="text/javascript">
+		var  url = 'http://upload.qiniu.com';
+		$(document).ready(function(){			
+			//绑定试听服务器函数
+			uploadListen.bind('BeforeUpload', function(up, file) {
+				var btn 	= $(uploadListen.getOption('browse_button'));
+				btn.next('.upload-progr').show();
+				var multipart_params = {
+					'token'	:getSin(file),
+					'key'	:file['name']
+				};
+				uploadListen.setOption({'multipart_params': multipart_params});
+				//显示要上传的服务器
+				$.ajax({
+					url: "<{:addons_url('Justup://Call/qiniuServer')}>",
+					type: "POST",
+					success: function(obj){
+						setServer(obj['server_id'],obj['server_name']);	
+					}
+				});
+			});
+			
+			uploadListen.bind('FileUploaded', function(up, file,info) {
+				var btn 	= uploadListen.getOption('browse_button');
+				uploaded( btn,file,info);				
+			});
+			
+			//绑定下载服务器函数
+			uploadDown.bind('BeforeUpload', function(up, file) {
+				var btn 	= $(uploadDown.getOption('browse_button'));
+				btn.next('.upload-progr').show();
+				var multipart_params = {
+					'token'	:getSin(file),
+					'key'	:file['name']
+				};
+				uploadDown.setOption({'multipart_params': multipart_params});
+				//显示要上传的服务器
+				$.ajax({
+					url: "<{:addons_url('Justup://Call/qiniuServer')}>",
+					type: "POST",
+					success: function(obj){
+						setServer(obj['server_id'],obj['server_name']);	
+					}
+				});
+			});
+			
+			uploadDown.bind('FileUploaded', function(up, file,info) {
+				var btn 	= uploadDown.getOption('browse_button');
+				uploaded( btn,file,info);				
+			});
+			
+		});
+		
+		function uploaded (btn, file,info) {				
+			var button 	= $(btn);			
+			var rel_url	= $(button.attr('rel_url'));
+			var res		= $.parseJSON(info.response);
+			
+			if (res.key){
+				rel_url.val(file['name']);
+				topAlert('文件上传成功','success');					
+			}else{
+				topAlert('七牛上传出错');
+			}
+			setTimeout(function(){button.next('.upload-progr').hide()},2000);	
+		}
+		
+		function getSin (file){
+			return $.ajax({
+				url: "<{:addons_url('Justup://Call/qiniu')}>",
+				type: "POST",
+				data:{file:file['name']},
+				async: false,
+			}).responseText;
+		}
+		</script>		
+		<else/>
+		
+		</if>
+	<else/>
+	<!--本地上传-->
+	<script type="text/javascript">
+		var  url = '<{:U('File/uploadMusic',array('session_id'=>session_id()))}>';		
+		$(document).ready(function(){
+			uploadListen.bind('FileUploaded', function(up, file,info) {
+				var btn 	= uploadListen.getOption('browse_button');
+				uploaded( btn,info);				
+			});
+			
+			uploadDown.bind('FileUploaded', function(up, file,info) {
+				var btn 	= uploadDown.getOption('browse_button');
+				uploaded( btn,info);				
+			});
+		});
+		//上传完成执行函数
+		function uploaded (btn,info){
+			var res		= $.parseJSON(info.response);
+			var button 	= $(btn);
+			var press	= button.next('.upload-progr');				
+			var rel_url	= $(button.attr('rel_url'));
+			var rel_id	= $(button.attr('rel_fileid'));
+			if (res.status){
+				var  path 	= res['path'] || res['url'] ;
+				rel_url.val(path);
+				rel_id.val(res['id']);
+				topAlert(res.info,'success');					
+			}else{
+				topAlert(res.info);
+			}
+			setTimeout(function(){press.hide()},2000);
+		}		
+	</script>
+	</eq>
+	<script type="text/javascript" src="__STATIC__/plupload/plupload.full.min.js"></script>
+	<script type="text/javascript" src="__STATIC__/plupload/zh_CN.js"></script>
+	<script type="text/javascript">
+	var options = {
+		runtimes			: 'html5,flash,silverlight,html4', 
+		//container			: document.getElementById('container'),
+		flash_swf_url		: '__STATIC__/plupload/Moxie.swf',
+		silverlight_xap_url : '__STATIC__/plupload/Moxie.xap',
+		url					: url,
+		file_data_name		:'file',
+		filters: {
+			mime_types : [ //只允许上传图片和zip,rar文件
+				{ extensions : "mp3,mp4,wav,ogg,m4a" },
+			],
+			max_file_size		: '300mb', //最大只能上传10mb的文件
+			prevent_duplicates	: false //不允许选取重复文件
+		},
+		init: {
+			Error: function(up, err) {
+				topAlert(err.message);
+			}
+		}
+	}
+
+	//注册试听上传
+	var lisrenSet	= $.extend(options, {browse_button: 'up-music'});
+	
+	var uploadListen = new plupload.Uploader(lisrenSet);
+		
+	uploadListen.bind('FilesAdded', function(up, file) {
+		uploadListen.start();
+	});
+	
+	uploadListen.bind('BeforeUpload', function(up, file) {
+		var btn 	= $(uploadListen.getOption('browse_button'));
+		btn.next('.upload-progr').show();
+	});
+	
+	uploadListen.bind('UploadProgress', function(up, file) {
+		var btn 	= $(uploadListen.getOption('browse_button'));
+		var press	= btn.next('.upload-progr');
+		press.find('.upload-bar').html('<span>' + file.percent + '%</span>').css( 'width', file.percent+'%' );	
+			
+	});
+	uploadListen.init();
+	
+	//注册下载上传
+	var downSet	= $.extend(options, {browse_button: 'down-music'});
+	
+	var uploadDown = new plupload.Uploader(downSet);
+		
+	uploadDown.bind('FilesAdded', function(up, file) {
+		uploadDown.start();
+	});
+	
+	uploadDown.bind('BeforeUpload', function(up, file) {
+		var btn 	= $(uploadDown.getOption('browse_button'));
+		btn.next('.upload-progr').show();
+	});
+	
+	uploadDown.bind('UploadProgress', function(up, file) {
+		var btn 	= $(uploadDown.getOption('browse_button'));
+		var press	= btn.next('.upload-progr');
+		press.find('.upload-bar').html('<span>' + file.percent + '%</span>').css( 'width', file.percent+'%' );	
+			
+	});
+	uploadDown.init();
+	
+	//显示要上传的服务器
+	function setServer(id,name){
+		var that = $('#server-'+id)	
+		if ( that.length > 0){		
+			that[0].selected = true;
+		}else{
+			var opt = '<option id="server-'+id+'" value="'+id+'" selected="true">'+name+'</option>';
+			$("select[name='server_id']").append(opt);
+		}
+	}
+	</script>
+</if> 
+
+
+
+

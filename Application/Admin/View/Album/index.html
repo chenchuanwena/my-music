@@ -1,0 +1,185 @@
+<extend name="Public/base"/>
+<block name="content">
+<h3 class="col-md-4">专辑管理</h3>
+<div class="col-lg-4">
+    <div class="col-sm-8">
+	    <div class="input-group">
+	       <select class="form-control"  id="batch-c">
+				<foreach name="positions" item="pos" key="k" >
+	          	<option  value="<{$k}>"><{$pos}></option>
+	          	</foreach>
+				<option value="0">取消推荐</option>
+	       </select>
+	       <span class="input-group-btn">
+	          <button class="btn batch-btn btn-default">确认提交</button>
+	       </span>
+	    </div>
+	  </div>
+</div> 
+<div class="col-md-4">
+	<div class="input-group mb-lg search-form">
+    	<input type="text" class="form-control search-input" name="title" value="" placeholder="请输入专辑名称">
+    	<a class="input-group-addon btn" id="search" url="<{:U('Album/index','pid='.I('pid',0),false)}>">
+        	<i class="fa-search fa" ></i>
+    	</a>
+	</div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+    	<div class="panel panel-default">
+       		<div class="panel-heading ">专辑列表
+				<div class="btn-group ml-lg">
+       				推荐位[<a class="mr-sm ml-sm <empty name="Think.get.pos">text-danger</empty>" href="<{:U('index')}>"> 全部</a>
+					<foreach name="positions" item="pos" key="k" >
+					<a class="ml-sm mr-sm <notempty name="Think.get.pos"><eq name="Think.get.pos" value="$k">text-danger</eq></notempty>" href="<{:U('index?pos='.$k)}>"><{$pos}></a>	
+					</foreach>	
+       				]
+       			</div>
+       			<div class="btn-group pull-right">
+	       			<a class="btn btn-labeled btn-success " href="<{:U('add')}>">新增 </a>
+	       			<a class="btn btn-labeled btn-success ajax-post "  href="<{:U('setStatus',array('status'=>1))}>" target-form="ids">启用</a>
+	       			<a class="btn btn-labeled btn-danger ajax-post "  href="<{:U('setStatus',array('status'=>0))}>" target-form="ids">禁用</a>					
+	                <a class="btn btn-labeled btn-danger ajax-post" href="<{:U('del')}>" target-form="ids">删除</a>
+	         	</div>      			
+       		</div>
+    		<div class="table-responsive">
+        		<table class="table table-striped table-bordered table-hover">           
+            		<thead>
+                		<tr>
+                			<th style="width: 5%" class="check-all">
+                          		<div data-toggle="tooltip" data-title="全选" class="checkbox c-checkbox">
+                             		<label>
+                                		<input type="checkbox">
+                                		<span class="fa fa-check"></span>
+                             		</label>
+                          		</div>
+                       		</th> 
+                        	<th>ID</th>
+        					<th>专辑名称</th>
+        					<th>所属类型</th>
+        					<th>所属曲风</th>
+        					<th>艺术家</th>
+        					<th>索引</th>
+        					<th>点击数</th>
+        					<th>推荐位</th>
+        					<th>评分</th>
+        					<th>状态</th>
+        					<th>添加时间</th>
+                     		<th class='text-center'>操作</th>
+                      	</tr>
+                    </thead>
+                    <tbody role="alert" aria-live="polite" aria-relevant="all">
+                    	<notempty name="list">
+                    	<volist name="list" id="data" key="k">
+                      	<tr>
+                        	<td>
+                          		<div class="checkbox c-checkbox">
+                             		<label>
+                                	<input type="checkbox" class="ids" value="<{$data.id}>" name="id[]">
+                                	<span class="fa fa-check"></span>
+                             		</label>
+                          		</div>
+                       		</td>
+                        	<td><{$data.id}></td>
+                        	<td class='m-name'><a class="edit-name" href="#"><{$data.name}></a></td>
+        					<td><{$data.type_name}></td>
+        					<td><{$data.genre_name}></td>
+        					<td><{$data.artist_name}></td>
+        					<td><{$data.sort}></td>
+        					<td><{$data.hits}></td>
+        					<td>
+        					<if condition="$data.position eq 0">
+        						无
+        					<else/>
+        						<assign name="pos" value="$positions[$data['position']]" />
+								<span style="color:#63930A">
+								<empty name="pos">多推荐位<else /><{$pos}></empty>
+								</span>
+        					</if>
+							</td>                        	
+                        	<td><{$data.rater}></td>
+        					<td><{$data.status|get_status_title}></td>
+                        	<td><{$data.add_time|time_format='Y-m-d'}></td>
+                    		<td class="text-center">
+	                            <a class="btn btn-labeled btn-sm mr-sm" href="<{:U('mod?id='.$data['id'])}>"><em class="fa fa-edit"></em></a>
+	                            <a class="btn btn-labeled btn-sm btn-danger btn-del" url="<{:U('del?id='.$data['id'])}>"><em class="fa fa-times"></em></a>
+                         	</td>
+                      	</tr>
+                      	</volist>
+        				<else/>
+        				<td colspan="13" class="text-center">暂时还没有内容! </td>
+        				</notempty>
+                    </tbody>
+                </table>
+    		</div>
+    		<!-- 结束 表格 -->
+    		<div class="panel-footer">
+    			<div class="row">
+					<ul class="pagination">
+					<{$_page}>
+					</ul>
+				 </div>
+            </div>    		
+    	</div>
+	</div>
+</div>
+</block>
+<block name="script">
+<script type="text/javascript">
+	//导航高亮
+	highlight_subnav("<{:U('Songs/index')}>","<{:U('Album/index')}>")
+	$('.batch-btn').click(function () {
+		var position = $('#batch-c').val();
+		//alert(batch_id);
+		var ids = [];
+		if ($('.ids:checked').size()){
+			$('.ids:checked').each(function () {
+				ids.push($(this).val());
+			})
+			//if(!confirm('确认要执行该操作吗?')){return false;}
+			$.ajax({ 
+				type: "POST",
+				url:'<{:U('setpos')}>', 
+				data:{
+					id:ids.join(','),
+					position:position
+				},
+				success: function(data){
+					if (data.status){
+						topAlert(data.info,'success');
+						window.location.reload(); // 刷新页面
+					}else{
+						topAlert(data.info);
+					}
+				},
+				error:function() {
+					topAlert('请求失败！');
+				}
+				
+			});
+		}else {			
+			topAlert('请至少选中一个！');
+		}
+		return false;
+	})
+    //搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+		var status = $("#sch-sort-txt").attr("data");
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+		if(status != ''){
+			query += 'status=' + status + "&" + query;
+        }
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+</script>
+</block>	
+
+

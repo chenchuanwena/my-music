@@ -1,0 +1,52 @@
+<extend name="Public/common"/>
+<block name="content">
+<div class="tour_div">
+	<div class="tour_title tc0"><{$data['name']}></div>
+	<div class="tour_img">
+		<img class="tm_img" src="<{$data['cover_url']}>">
+		<gt name="data['position']" value="0"><div class="tour_type"><img src="__TMPL__/Mobile/images/tourtag_0.png"></div></gt>
+	</div>
+	<div class="tour_info">
+		<ul>
+			<li>
+				<span class="info_ti">发行时间:</span>
+				<span class="info_dt"><{$data['pub_time']}></span>
+			</li>
+			
+			<li>
+				<span class="info_ti">所属类型:</span>
+				<span class="info_dt"><{$data['type_name']|default="未知"}></span>
+			</li>
+			<li>
+				<span class="info_ti">唱片公司:</span>
+				<span class="info_dt"><{$data['company']|default="未知"}></span>
+			</li>
+			<li>
+				<span class="info_ti">所属歌手:</span>
+				<span class="info_dt"><a href="<{$data['artist_url']}>"><{$data['artist_name']}></a></span>
+			</li>
+			
+			<li>
+				<span class="info_ti">详细介绍:</span>
+				<span class="info_dt"><{$data['introduce']|default="暂无介绍"}></span>
+			</li>
+		
+		</ul>
+	</div>
+</div>
+
+<div class="tour_div">
+	<div class="tour_title tc0"><{$data['name']}>的全部歌曲</div>
+	<ul class="song_con">
+		<JY:songs result="v" album_id="$data['id']" limit="15" order="listens">
+		<li>
+			<span class="numb"><{$i}></span>
+			<a class="sname text-ellipsis" title="<{$v['name']}>" href="<{$v['url']}>"><{$v['name']}></a>
+			<a class="gname text-ellipsis" title="<{$v['name']}>" href="<{$v['artist_url']}>"><{$v['artist_name']}></a>
+			<a class="play" title="播放<{$v['name']}>" href="<{$v['url']}>"></a>		
+		</li>
+		</JY:songs>
+	</ul>
+	
+</div>
+</block>

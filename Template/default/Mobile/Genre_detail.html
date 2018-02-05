@@ -1,0 +1,20 @@
+<extend name="Public/common"/>
+
+<block name="content">
+<div class="tm_div  clearfix">
+	<div class="tour_title tc0" ><{$data['name']}> - 所有歌曲</div>
+</div>
+<div class="tour_div ">
+	<ul class="song_con">
+		<JY:songs result="v" limit="15" grnre_id="$data['id']">
+		<li>
+			<span class="numb"></span>
+			<a class="sname text-ellipsis" title="<{$v['name']}>" href="<{$v['url']}>"><{$v['name']}></a>
+			<a class="gname text-ellipsis" title="<{$v['name']}>" href="<{$v['artist_url']}>"><{$v['artist_name']}></a>
+			<a class="play" title="播放小<{$v['name']}>" href="<{$v['url']}>"></a>		
+		</li>
+		</JY:songs>	
+		<div id="more" class="more clearfix" style="margin-top:20px;" url="<{:U('index')}>" genre="<{$data['id']}>" limit="15" order="<{$order}>">点击查看更多</div>			
+	</ul>				
+</div>	
+</block>

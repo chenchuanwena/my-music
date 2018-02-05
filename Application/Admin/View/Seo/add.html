@@ -1,0 +1,85 @@
+<extend name="Public/base"/>
+<block name="content">
+<h3>SEO管理</h3>
+<div class="panel panel-default">
+	<div class="panel-heading"><{:isset($data['id'])?'编辑':'新增'}>SEO规则</div>
+ 	<div class="panel-body">
+		<div class="alert alert-warning">
+			如果你不明白什么是模块、控制器、操作，请不要修改对应值，规则可自由修改，前提懂得变量的作用
+		</div>
+		<form class="form-horizontal" enctype="multipart/form-data" action="<{:U()}>" method="post">													
+			<div class="form-group">	
+				<label class="col-sm-2 control-label">规则名称 </label>
+				<div class="col-sm-3">
+					<input  type="text" name="title" class="form-control" value="<{$data.title|default=''}>" >					
+				</div>
+				<span class="help-inline">此项不能为空</span>	
+		    </div>		
+    		<div class="form-group">	
+    			<label class="col-sm-2 control-label">所属模块</label>
+    			<div class="col-sm-5">
+   					<select name="app" class="form-control">        			
+	            		<option value="Home" <eq name="data['app']" value="Home">selected </eq> >前台模块</option>
+						<option value="User" <eq name="data['app']" value="User">selected </eq> >用户模块</option>
+	    			</select>
+    			</div>
+    		</div> 
+			<div class="form-group">
+				<label class=" col-sm-2  control-label">所属操作</label>
+				<div class="col-sm-2">
+	    			<input  type="text" name="controller" class="form-control" value="<{$data.controller|default=''}>" >
+				</div>
+			</div>		
+    		<div class="form-group">	
+    			<label class=" col-sm-2  control-label">所属控制器</label>
+				<div class="col-sm-2">
+	    			<input  type="text" name="act" class="form-control" value="<{$data.action|default=''}>" >
+				</div>		
+    		</div>
+    		
+    		<div class="form-group">	
+				<label class=" col-sm-2 control-label">SEO标题规则</label>
+				<div class="col-sm-5">
+					<textarea name="title_rule" style="width:100%;height:80px;" ><{$data.title_rule|default=''}></textarea>
+					<span class="help-block">可用变量 {$webname}网站名称，{$webtitle}网站标题，{$webkeywords}网站关键字，{$webdescription}网站描述，{$name}当前详情页名称例如： 歌曲名称，专辑名称，歌手名称等，{$username}用户名称，留空则读取网站设置</span>
+			
+				</div>
+				
+			</div>
+			
+			<div class="form-group">	
+				<label class=" col-sm-2  control-label">关键字规则</label>
+				<div class="col-sm-5">
+					<textarea name="keywords_rule" style="width:100%;height:80px;" ><{$data.keywords_rule|default=''}></textarea>
+					<span class="help-block">可用变量 {$webname}网站名称，{$webtitle}网站标题，{$webkeywords}网站关键字，{$webdescription}网站描述，{$name}当前详情页名称例如： 歌曲名称，专辑名称，歌手名称等，{$username}用户名称，留空则读取网站设置</span>			
+				</div>
+			</div>					
+					
+		    <div class="form-group">		
+				<label class="col-sm-2 control-label">描述规则</label>
+				<div class="col-sm-5">	
+					<textarea name="description_rule" style="width:100%;height:80px;" ><{$data.description_rule|default=''}></textarea>
+		    		<span class="help-block">可用变量 {$webname}网站名称，{$webtitle}网站标题，{$webkeywords}网站关键字，{$webdescription}网站描述，{$name}当前详情页名称例如： 歌曲名称，专辑名称，歌手名称等，{$username}用户名称，留空则读取网站设置</span>			
+		    	</div>
+		    </div>			 
+									
+    		<div class="form-group">
+    			<input type="hidden" name="status" value="<{$data.status|default=''}>">
+    			<input type="hidden" name="id" value="<{$data.id|default=''}>">      		
+            	<div class="col-sm-4 col-sm-offset-2">
+                	<button class="btn btn-default" type="button" onclick="javascript:history.back(-1);return false;">取消</button>
+                	<button class="btn btn-primary ajax-post" target-form="form-horizontal" type="submit">保存</button>
+            	</div>
+        	</div>
+        </form>
+	</div>
+</div> 
+</block>
+<block name="script">
+<script type="text/javascript">
+	//导航高亮
+	highlight_subnav("<{:U('Config/group')}>","<{:U('Seo/index')}>");
+</script>
+</block>	
+
+

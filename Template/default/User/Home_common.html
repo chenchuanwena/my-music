@@ -1,0 +1,189 @@
+<!doctype html>
+<!--[if IE 9 ]><html class="ie9" lang="en"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en"><!--<![endif]-->
+<head>	
+	<title><{$meta_title}></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" 		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="author" 		content="JYmusic音乐管理系统">
+	<meta name="keywords" 		content="<{$meta_keywords}>">
+	<meta name="description" 	content="<{$meta_description}>">
+	<link type="image/x-ico; charset=binary" rel="JYmusic icon" href="__TMPL__/images/favicon.ico">
+	<!--Css-->
+	<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="__STATIC__/JYmusic/css/jy.css">
+	<link rel="stylesheet" type="text/css" href="__TMPL__/css/style.css" media="all">
+	<link rel="stylesheet" type="text/css" href="__TMPL__/css/user.css" media="all">
+	<!--js-->
+    <script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script>
+	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	(function(){window.JY = {"ROOT"   : "__ROOT__","APP": "__APP__","PUBLIC" : "__PUBLIC__","DEEP"   : "<{:C('URL_PATHINFO_DEPR')}>","MODEL": ["<{:C('URL_MODEL')}>", "<{:C('URL_CASE_INSENSITIVE')}>", "<{:C('URL_HTML_SUFFIX')}>"],"VAR": ["<{:C('VAR_MODULE')}>", "<{:C('VAR_CONTROLLER')}>","<{:C('VAR_ACTION')}>"]}})();
+	</script>
+	<block name="style"></block>
+</head>
+<body id="">
+<div class="relative w_xs_auto">
+	<block name="footer"><include file="Public/header"/></block>	
+	<!-- /头部 -->	
+	<section class="content-wrap">
+		<div class="container zoom-header">
+			<div class="row">
+				<div class="col-sm-7">
+					<div class="avatar">
+						<img class="a_cover" alt="<{$user['nickname']}>" src="<{:get_user_avatar($user['uid'])}>">
+					</div>
+					<div class="uinfo">
+						<h2 class="">
+							<{$user['nickname']}>
+							<if condition="is_vip($user['uid'])">
+							<a class="u-icon" href="#"><i class="jy jy-vip-o"></i> VIP会员</a>
+							</if>
+							<if condition="is_musician($user['uid'])">
+							<a class="u-icon" href="#"><i class="jy jy-round-music"></i>音乐人</a>
+							</if>
+						</h2>
+						<div><{$user['signature']}></div>
+						<div class="ubtn">							
+							<if condition="is_follow($user['uid'])">
+							<a class="btn btn-default on" data-action="follow" data-id="<{$user['uid']}>">
+								<i class="jy jy-user-add on"></i>
+								已关注
+							</a>
+							<else /> 
+							<a class="btn btn-default" data-action="follow" data-id="<{$user['uid']}>">
+								<i class="jy jy-user-add"></i>
+								关注
+							</a>
+							</if>
+							<if condition="UID neq $user['uid'] ">
+							<a class="btn btn-default" data-toggle="modal" data-target="#msgModal" data-whatever="@<{$user['nickname']}>">
+								<i class="jy jy-edit-f"></i>
+								私信
+							</a>
+							</if>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-5">
+					<ul class="clearfix list-ucount">
+						<li>
+							<strong><{$user['hits']}></strong>
+							<p>人气</p>
+						</li>
+						<li>
+							<strong><{$user['fans']}></strong>
+							<p>粉丝</p>
+						</li>
+						<li class="last">
+							<strong class="album-count"><{$user['songs']}></strong>
+							<p>歌曲</p>
+						</li>
+						<li class="last">
+							<strong class="album-count"><{$user['albums']}></strong>
+							<p>专辑</p>
+						</li>
+					</ul>
+
+					<div class="ufx">
+						<{:hook('pageBody',array('widget'=>'Baidushare'))}>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="container zoom-inner">
+			<div class="tabbable-custom zoom-nav">
+				<ul class="nav nav-tabs">
+					<li <eq name="ACTION_NAME" value="index"> class="active"</eq>>
+						<a href="<{:U('/user/'.$user['uid'])}>">首页</a>
+					</li>
+					<li <eq name="ACTION_NAME" value="share"> class="active"</eq>>
+						<a href="<{:U('home/share?uid='.$user['uid'])}>">分享</a>
+					</li>
+					<li <eq name="ACTION_NAME" value="album"> class="active"</eq>>
+						<a href="<{:U('home/album?uid='.$user['uid'])}>">专辑</a>
+					</li>
+					<!--li <eq name="ACTION_NAME" value="profile"> class="active"</eq>>
+						<a href="<{:U('home/profile?uid='.$user['uid'])}>">资料</a>
+					</li-->
+					<li <eq name="ACTION_NAME" value="fans"> class="active"</eq>>
+						<a href="<{:U('home/fans?uid='.$user['uid'])}>">粉丝</a>
+					</li>
+				</ul>
+			</div>
+			<block name="content">
+
+			</block>
+		</div>
+	</div>
+	<!-- /主体 -->
+	</section>
+	<!-- 底部 -->
+	<block name="footer"><include file="Public/footer"/></block>
+	<!-- /底部 -->
+	<div class="hidden"><!-- 用于加载统计代码等隐藏元素 -->
+		<block name="hidden"><{:C('WEB_SITE_STAT')}></block>
+	</div>
+</div>
+
+<if condition="UID neq $user['uid'] ">
+<div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			    <h4 class="modal-title" id="exampleModalLabel">发送私信到@<{$user['nickname']}></h4>
+			</div>
+			<div class="modal-body">
+			    <form action="<{:U('msgcenter/send')}>" method="post" id="msg-form">
+			        <div class="form-group">
+			            <label for="message-text" class="control-label">消息内容:</label>
+			            <textarea class="form-control" name="content" id="message-text"></textarea>
+			        </div>
+			        <input type="hidden" class="form-control" name="to_uid" value="<{$user['uid']}>">
+					<div class="form-group">
+			 			<button type="submit" tagform="#msg-form" class="btn btn-success">提交</button>
+			 		</div>
+			    </form>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+$().ready(function() {
+	$("#msg-form").validate({
+		rules: {
+			content:{
+				required: true,
+				rangelength:[2,400]
+			},
+			to_id: {
+				required: true,
+				digits: true
+			}
+
+		},
+		messages: {
+			content: {
+				required: '信息不能为空',
+				rangelength:'信息长度2-400个字符'
+			},
+			to_uid: {
+				required: "无效操作",
+				digits: "无效操作"
+			}
+
+		}
+	});
+});
+</script>
+</if>
+<script type="text/javascript" src="__STATIC__/JYmusic/js/jy.js"></script>
+<script type="text/javascript" src="__TMPL__/js/uplugs.js"></script>
+<script type="text/javascript" src="__TMPL__/js/user.js?v=1.0"></script>
+<block name="player"></block>
+<block name="script"></block>
+</body>
+</html>

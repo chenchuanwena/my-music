@@ -1,0 +1,162 @@
+<extend name="Public/common" />
+
+<block name="warp">
+<div class="tabbable tabbable-custom tabbable-reversed">
+	<ul class="nav nav-tabs">
+		<li class="active">
+			<a data-toggle="tab" href="#tab_in">认证音乐人</a>
+		</li>
+	</ul>
+	<div class="tab-content">
+		<div id="tab_in" class="tab-pane active">
+			
+			<if condition="($user['songs'] eq C('AUTH_MUSICIAN_SONGS')) OR ($user['songs'] gt C('AUTH_MUSICIAN_SONGS')) ">
+			<div class="alert alert-warning">
+				<p>感谢你申请认证音乐人</p>
+				<p>确保你填写的信息真实有效，否者不予通过</p>
+				<p>认证通过后认证资料将无法修改</p>
+			</div>
+			<form class="form-horizontal" action="<{:U('')}>" method="post" id="auth-form">
+				<div class="form-body">
+				    <div class="form-group">
+                   		<label class="col-lg-3 control-label">真实姓名</label>
+                    	<div class="col-lg-4">
+							<input type="text" name="realname" value="" class="form-control">
+							<span class="help-block">请保证姓名真实有效</span>										
+						</div>                           
+                    </div>
+					
+					<div class="form-group">
+                   		<label class="col-lg-3 control-label">身份证号码</label>
+                    	<div class="col-lg-4">
+							<input type="text" name="idcard" value="" class="form-control">										
+						</div>                           
+                    </div>
+                   					
+					<div class="form-group">		        			
+	                    <label class="col-md-3 control-label">身份证件照片</label>				
+						<div class="col-md-6" id="up-box" style="line-height:30px">      	
+			            	<{:W('Justup/index',array('type'=>'img'))}>
+						</div>
+		            </div>				
+		            
+                   	<div class="form-group">
+                   		<label class="col-lg-3 control-label">手机号码</label>
+                    	<div class="col-lg-4">
+							<input type="text" name="phone" value="" class="form-control">	
+							<span class="help-block">请填写你的手机</span>							
+						</div>                           
+                    </div>
+
+
+                    <div class="form-group">
+						<label class="col-md-3 control-label">认证理由</label>
+	                    <div class="col-md-8">
+	                       <textarea class="form-control" name="reason" rows="6" placeholder=""><{$data.lrc|default=''}></textarea>
+	                       <span class="help-block">填写认证补充说明</span>
+	                    </div>
+	                </div>
+
+					<div class="form-group ">
+						<div class="col-md-4 col-md-offset-3">
+							<button class="btn btn-danger" tagform="#auth-form">确认提交</button>
+						</div>
+					</div>
+				</div>
+			</form>
+			<else/>
+			<div class="alert alert-warning">
+				你分享的音乐不足<{:C('AUTH_MUSICIAN_SONGS')}>首无法申请！
+			</div>
+			</if>
+
+		</div>
+
+	</div>
+</div>
+</block>
+
+<block name="script">
+<script script type="text/javascript">
+$.validator.setDefaults({
+	submitHandler: function(form) {
+		postForm(form);
+		return false;		
+	}
+});
+$().ready(function() {
+	$("#auth-form").validate({
+		rules: {
+			realname:{
+				required: true,
+				rangelength:[2,32]
+			},
+			idcard: {
+				required: true,
+			},
+			phone:{
+				required: true,
+				digits: true
+			},
+			reason:{
+				required: true,
+				rangelength:[20,255]
+			}
+		},
+		messages: {
+			realname: {
+				required: '真实姓名不能为空',
+				rangelength:'真实姓名长度2-32个字符'
+			},
+			idcard: {
+				required: "身份证号码不能为空",
+			},
+			phone:{
+				required: '请填写手机号码',
+				digits: '手机号码不正确'
+			},
+			reason:{
+				required: '认证理由不能为空',
+				rangelength:'认证理由长度20-255个字符'
+			}
+		}
+	});
+
+	$("#pwd-form").validate({
+		rules: {
+			old:{
+				required: true,
+				rangelength:[6,30]
+			},
+			password: {
+				required: true,
+				rangelength:[6,30]
+			},
+			repassword:{
+				equalTo: '#inpwd'
+			}
+		},
+		messages: {
+			old: {
+				required: '原密码不能为空',
+				rangelength:'密码长度6-30个字符'
+			},
+			password: {
+				required: '新密码不能为空',
+				rangelength:'密码长度6-30个字符'
+			},
+			repassword:{
+				equalTo:'两次密码输入不一致'
+			}
+		}
+	});
+
+    $.ms_DatePicker({ 
+        YearSelector: "#sel_year", 
+        MonthSelector: "#sel_month", 
+        DaySelector: "#sel_day" 
+    }); 
+});
+
+</script>
+</block>

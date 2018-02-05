@@ -1,0 +1,59 @@
+[ 2017-08-16T11:45:20+08:00 ]  
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `jy_hooks` [ RunTime:0.0770s ]
+SQL: SELECT `name`,`addons` FROM `jy_hooks`  [ RunTime:0.0760s ]
+SQL: SHOW COLUMNS FROM `jy_addons` [ RunTime:0.0770s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('Links')  [ RunTime:0.0760s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('Attachment')  [ RunTime:0.0760s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('SocialComment','Attachment')  [ RunTime:0.0770s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('Baidushare')  [ RunTime:0.0850s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('Attachment')  [ RunTime:0.0760s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('Editor')  [ RunTime:0.0760s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('EditorForAdmin')  [ RunTime:0.0770s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('Justup')  [ RunTime:0.0820s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('SyncLogin','Ads')  [ RunTime:0.0760s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('Editor')  [ RunTime:0.0760s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('JYslider','slider','Slider')  [ RunTime:0.0830s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('Ftp','Parser')  [ RunTime:0.0760s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('Template')  [ RunTime:0.3820s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('SyncLogin')  [ RunTime:0.0760s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('SyncLogin')  [ RunTime:0.0810s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('Collect')  [ RunTime:0.0770s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('Ads')  [ RunTime:0.0770s ]
+SQL: SELECT `id`,`name` FROM `jy_addons` WHERE `status` = 1 AND `name` IN ('indexPay','Pay')  [ RunTime:0.0760s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:2.792160s ]
+INFO: [ app_init ] --END-- [ RunTime:2.792160s ]
+NOTIC: [8] Undefined index: REQUEST_METHOD D:\WAMP\www\www.my-music.cn\ThinkPHP\Library\Think\App.class.php 第 31 行.
+NOTIC: [8] Undefined index: REQUEST_URI D:\WAMP\www\www.my-music.cn\ThinkPHP\Library\Think\Dispatcher.class.php 第 137 行.
+NOTIC: [8] Use of undefined constant _PHP_FILE_ - assumed '_PHP_FILE_' D:\WAMP\www\www.my-music.cn\ThinkPHP\Library\Think\Dispatcher.class.php 第 182 行.
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `jy_config` [ RunTime:0.0780s ]
+SQL: SELECT `type`,`name`,`value` FROM `jy_config` WHERE `status` = 1  [ RunTime:0.0810s ]
+
+[ 2017-08-16T11:45:30+08:00 ]  
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8] Undefined index: REQUEST_METHOD D:\WAMP\www\www.my-music.cn\ThinkPHP\Library\Think\App.class.php 第 31 行.
+NOTIC: [8] Undefined index: REQUEST_URI D:\WAMP\www\www.my-music.cn\ThinkPHP\Library\Think\Dispatcher.class.php 第 137 行.
+NOTIC: [8] Use of undefined constant _PHP_FILE_ - assumed '_PHP_FILE_' D:\WAMP\www\www.my-music.cn\ThinkPHP\Library\Think\Dispatcher.class.php 第 182 行.
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-08-16T11:47:42+08:00 ]  
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8] Undefined index: REQUEST_METHOD D:\WAMP\www\www.my-music.cn\ThinkPHP\Library\Think\App.class.php 第 31 行.
+NOTIC: [8] Undefined index: REQUEST_URI D:\WAMP\www\www.my-music.cn\ThinkPHP\Library\Think\Dispatcher.class.php 第 137 行.
+NOTIC: [8] Use of undefined constant _PHP_FILE_ - assumed '_PHP_FILE_' D:\WAMP\www\www.my-music.cn\ThinkPHP\Library\Think\Dispatcher.class.php 第 182 行.
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+

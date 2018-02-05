@@ -1,0 +1,87 @@
+<extend name="Public/base"/>
+<block name="content">
+<h3>用户组管理</h3>
+<div class="panel panel-default">
+	<div class="panel-heading"><{:isset($data['id'])?'编辑':'新增'}>用户组</div>
+ 	<div class="panel-body">
+    	<form class="form-horizontal" enctype="multipart/form-data" action="<{:U()}>" name="songs"  method="post">														
+    		<div class="form-group">	
+    			<label class="col-sm-2 control-label">用户组名称</label>
+    			<div class="col-sm-4">
+    				<input  type="text" name="name" class="form-control" value="<{$data.name|default=''}>" >   				
+    			</div>
+    			<p class="help-block">此项不能为空</p>
+    	    </div>
+			
+			<div class="form-group">	
+    			<label class="col-sm-2 control-label">用户组图标</label>
+    			<div class="col-sm-4">
+    				<input  type="text" name="icon" class="form-control" value="<{$data.icon|default=''}>" >   				
+    			</div>
+    	    </div>	
+    		
+    	    <div class="form-group">	
+    			<label class="col-sm-2 control-label">是否认证</label>
+    			<div class="col-sm-6">
+					<input class="hide" name="is_auth" value="<{$data['is_auth'] |default='0'}>">
+					<div class="switch-wrapper">
+						<span class="switch-enable">是</span>
+						<span class="switch-disable selected">否</span>
+					</div>
+					<present name="data">
+					<if condition="$data.is_authenticate == 1">					
+						<script type="text/javascript">
+							$('.switch-disable').removeClass('selected');
+							$('.switch-enable').addClass('selected');
+						</script>	
+					</if>
+					</present>
+                </div>							
+    		</div>
+			<foreach name="rules" item="form" key="o_key">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">
+					<{$form.title|default=''}>
+				</label>
+				<switch name="form.type">		
+				<case value="num">
+				<div class="col-sm-1">
+					<input type="text" class="form-control" name="rule[<{$o_key}>]"  value="<{$form.value}>">
+				</div>
+				</case>
+				<case value="radio">
+				<div class="col-sm-10">
+					<foreach name="form.options" item="opt" key="opt_k">
+					<label class="radio pull-left mr">
+						<input type="radio" name="rule[<{$o_key}>]" value="<{$opt_k}>" <eq name="form.value" value="$opt_k"> checked</eq>><{$opt}>
+					</label>
+					</foreach>
+				</div>
+				</case>
+				<present name="form.tip">
+				<span class="help-block  col-sm-offset-2"><{$form.tip}></span>
+				</present>
+			
+				</switch>
+			</div>
+			</foreach>
+								
+    		<div class="form-group">
+    			<input type="hidden" name="id" value="<{$data.id|default=''}>">     		
+            	<div class="col-sm-4 col-sm-offset-2">
+                	<button class="btn btn-default" type="button" onclick="javascript:history.back(-1);return false;">取消</button>
+                	<button class="btn btn-primary ajax-post" target-form="form-horizontal" type="submit">保存</button>
+            	</div>
+        	</div>
+        </form>
+	</div>
+</div>
+</block>
+<block name="script">
+<script type="text/javascript">
+	//导航高亮
+	highlight_subnav("<{:U('User/index')}>","<{:U('UserGroup/index')}>");
+</script>
+</block>	
+
+

@@ -1,0 +1,109 @@
+<extend name="Public/common"/>
+<block name="content">
+<!--content-->
+<div class="page_content_offset">
+	<div class="container">
+		<div class="row clearfix">			
+			<section class="col-sm-8">
+				<div class="info_focus">
+					<ul class="info_carousel">
+						<JY:info result="v" cover="1" pos="1" limit="3" cache="86400">
+						<li class="relative">
+							<a title="<{$v['title']}>" href="<{$v['url']}>">
+								<img src="<{$v['cover_url']}>">
+								<span class="focus_title"><{$v['title']}></span>
+							</a>
+						</li>
+						</JY:info>
+					</ul>
+					<a class="info_carousel_prev" href="javascript:;"><i class="jy jy-left"></i></a>
+					<a class="info_carousel_next" href="javascript:;"><i class="jy jy-right"></i></a>
+				</div>		
+			</section>
+
+			<aside class="col-sm-4">
+				<h2 class="hd">热门推荐</h2>
+				<div class="row">
+					<JY:info result="v"  limit="4" order="view" cache="86400">
+					<div class="col-sm-6 top_info">	
+						<a target="_blank" href="<{$v['url']}>">
+							<div class="top_img"><img  alt="<{$v['title']}>" src="<{$v['cover_url']}>"></div>
+                        	<div class="top_title"><{$v['title']}></div>
+                        </a>
+					</div>
+					</JY:info>
+				</div>
+			</aside>
+		</div>
+
+		<div class="row clearfix mt_20">
+			<section class="col-sm-8">
+				<JY:cate result="c" limit="6" key="ck">
+				<in name="ck" value="2,4"><{:hook('Ads','index_center')}></in>
+				<div class="info_hd clearfix b1">	
+					<h3 class="hd"><a href="<{$c['url']}>" title="<{$c['title']}>"><{$c['title']}></a></h3>
+					<span class="more">
+						<JY:cate result="ch" pid="$c['id']" limit="6" key="chk">
+						<neq name="chk" value="1"><span>/</span></neq>
+			            <a href="<{$ch['url']}>" title="<{$ch['title']}>"><{$ch['title']}></a>
+						</JY:cate>
+			         </span>
+			    </div>
+			    <div class="main_list">
+					<div class="top_list">
+						<ul>
+							<JY:info result="v" cate="$c['id']" limit="6" cache="86400" key="li">
+							<eq name="li" value="1">
+							<li class="top1 text-ellipsis"> 
+								<a target="_blank" href="<{$v['url']}>">
+									<b><{$v['title']}></b>
+								</a>
+							</li>
+							<else/>
+							<li class="text-ellipsis"> 
+								<a target="_blank" href="<{$v['url']}>" ><{$v['title']}></a>
+							</li>
+							</eq>
+							</JY:info>							
+						</ul>					
+					</div>
+					<JY:info result="v" cate="$c['id']" limit="1" pos="1" cover="1" cache="86400">
+					<div class="top_list_r">
+						<a title="<{$v['title']}>" href="<{$v['url']}>"> 
+							<img  class="" alt="<{$v['title']}>" src="<{$v['cover_url']}>">
+                            <em><{$v['title']}></em>
+                        </a>
+					</div>
+					</JY:info>	
+				</div>			
+				</JY:cate>
+				
+				
+			</section>
+
+			<aside class="col-sm-4">
+			
+				<div class="side_info_con">
+				<{:hook('Ads','right_up')}>
+				</div>
+				<div class="side_info_con">
+					<h2 class="hd">热点资讯</h2>
+					<ul class="side_info_list">
+						<JY:info result="v" cover="1" limit="4,8" order="view" cache="86400">				
+						<li><a target="_blank" href="<{$v['url']}>"><img width="74" height="56" border="0" src="<{$v['cover_url']}>" alt="<{$v['title']}>"></a>
+							<p>
+								<a href="<{$v['url']}>"><{$v['title']}></a>
+								<span><{$v['create_time']|time_format}></span> 
+							</p>
+						</li>
+						</JY:info>
+					</ul>
+				</div>
+			</aside>
+
+		</div>
+
+	</div>
+</div>
+
+</block>

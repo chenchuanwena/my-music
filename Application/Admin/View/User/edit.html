@@ -1,0 +1,72 @@
+<extend name="Public/base"/>
+<block name="content">
+<h3>用户管理</h3>
+<div class="panel panel-default">
+	<div class="panel-heading"><{:isset($data['id'])?'编辑':'新增'}>用户</div>
+ 	<div class="panel-body">
+		<form class="form-horizontal"  action="<{:U()}>" method="post">													
+			<div class="form-group">	
+				<label class="col-sm-2 control-label">用户名</label>
+				<div class="col-sm-2">
+					<input  type="text" name="username" disabled="true" class="form-control" value="<{$info['username']}>" >       				
+				</div>
+				
+			</div>        
+			
+			<div class="form-group">	
+				<label class="col-sm-2 control-label">用户昵称</label>
+				<div class="col-sm-3"> 							
+					<input type="text" class="form-control" name="nickname" value="<{$info['nickname']}>">      																		
+				</div>	
+			</div>					
+			
+			<div class="form-group">		
+				<label class="col-sm-2 control-label">用户密码</label>
+				<div class="col-sm-3">	
+					<input type="password" class="form-control" name="password" value="">
+				</div>
+				<p class="help-block">留空表示不修改密码</p>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-2 control-label">QQ号</label>
+				<div class="col-sm-2">
+					 <input type="text" class="form-control" name="qq" value="<{$info['qq']}>">       				
+				</div>
+			</div>	
+			
+			<div class="form-group">	
+				<label class="col-sm-2 control-label">积分</label>
+				<div class="col-sm-2">
+					 <input type="text" class="form-control" name="score" value="<{$info['score']}>">       				
+				</div>
+			</div>	
+			
+			<div class="form-group">	
+				<label class="col-sm-2 control-label">金币</label>
+				<div class="col-sm-2">
+					 <input type="text" class="form-control" name="coin" value="<{$info['coin']}>">       				
+				</div>
+			</div>	
+			 
+										
+    		<div class="form-group">
+    			<input type="hidden" name="status" value="<{$info.status|default=''}>"> 
+				<input type="hidden" name="uid" value="<{$info.uid}>">				
+            	<div class="col-sm-4 col-sm-offset-2">
+                	<button class="btn btn-default" type="button" onclick="javascript:history.back(-1);return false;">取消</button>
+                	<button class="btn btn-primary  ajax-post" target-form="form-horizontal" type="submit">保存</button>
+            	</div>
+        	</div>
+        </form>
+	</div>
+</div>													
+
+</block>
+<block name="script">
+<script type="text/javascript">
+	//导航高亮
+    highlight_subnav("<{:U('User/index')}>");
+</script>
+</block>	
+
+

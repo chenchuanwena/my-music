@@ -1,0 +1,117 @@
+body{
+    -webkit-user-select:initial;
+    /*background-color: #282830;*/
+    background-image: url('../images/trans_black.png');
+}
+a {
+    color: #fff;
+}
+
+/*重置默认*/
+.ui-avatar, .ui-avatar-lg, .ui-avatar-s, .ui-avatar-one, .ui-avatar-tiled {
+    display: block;
+    -webkit-background-size: cover;
+    background-image: url('../images/icon/btn_play.png');
+}
+
+.ui-list {
+    background-color: transparent;
+}
+
+.ui-btn{
+    background-color:transparent;
+    background-image: none;
+    color: #fff;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+    .ui-btn:before, .ui-btn-lg:before, .ui-btn-s:before {
+        border: none;
+    }
+}
+/*头部*/
+.ui-header-positive, .ui-footer-positive {
+    background-color: #d02629;
+    box-shadow: none;
+}
+
+
+
+.ui-btn-menu, .ui-btn-return {
+    text-indent: -9999px;
+    background-image: url('../images/icon/lists.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size:32px;
+    min-width: 33px;
+}
+.ui-btn-return{
+    position: absolute;
+    left: 10px;
+    background-image: url('../images/icon/arrowleft.png'); 
+    background-size:20px;
+}
+
+/*内容区域*/
+.ui-tab-nav{
+    background: rgba(0,0,0,.3);
+}
+.ui-tab-nav li a {
+    font-weight: bold;
+}
+.ui-tab-nav li.current {
+    color: #d02629; 
+    border-bottom: 2px #d02629 solid;
+}
+.ui-tab-nav li.current a{
+    color: #d02629;
+}
+
+.ui-title {
+    zoom: 1;
+    padding: 0 0 5.33px 5.33px;
+    margin: 0 0 8.89px;
+    font-size: 13.33px;
+    border-bottom: 1px solid #e7e7e7;   
+}
+
+
+/*重置幻灯片按钮*/
+.ui-slider-indicators{
+    display: block;
+    text-align: center;
+}
+.ui-slider-indicators li {
+    height: 10px;
+    width: 10px;
+    border-radius: 100%;
+    display: inline-block;
+}
+
+.ui-slider-indicators li.current:before {
+    height: 8px;
+    width: 8px;
+    background-color:#d02629;
+}
+
+
+/*底部播放器*/
+.ui-footer {
+    bottom: 0;
+    height: 45px;
+    line-height: 45px;
+}
+.footer-player{
+    height: 100%;
+    width: 100%;
+    background-image: url('../images/trans_black.png'); 
+    display: block;
+    overflow: hidden;
+}
+.footer-player .player-wrap{
+    margin:3px 10px;
+    height:39px;
+}
+.footer-player .player-cover{
+    float: left;
+    width:39px;
+}

@@ -1,0 +1,40 @@
+<select class="form-control" name="province" id="jy_province"></select>
+<select class="form-control" name="city" id="jy_city" style="display:none;"></select>
+<select class="form-control" name="district" id="jy_district" style="display:none;"></select>
+<script type="text/javascript">
+$(function(){
+	
+	var pid=<if condition="$param.province neq ''"><{$param.province}><else />0</if>; 
+	var cid=<if condition="$param.city neq ''"><{$param.city}><else />0</if>; 
+	var did=<if condition="$param.district neq ''"><{$param.district}><else />0</if>;
+	
+	$.post("<{:addons_url('ChinaCity://ChinaCity/getProvince')}>", {pid: pid}, function(result){
+		$("#jy_province").html(result);
+	});
+
+	$.post('<{:addons_url("ChinaCity://ChinaCity/getCity")}>', {pid: pid, cid: cid}, function(result){
+		$("#jy_city").show().html(result);
+	});
+
+	$.post('<{:addons_url("ChinaCity://ChinaCity/getDistrict")}>', {cid: cid, did: did}, function(result){
+		$("#jy_district").show().html(result);
+	});
+
+
+	$('#jy_province').change(function(){
+		var pid_g=$(this).children('option:selected').val();
+		$.post('<{:addons_url("ChinaCity://ChinaCity/getCity")}>', {pid: pid_g}, function(result){
+			$("#jy_city").show().html(result);
+			$("#jy_district").show().html('<option value="">-州县-</option>');
+		});
+	});
+	
+	$('#jy_city').change(function(){
+		var cid_g=$(this).children('option:selected').val();
+		$.post('<{:addons_url("ChinaCity://ChinaCity/getDistrict")}>', {cid: cid_g}, function(result){
+			$("#jy_district").show().html(result);
+		});
+	});
+	
+});
+</script>

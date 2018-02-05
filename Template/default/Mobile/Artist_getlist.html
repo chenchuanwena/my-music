@@ -1,0 +1,8 @@
+<volist name="list" id="v" >
+<div class="ar_con">
+	<a href="{:U('Artist/'.$v['id'])}>">
+		<img  src="<{$v['cover_url']|default="/Public/static/images/artist_cover.png"}>">
+	</a>
+	<a class="ar_info" href="<{:U('Artist/'.$v['id'])}>"><{$v['name']}></a>		
+</div>
+</volist>

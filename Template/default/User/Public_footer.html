@@ -1,0 +1,90 @@
+<footer id="footer" >
+	<div class="hidden-xs">
+		<div class="container">
+			<div class="row clearfix">
+				<div class="col-sm-6">
+					<h3><{:C('WEB_SITE_NAME')}></h3>
+					<p><{:C('WEB_SITE_DESCRIPTION')}></p>
+				</div>
+				<div class="col-sm-2">
+					<h3>关于网站</h3>
+					<ul class="vertical_list">
+						<JY:info name="site" result="v" limit="5" cache="86400">
+						<li><a class="tr_delay_hover" href="<{$v['url']}>"><{$v['title']}></a></li>
+						</JY:info>
+					</ul>
+				</div>
+				<div class="col-sm-2">
+					<h3>帮助中心</h3>
+					<ul class="vertical_list">
+						<JY:info name="site" type="help" result="v" limit="5" cache="86400">
+						<li><a class="tr_delay_hover" href="<{$v['url']}>"><{$v['title']}></a></li>
+						</JY:info>
+					</ul>
+				</div>
+				<div class="col-sm-2">
+					<h3>联系我们</h3>
+					<ul class="vertical_list">
+						<li><i class="jy jy-envelope f_left"></i><{:C('WEB_EMAIL')}></li>
+						<li><i class="jy jy-share-square f_left"></i>QQ: <{:C('WEB_QQ')}></li>
+						<li><i class="jy jy-phone f_left"></i><{:C('WEB_PHONE')}></li>						
+						<li><i class="jy jy-music f_left"></i><a class="contact_e" href="http://www.my-music.cn">MYmusic音乐网站管理系统</a></li>
+					</ul>
+				</div>
+			</div>
+			<hr>
+			<div class="row clearfix">
+				<!--版权的部分 请务必保留版权 谢谢合作！-->
+				<div class="footer_bottom_part col-sm-6 ">
+						<p class="f_left"> Powered by<a style="color: #ff7f9a;" href="http://www.my-music.cn">MYmusic</a>&copy; <{:date('Y')}></p>
+						<p class="f_left">
+						<{:C('WEB_SITE_ICP')}>
+						</p>
+				</div>
+				
+				<div class="col-sm-6 mb_10">
+					<!--图标-->
+					<ul class="clearfix horizontal_list social_icons f_right">
+						<li class="html5 relative">
+							<span class="tooltip tr_all_hover  ">HTML5支持</span>
+							<a class=" t_align_c tr_delay_hover " href="javascript:;">
+								<i class="jy jy-html5"></i>
+							</a>
+						</li>
+						<li class="css3 ml_5 relative">
+							<span class="tooltip tr_all_hover  ">Css3支持</span>
+							<a class="  t_align_c tr_delay_hover" href="javascript:;">
+								<i class="jy jy-css3"></i>
+							</a>
+						</li>
+						<li class="android ml_5 relative">
+							<span class="tooltip tr_all_hover  ">Android支持</span>
+							<a class="t_align_c tr_delay_hover" href="javascript:;">
+								<i class="jy jy-anzhuo"></i>
+							</a>
+						</li>
+						<li class="iPhone ml_5 relative">
+							<span class="tooltip tr_all_hover  ">iPhone支持</span>
+							<a class="t_align_c tr_delay_hover" href="javascript:;">
+								<i class="jy jy-iphone"></i>
+							</a>
+						</li>
+						<li class="windows-Phone ml_5 relative">
+							<span class="tooltip tr_all_hover  ">Windows Phone 8支持</span>
+							<a class="  t_align_c tr_delay_hover" href="javascript:;">
+								<i class="jy jy-window"></i>
+							</a>
+						</li>
+						<li class="rss ml_5 relative">
+							<span class="tooltip tr_all_hover  ">Rss订阅</span>
+							<a class="t_align_c tr_delay_hover" href="javascript:;">
+								<i class="jy jy-rss"></i>
+							</a>
+						</li>
+					</ul>
+				</div>			
+			</div>
+		
+		</div>
+	</div>
+</footer>

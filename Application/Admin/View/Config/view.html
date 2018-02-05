@@ -1,0 +1,236 @@
+<extend name="Public/base"/>
+<block name="content">
+<h3 class="col-md-12">网站设置</h3>
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<ul class="nav nav-pills">
+			   		<volist name="Think.config.CONFIG_GROUP_LIST" id="group">
+					<li><a href="<{:U('group?id='.$key)}>"><{$group}>配置</a></li>
+					</volist>
+					<li class="active"><a href="<{:U('view')}>">视图配置</a></li>				
+				</ul>
+			</div>
+		
+			<div class="panel-body">										
+				<ul class="nav nav-tabs">
+                   <li class="active"><a data-toggle="tab" href="#theme">主题设置</a> </li>
+                   <li class=""><a data-toggle="tab" href="#Home">Home模块设置</a></li>
+                   <li class=""><a data-toggle="tab" href="#User">User模块设置</a></li>
+                   <li class=""><a data-toggle="tab" href="#Article">Article模块设置</a></li>
+                </ul>
+               	<div class="tab-content mt-lg">
+                   	<div class="tab-pane fade active in" id="theme">
+						<div class="row">
+							<volist name="list" id="vo">
+			               	<div class="col-md-3">
+			                  	<!-- START panel-->
+			                  	<div class="panel panel-default">
+			                     	<div class="panel-heading">
+			                     		<em class="fa fa-credit-card text-info"></em> 
+			                     		<a href="<{$vo['author']['url']}>"><{$vo['theme_title']}> </a>
+			              				<eq name="current_theme" value="$vo['theme_name']">
+			                     		<a href="#" class="pull-right  hover" data-original-title="默认主题"data-placement="left" data-toggle="tooltip"><em class="fa fa-check-square-o  pull-right text-green"></em></a>
+			                     		<else/>
+			                     		<a href="#" class="pull-right  hover" data-original-title="删除主题"data-placement="left" data-toggle="tooltip"><em class="fa fa-times-circle text-pink"></em></a>			                     			
+			                     		</eq>				                     		 
+			                     	</div>
+			                    	<div class="panel-body">
+			                    		<div class="col-masonry">
+						                  <img class="img-thumbnail img-responsive" width="100%"  src="<{$vo['cover']}>">
+						               </div>
+			                     	</div>
+			                     	<div class="panel-footer clearfix">
+				                    	<div class="btn-group pull-left previous">
+					                        <button data-toggle="dropdown" data-play="rotateInUpRight" class="btn btn-default btn-sm dropdown-toggle">作者 <b class="caret"></b>
+					                        </button>
+					                        <ul class="dropdown-menu">
+					                           <li><a href="<{$vo['author']['url']}>" target="_blank">作者：<{$vo['author']['name']}></a></li>
+					                           <li><a href="#">Q Q：<{$vo['author']['qq']}></a></li>
+					                           <li><a href="#">邮箱：<{$vo['author']['email']}></a></li>
+					                        </ul>
+					                    </div>
+										
+					                    <eq name="current_theme" value="$vo['theme_name']">
+					                	<div class="pull-right pagination p0">
+					                		<li class="previous disabled">
+					                        <a class="btn btn-default btn-sm btn-success"  href="javascript:;">
+					                           <small>启用</small>
+					                        </a>
+					                    	</li>
+					                    </div>
+					                    <else/> 
+					                    <div class="pull-right">
+					                        <a class="btn btn-default btn-sm btn-success using-theme" href="<{:U('view',array('theme'=>$vo['dir']))}>">
+					                           <small>启用</small>
+					                        </a>
+					                    </div>
+					                    </eq>
+
+				                    </div>
+			                  	</div>
+			               	</div>
+			               	</volist>
+			            </div>
+              		</div>
+                	<div class="tab-pane fade" id="Home">
+                		<form class="form-horizontal home-form" action="<{:U('homemodule')}>"  method="post">
+							<div class="form-group">											
+								<label class="col-sm-2 control-label">URL访问模式</label>							
+								<div class="col-sm-2">
+									<select style="width:auto" class="form-control" name="URL_MODEL">
+										<option value="0" <eq name="home_conf['URL_MODEL']" value="0">selected</eq> >普通模式</option>
+										<option value="1" <eq name="home_conf['URL_MODEL']" value="1">selected</eq> >PATHINFO 模式</option>
+										<option value="2" <eq name="home_conf['URL_MODEL']" value="2">selected</eq> >REWRITE  模式</option>
+										<option value="3" <eq name="home_conf['URL_MODEL']" value="3">selected</eq> >兼容模式</option>		
+									</select>
+								</div>
+								<span class="help-inline">REWRITE 重写模式，确保对应服务器规则文件</span>					
+							</div>
+							
+							<div class="form-group">											
+								<label class="col-sm-2 control-label">静态缓存</label>							
+								<div class="col-sm-2">
+									<select style="width:auto" class="form-control" name="HTML_CACHE_ON">
+										<option value="0">关闭</option>
+										<option value="1" <eq name="home_conf['HTML_CACHE_ON']" value="1">selected</eq> >开启</option>	
+									</select>
+								</div>
+								<span class="help-inline">此功能配合规则可以达到静态网页功能，需要更多储存空间</span>					
+							</div>
+							
+							<div class="form-group">											
+								<label class="col-sm-2 control-label">缓存有效期</label>							
+								<div class="col-sm-2">
+									<input type="text" class="form-control" name="HTML_CACHE_TIME" value="<{$home_conf['HTML_CACHE_TIME']}>">
+								</div>
+								<span class="help-inline">更新缓存间隔时间，单位-秒</span>						
+							</div>
+							
+							<div class="form-group">											
+								<label class="col-sm-2 control-label">缓存文件后缀</label>							
+								<div class="col-sm-1">
+									<input type="text" class="form-control" name="HTML_FILE_SUFFIX" value="<{$home_conf['HTML_FILE_SUFFIX']}>">
+								</div>
+								
+								<span class="help-inline">缓存文件的文件后缀.html或者.shtml</span>							
+							</div>							
+							<hr>
+							<div class="form-group">      		
+			            		<div class="col-sm-4 col-sm-offset-2">
+			                		<button class="btn btn-default" type="button" onclick="javascript:history.back(-1);return false;">取消</button>
+			                		<button class="btn btn-primary ajax-post" target-form="home-form" type="submit">保存</button>
+			            		</div>
+		        			</div>					
+							
+						</form>	
+                	</div>
+                	<div class="tab-pane fade" id="User">
+                		<form class="form-horizontal user-form" action="<{:U('usermodule')}>"  method="post">
+							<div class="form-group">											
+								<label class="col-sm-2 control-label">URL访问模式</label>							
+								<div class="col-sm-2">
+									<select style="width:auto" class="form-control" name="URL_MODEL">
+										<option value="0" <eq name="user_conf['URL_MODEL']" value="0">selected</eq> >普通模式</option>
+										<option value="1" <eq name="user_conf['URL_MODEL']" value="1">selected</eq> >PATHINFO 模式</option>
+										<option value="2" <eq name="user_conf['URL_MODEL']" value="2">selected</eq> >REWRITE 模式</option>
+										<option value="3" <eq name="user_conf['URL_MODEL']" value="3">selected</eq> >兼容模式</option>		
+									</select>
+								</div>
+								<span class="help-inline">REWRITE 重写模式，确保对应服务器规则文件</span>				
+							</div>
+							
+							<hr>
+							<div class="form-group">      		
+			            		<div class="col-sm-4 col-sm-offset-2">
+			                		<button class="btn btn-default" type="button" onclick="javascript:history.back(-1);return false;">取消</button>
+			                		<button class="btn btn-primary ajax-post" target-form="user-form" type="submit">保存</button>
+			            		</div>
+		        			</div>					
+						</form>	
+                	</div>
+
+                	<div class="tab-pane fade " id="Article">
+						<form class="form-horizontal article-form" action="<{:U('articlemodule')}>"  method="post">
+							<div class="form-group">											
+								<label class="col-sm-2 control-label">URL访问模式</label>							
+								<div class="col-sm-2">
+									<select style="width:auto" class="form-control" name="URL_MODEL">
+										<option value="0" <eq name="article_conf['URL_MODEL']" value="0">selected</eq> >普通模式</option>
+										<option value="1" <eq name="article_conf['URL_MODEL']" value="1">selected</eq>>PATHINFO 模式</option>
+										<option value="2" <eq name="article_conf['URL_MODEL']" value="2">selected</eq> >REWRITE 模式</option>
+										<option value="3" <eq name="article_conf['URL_MODEL']" value="3">selected</eq> >兼容模式</option>		
+									</select>
+								</div>
+								<span class="help-inline">REWRITE 重写模式，确保对应服务器规则文件</span>				
+							</div>
+							<div class="form-group">											
+								<label class="col-sm-2 control-label">静态缓存</label>							
+								<div class="col-sm-2">
+									<select style="width:auto" class="form-control" name="HTML_CACHE_ON">
+										<option value="0">关闭</option>
+										<option value="1" <eq name="article_conf['HTML_CACHE_ON']" value="1">selected</eq> >开启</option>	
+									</select>
+								</div>
+								<span class="help-inline">此功能配合规则可以达到静态网页功能，需要更多储存空间</span>					
+							</div>
+							
+							<div class="form-group">											
+								<label class="col-sm-2 control-label">缓存有效期</label>							
+								<div class="col-sm-2">
+									<input type="text" class="form-control" name="HTML_CACHE_TIME" value="<{$article_conf['HTML_CACHE_TIME']}>">
+								</div>
+								<span class="help-inline">更新缓存间隔时间，单位-秒</span>						
+							</div>
+							
+							<div class="form-group">											
+								<label class="col-sm-2 control-label">缓存文件后缀</label>							
+								<div class="col-sm-1">
+									<input type="text" class="form-control" name="HTML_FILE_SUFFIX" value="<{$article_conf['HTML_FILE_SUFFIX']}>">
+								</div>
+								
+								<span class="help-inline">缓存文件的文件后缀.html或者.shtml</span>							
+							</div>	
+							<hr>
+							<div class="form-group">      		
+			            		<div class="col-sm-4 col-sm-offset-2">
+			                		<button class="btn btn-default" type="button" onclick="javascript:history.back(-1);return false;">取消</button>
+			                		<button class="btn btn-primary ajax-post" target-form="article-form" type="submit">保存</button>
+			            		</div>
+		        			</div>					
+						</form>	
+
+                	</div>	                
+        		</div>			
+				
+			</div>		
+		</div>
+	</div>
+</div>
+</block>
+<block name="script">
+<script type="text/javascript">
+//导航高亮
+highlight_subnav("<{:U('Config/group')}>");
+$('.using-theme').click(function () {
+	var url = $(this).attr('href');
+	$.post(url, function(data){
+   		if (data.status == 1){
+            topAlert(data.info + ' 页面即将自动跳转~','success');
+            setTimeout(function(){
+                if (data.url) {
+                    location.href=data.url;
+                }else{
+                    location.reload();
+                }
+            },1500);
+   		}else{
+   			topAlert(data.info);
+   		}   		
+	});
+	return false;
+});
+</script>
+</block>	
+

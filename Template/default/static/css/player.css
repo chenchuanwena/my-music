@@ -1,0 +1,332 @@
+/*播放器样式*/
+.jy-player-f{
+	background: url("../images/bg2.png");
+    color: #c9d0d7;
+    bottom: -52px;
+    position: fixed;
+    width: 100%;
+    z-index: 99999;
+    opacity:0.96;
+    border-top: 1px solid #EC1E37;    
+}
+#jy-player{
+	position: relative;
+}
+
+.play-wrap {
+	padding:0 15px;
+	position: relative;
+}
+.play-wrap  .play-wrap-btns {
+	width: 176px;
+	display: inline-block;
+	height:50px;
+	float: left;
+}
+
+.play-wrap  .play-wrap-btns  a{
+	cursor: pointer;
+	display: inline-block;
+	height:50px;
+	line-height:50px;
+	width:40px;
+	font-size:24px;
+	text-align:center;
+	font-weight:600;
+	color:#aaa;
+}
+.play-wrap  .play-wrap-btns .jp-cover img{
+	border:2px solid #3a3a3a;
+	padding: 1px;
+	margin-top: 4px;
+	width: 42px;
+	height: 42px;
+
+}
+
+.play-wrap  a:hover{
+	color:#ef2630;
+}
+
+.play-wrap .play-wrap-btns .jp-play, .play-wrap .play-wrap-btns .jp-pause{
+	font-size:36px;
+}
+
+.play-wrap   .play-wrap-info{
+	display:block;
+	width:auto;
+	margin:0 286px 0 203px;
+	height:50px;
+	position: relative;
+	padding-top:38px;
+}
+
+.play-wrap  .play-wrap-info .jp-title{
+	position: absolute;
+	left: 5px;
+	top: 0;
+	font-weight:600;
+	display: block !important;
+	line-height: 36px;
+	z-index:10;
+}
+.play-wrap-info  .jp-progress{
+	background: #000;
+	height:5px;
+}
+
+.play-wrap-info  .jp-seek-bar, .jp-volume .jp-volume-bar{
+	width:100%;	
+	position: relative;
+	background: #222;
+	height:5px;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.play-wrap  .jp-play-bar,.jp-volume .jp-volume-bar-value{
+	z-index:10;
+	height:5px;
+	opacity:1;
+	border-right: 1px solid #ddd;
+	border-radius: 4px;
+	background:#ef2630;
+	display: inline-block;
+	position: relative;
+}
+
+.jp-play-bar .play-bar-alpha,.jp-volume-bar-value .volume-bar-alpha{
+	position:absolute;
+	height:10px;
+	width:10px;
+	top:-3px;
+	right:-5px;
+	background-color:#ef2630;
+	border-radius:50%;
+    border:1px solid #909090;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.75) inset, 0 0 8px rgba(170, 170, 170, 0.6);
+    -webkit-transition: box-shadow 0.30s ease-in-out;   //只让box-shadow属性做过渡效果！
+    -moz-transition:  box-shadow 0.30s ease-in-out;      //firefox*/
+}
+
+/*右侧操作按钮*/
+.play-wrap-action {
+	position:absolute;
+	right:0;
+	top:0;
+	height:50px;
+}
+
+.play-wrap-action div {
+	display: inline-block;
+	line-height: 50px;
+	margin-right: 5px;
+}
+.jp-volume {
+	width: 120px;
+	height: 6px;
+	margin-top: 23px;
+}
+
+.play-list-action a {
+	font-size: 24px;
+	color: #aaa;
+}
+.jp-mute,
+.jp-unmute {
+	font-size: 18px;
+	color: #aaa;
+}
+
+/*播放器锁按钮*/
+.player-off{
+	position:absolute;
+	top:-26px;
+	right:30px;
+	height:26px;
+	width:28px;
+	z-index:999;
+	background-color: #000;
+	border: 1px solid #ec1e37;
+	border-radius:16px 16px 0 0;
+	border-bottom:0 none;
+	background: url("../images/bg2.png");
+	text-align:center;
+}
+.player-off a {
+	overflow: hidden;
+	height:26px;
+	line-height:26px;
+	width:28px;
+	color:#aaa;
+}
+
+
+/*controls*/
+
+.jp-title ul{
+	list-style: none;
+	margin: 0;
+	padding: 0;	
+}
+
+.jp-title li{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.jp-artist{
+	opacity: 0.6;
+}
+
+.jp-volume{
+	width: 60px !important;
+	padding-right:10px !important;
+}
+.jp-volume-bar-value{
+  height: 6px;
+}
+a.hid{
+	display: none;
+}
+
+
+
+/*playlist*/
+#lrc-wramp , #play-list-wramp{
+	display: none;
+	width: 420px;
+	height:240px;
+	overflow:hidden;
+    position: absolute;
+    right: 0;
+    bottom: 52px;
+	z-index: 10;
+	background: #000;
+	opacity: 1;
+	border: 1px solid #EC1E37;
+	border-radius:3px;
+}
+
+#play-list-wramp{
+	width: 468px;
+	right: 425px;
+}
+
+.lrc-title, .play-list-title{
+	height: 40px;
+	line-height: 40px;
+	color:#fff;
+	background-color: #000;
+	position: relative;
+	padding-right: 0 45px 0 5px;
+}
+
+.lrc_content {
+	background:#312f2c;
+	display: block;
+	height:193px;
+	overflow:hidden;
+	margin: 0 5px 5px 5px;
+}
+
+#l-title, #pl-title {
+	display: block;
+	width:100%;	
+	overflow: hidden;
+	text-align: center;
+	color:#fff;
+
+}
+
+#pl-title {
+	 text-align: left;
+	 padding-left:26px
+}
+
+#l-close, #pl-close {
+	position: absolute;
+    right: 0;
+    top: 0;
+    height: 40px;
+    width: 40px;
+    font-size: 18px;
+    text-align: center;
+}
+
+
+#play_lists{
+	background:#111;
+	display: block;
+	height:193px;
+	margin: 0 5px 5px 5px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+#play_lists li{
+	position: relative;
+	float: left;
+    width: 100%;
+}
+#play_lists li div {
+    cursor: pointer;
+    float: left;
+    height: 28px;
+    line-height: 28px;
+    overflow: hidden;
+    padding-left: 10px;
+}
+
+#play_lists li .play_icon {
+    width: 26px;
+    display: block;
+    color:#EC1E37;
+    visibility: hidden;
+}
+
+#play_lists li .play_name, #play_lists li .play_aname {
+    cursor: pointer;
+    float: left;
+    height: 28px;
+    line-height: 28px;
+    padding-left: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 280px;
+}
+
+
+#play_lists li .play_aname {
+    width: 96px;
+}
+
+#play_lists li .play_del{
+    width: 37px;
+    font-size: 14px;
+}
+
+
+#lrc_list{margin:10px auto;}
+#lrc_list li{
+	color: #989898;
+	padding: 5px 0;
+	text-align:center;
+}
+#lrc_list li.hover {
+	color:red;
+	font-weight:bold;
+}
+
+/*单曲播放页面*/
+#one-play {
+	font-size: 20px;
+	color: #ff7f9a;
+}
+
+
+.jy-player-f .on , #play_lists li.playing .play_icon {
+	display:block;
+	visibility:visible;
+}

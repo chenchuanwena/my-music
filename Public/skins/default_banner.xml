@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spacebg>
+	<theme>
+		<imgurl>/bn/pc-tf.jpg</imgurl>
+		<thumburl>/bn/pc-tf-small.jpg</thumburl>
+	</theme>
+	<theme>
+		<imgurl>/bn/pc-xyes.jpg</imgurl>
+		<thumburl>/bn/pc-xyes-small.jpg</thumburl>
+	</theme>
+	<theme>
+		<imgurl>/bn/pc-xywj.jpg</imgurl>
+		<thumburl>/bn/pc-xywj-small.jpg</thumburl>
+	</theme>
+	<theme>
+		<imgurl>/bn/pc-yyzq.jpg</imgurl>
+		<thumburl>/bn/pc-yyzq-small.jpg</thumburl>
+	</theme>
+</spacebg>

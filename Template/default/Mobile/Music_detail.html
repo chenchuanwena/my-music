@@ -1,0 +1,57 @@
+<extend name="Public/common"/>
+<block name="topnav"></block>
+<block name="content">
+<div class="tm_div  clearfix">
+	<h2><{$data['name']}> </h2>
+	<div class="pgs">歌手：<a target="_blank" href="<{$data['artist_url']}>"><{$data['artist_name']}> </a></div>
+</div>
+<div class="tour_div ">
+	<div id="song-play" class="mt10 clearfix">
+		<span class="img_border">
+			<a target="_blank" title="<{$data['name']}>" href="javascript:;">
+				<img class="br100" alt="<{$data['name']}>" src="<{:get_song_cover($data)}>">
+			</a>
+		</span>
+		<div class="playerBtn">
+			<JY:prev result="p">
+			<a class="jp-previous" href="<{$p['url']}>"></a>
+			</JY:prev>
+			<a class="jp-play" href="javascript:;" style="display: none;"></a>
+			<a class="jp-pause" href="javascript:;" style="display: block;"></a>
+
+			<JY:next result="n">
+			<a class="jp-next" href="<{$n['url']}>"></a>
+			</JY:next>
+		</div>
+		
+		<span class="jp-current-time">00:00</span>
+		<div class="jp-progress">
+			<div class="jp-seek-bar">						
+				<div class="jp-play-bar" style="width: 2%;">
+					<a class="bar" href="javascript:;"></a>
+				</div>
+			</div>
+		</div>
+		<span class="jp-duration">00:00</span>
+	</div>	
+</div>
+<div class="tm_div  clearfix">
+	<div class="tour_title tc0" >热门歌曲</div>
+</div>
+<div class="tour_div ">
+	<ul class="song_con">
+		<JY:songs result="v"  limit="10" cache_time="86400" order="listens">
+		<li>
+			<span class="numb"></span>
+			<a class="sname text-ellipsis" title="<{$v['name']}>" href="<{$v['url']}>"><{$v['name']}></a>
+			<a class="gname text-ellipsis" title="<{$v['name']}>" href="<{$v['artist_url']}>"><{$v['artist_name']}></a>
+			<a class="play" title="播放小<{$v['name']}>" href="<{$v['url']}>"></a>		
+		</li>
+		</JY:songs>	
+	</ul>				
+</div>
+<div id="jy-player" style="height:0px"></div>
+<script type="text/javascript" src="__TMPL__/Mobile/js/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="__TMPL__/Mobile/js/player.js"></script>
+<script type="text/javascript">setplayer(<{$data['id']}>)</script>
+</block>

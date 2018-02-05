@@ -1,0 +1,42 @@
+<extend name="Public/common" />
+
+<block name="warp">
+<div class="tabbable tabbable-custom tabbable-reversed">
+	<ul class="nav nav-tabs">
+		<li class="active">
+			<a href="<{:U('index')}>">账户总览</a>
+		</li>
+		<li>
+			<a href="<{:U('charge')}>">金币充值</a>
+		</li>
+		<li>
+			<a href="<{:U('vip')}>"> 开通VIP</a>
+		</li>
+		<li>
+			<a href="<{:U('auth/musician')}>"> 认证音乐人</a>
+		</li>
+	</ul>
+	<div class="tab-content clearfix">
+		<p class="mb_10">你的账号：<{$user['username']}>(ID:<{$user['uid']}>)</p>
+		<p class="mb_10">你的昵称：<{$user['nickname']}></p>
+		<p class="mb_10">账户等级：
+			<if condition="is_musician($user['uid'])">
+			<span class="d_inline_b text-danger"><i class="jy jy-round-music">音乐人</i></span>
+			<else/>
+			<a class="ml_10 text-info" href="<{:U('auth/musician')}>">[去认证音乐人]</a>
+			</if>
+			<if condition="is_vip($user['uid'])">
+			<span class="d_inline_b ml_10 text-info"><i class="jy jy-vip-o"></i> VIP会员<a class="ml_10 text-info" href="<{:U('vip')}>">[续费]</a></span>
+			<else/>
+			<span class="d_inline_b ml_10">普通会员<a class="ml_10 text-info" href="<{:U('vip')}>">[升级VIP]</a></span>
+			</if>
+		</p>
+		<p class="mb_10">你的邮箱：<{$user['email']}></p>
+		<p class="mb_10">注册时间：<{$user['reg_time']|time_format}></p>
+
+		<hr>
+		<p>你的金币余额：<{$user['coin']}><a class="ml_10 text-info" href="<{:U('charge')}>">[充值]</a><p/>
+	</div>
+</div>
+</block>
+

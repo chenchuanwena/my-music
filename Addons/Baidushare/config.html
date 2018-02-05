@@ -1,0 +1,176 @@
+<style>
+    .lineD {
+        border-bottom: 1px dashed #e2e2e2;
+    }
+
+    #themes {
+        overflow: hidden;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        margin-top: 20px;
+    }
+
+    #themes li {
+        float: left;
+        padding: 10px;
+    }
+
+    #themes li.current {
+        background: yellow;
+    }
+
+    #themes li a:hover {
+        color: #f6f6f6
+    }
+</style>
+
+<?php
+	$button = $data['config']['group']['options']['button']['options'];
+	$img = $data['config']['group']['options']['img']['options'];
+	$select = $data['config']['group']['options']['select']['options'];
+?>
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#tab1" data-toggle="tab">页面按钮设置</a></li>
+    <li><a href="#tab2" data-toggle="tab">图片按钮设置</a></li>
+    <li><a href="#tab3" data-toggle="tab">划词按钮设置</a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="tab1" class="tab-pane fade active in tab1">
+        <foreach name="button" item="form" key="o_key">
+            <div class="form-group">
+                <label class="col-sm-2 control-label ">
+                    <{$form.title|default=''}>
+                    <present name="form.tip">
+                        <span class="check-tips"><{$form.tip}></span>
+                    </present>
+                </label>
+				<div class="col-sm-8">
+                <switch name="form.type">				
+                    <case value="radio">
+                        <div class="form-group">
+                            <foreach name="form.options" item="opt" key="opt_k">
+                                <label class="checkbox checkbox-inline">
+                                    <input type="radio" name="config[<{$o_key}>]" value="<{$opt_k}>" <eq name="form.value" value="$opt_k"> checked</eq>><{$opt}>
+                                </label>
+                            </foreach>
+                        </div>
+                    </case>
+                    <case value="checkbox">
+                        <div class="form-group">
+                            <foreach name="form.options" item="opt" key="opt_k">
+                                <label class="checkbox checkbox-inline">
+                                    <php>
+                                        is_null($form["value"]) && $form["value"] = array();
+                                    </php>
+                                    <input type="checkbox" name="config[<{$o_key}>][]" value="<{$opt_k}>" <in name="opt_k" value="$form.value"> checked</in>><{$opt}>
+                                </label>
+                            </foreach>
+                        </div>
+                    </case>
+			
+				</switch>
+				</div>				
+			</div>
+		</foreach>
+    </div>
+    <div id="tab2" class="tab-pane tab2">
+        <foreach name="img" item="form" key="o_key">
+            <div class="form-group">
+                <label class="col-sm-2 control-label ">
+                    <{$form.title|default=''}>
+                    <present name="form.tip">
+                        <span class="check-tips"><{$form.tip}></span>
+                    </present>
+                </label>
+				<div class="col-sm-8">
+                <switch name="form.type">				
+                    <case value="radio">
+                        <div class="form-group">
+                            <foreach name="form.options" item="opt" key="opt_k">
+                                <label class="checkbox checkbox-inline">
+                                    <input type="radio" name="config[<{$o_key}>]" value="<{$opt_k}>" <eq name="form.value" value="$opt_k"> checked</eq>><{$opt}>
+                                </label>
+                            </foreach>
+                        </div>
+                    </case>
+                    <case value="checkbox">
+                        <div class="form-group">
+                            <foreach name="form.options" item="opt" key="opt_k">
+                                <label class="checkbox checkbox-inline">
+                                    <php>
+                                        is_null($form["value"]) && $form["value"] = array();
+                                    </php>
+                                    <input type="checkbox" name="config[<{$o_key}>][]" value="<{$opt_k}>" <in name="opt_k" value="$form.value"> checked</in>><{$opt}>
+                                </label>
+                            </foreach>
+                        </div>
+                    </case>
+			
+				</switch>
+				</div>				
+			</div>
+		</foreach>
+    </div>
+    <div id="tab3" class="tab-pane tab3">
+        <foreach name="select" item="form" key="o_key">
+            <div class="form-group">
+                <label class="col-sm-2 control-label ">
+                    <{$form.title|default=''}>
+                    <present name="form.tip">
+                        <span class="check-tips"><{$form.tip}></span>
+                    </present>
+                </label>
+				<div class="col-sm-8">
+                <switch name="form.type">				
+                    <case value="radio">
+                        <div class="form-group">
+                            <foreach name="form.options" item="opt" key="opt_k">
+                                <label class="checkbox checkbox-inline">
+                                    <input type="radio" name="config[<{$o_key}>]" value="<{$opt_k}>" <eq name="form.value" value="$opt_k"> checked</eq>><{$opt}>
+                                </label>
+                            </foreach>
+                        </div>
+                    </case>
+                    <case value="checkbox">
+                        <div class="form-group">
+                            <foreach name="form.options" item="opt" key="opt_k">
+                                <label class="checkbox checkbox-inline">
+                                    <php>
+                                        is_null($form["value"]) && $form["value"] = array();
+                                    </php>
+                                    <input type="checkbox" name="config[<{$o_key}>][]" value="<{$opt_k}>" <in name="opt_k" value="$form.value"> checked</in>><{$opt}>
+                                </label>
+                            </foreach>
+                        </div>
+                    </case>
+			
+				</switch>
+				</div>				
+			</div>
+		</foreach>
+    </div>
+
+    <script type="text/javascript">
+         /**
+         * 改变选中样式
+         * @param string key 选中样式Key值
+         * @param object this 点击按钮对象
+         * @return void
+         */
+        var fChange = function (key, obj) {
+            $('#themes').find('li').removeClass('current');
+            $(obj).parent().addClass('current');
+            $('#theme').val(key);
+            return false;
+        }
+        $(function () {
+            //设置高亮主题
+            fChange(
+                    '{$theme}',
+                    $('#themes img[alt="{$theme}"]').parent()
+            );
+        });
+    </script>
+</div>

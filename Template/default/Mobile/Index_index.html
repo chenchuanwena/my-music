@@ -1,0 +1,79 @@
+<extend name="Public/common"/>
+<block name="content">
+<div class="tour_div tabs">
+	<div class="tour_title tc0">
+		<a class="show_tab active" href="#tab1">新歌推荐</a>
+		<a class="show_tab" href="#tab2">热门试听 </a>
+		<!--a class="tour_more">>></a-->
+	</div>
+	<div class="tab_con in" id="tab1">
+		<ul class="song_con">
+			<JY:songs result="v" limit="20" order="add_time" cache_time="86400">
+			<li>
+				<span class="numb"><{$i}></span>
+				<a class="sname text-ellipsis" title="<{$v['name']}>" href="<{$v['url']}>"><{$v['name']}></a>
+				<a class="gname text-ellipsis" title="<{$v['name']}>" href="<{$v['artist_url']}>"><{$v['artist_name']}></a>
+				<a class="play" title="播放小<{$v['name']}>" href="<{$v['url']}>"></a>		
+			</li>
+			</JY:songs>		
+		</ul>
+	</div>
+	
+	<div class="tab_con" id="tab2">
+		<ul class="song_con">
+			<JY:songs result="v" limit="20" order="listens" cache_time="86400">
+			<li>
+				<span class="numb"><{$i}></span>
+				<a class="sname text-ellipsis" title="<{$v['name']}>" href="<{$v['url']}>"><{$v['name']}></a>
+				<a class="gname text-ellipsis" title="<{$v['name']}>" href="<{$v['artist_url']}>"><{$v['artist_name']}></a>
+				<a class="play" title="播放小<{$v['name']}>" href="<{$v['url']}>"></a>		
+			</li>
+			</JY:songs>
+		</ul>
+	</div>
+
+</div>
+
+<div class="tour_div clearfix">
+	<div class="tour_title tc0">
+		<a  href="javascript:;">新碟首发</a>
+		<a class="tour_more" href="<{:U('/Album')}>">更多>></a>
+	</div>
+	<JY:album result="v" limit="8" order="add_time" cache_time="86400">
+	<div class="al_con">
+		<a href="<{$v['url']}>">
+			<img  src="<{$v['cover_url']}>">
+		</a>
+		<a class="al_info" href="<{$v['url']}>"><{$v['name']}></a>		
+	</div>
+	</JY:album>
+</div>
+
+<div class="tour_div clearfix">
+	<div class="tour_title tc0">
+		<a  href="javascript:;">热门曲风</a>
+		<a class="tour_more" href="<{:U('/Genre')}>">更多>></a>
+	</div>
+	<div class="clearfix">
+		<JY:genre result="v" limit="20" order="add_time" cache_time="86400">
+		<a class="tag" href="<{$v['url']}>"><{$v['name']}></a>
+		</JY:genre>
+	</div>
+</div>
+
+
+<div class="tour_div clearfix">
+	<div class="tour_title tc0">
+		<a  href="javascript:;">热门歌手</a>
+		<a class="tour_more" href="<{:U('/Artist')}>">更多>></a>
+	</div>
+	<JY:artist result="v" limit="21" order="add_time" cache_time="86400">
+	<div class="ar_con">
+		<a href="<{$v['url']}>">
+			<img  src="<{$v['cover_url']}>">
+		</a>
+		<a class="ar_info" href="<{$v['url']}>"><{$v['name']}></a>		
+	</div>
+	</JY:artist>
+</div>
+</block>

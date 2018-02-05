@@ -1,0 +1,34 @@
+<if condition="$type eq 'img'">
+	<div class="box-placeholder text-center mt-sm mb-sm" id="upload-drop" up-url="<{:U('File/uploadPic',array('session_id'=>session_id()))}>">
+		<div id="filePicker"></div>
+		点击或将文件拖拽到此处 
+	</div>
+	<script type="text/javascript">
+		var maxSize		= <{:C('USER_UPPIC_MAX')}>;
+		var exts		= 'jpg,gif,png,bpm,jpeg';
+		var mimeTypes 	= 'image/*';
+	</script>
+<else />
+	<empty name="file">
+	<div class="box-placeholder text-center mt-sm mb-sm" id="upload-drop" up-url="<{:U('File/upload',array('session_id'=>session_id()))}>">
+		<div id="filePicker"></div>
+		点击或将文件拖拽到此处 
+	</div>
+	<script type="text/javascript">
+		var maxSize		= <{:C('USER_UPMUSIC_MAX')}>;
+		var exts		= 'mp3,MP3,ogg,m4a,mp4,wav';
+		var mimeTypes 	= 'audio/*';
+	</script>
+	<else />
+	<input type="text" class="form-control" value="<{$file['name']}>" disabled="disabled" />
+	<script type="text/javascript">$(function($){JY.tipMsg('检测到上次分享未完成，请完善！');});</script>
+	</empty>
+
+</if>
+<input type="hidden" type="file" id="file_id" name="fileid" value="">
+<div class="progress progress-striped progress-xs" id="upload-progress" >
+	 <div class="progress-bar progress-bar-success"></div>
+</div>
+<script type="text/javascript" src="__STATIC__/webuploader/webuploader.min.js"></script>
+<script type="text/javascript" src="__STATIC__/JYmusic/js/userup.js"></script>
+	

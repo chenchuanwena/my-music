@@ -1,0 +1,43 @@
+<extend name="Public/common" />
+
+<block name="warp">
+<div class="tabbable tabbable-custom tabbable-reversed">
+	<ul class="nav nav-tabs">
+		<li>
+			<a href="<{:U('index')}>">我的消息</a>
+		</li>
+
+		<li class="active">
+			<a href="<{:U('notice')}>">系统消息</a>
+		</li>
+	</ul>
+	<div class="tab-content clearfix">
+
+		<ul class="media-list">
+			<foreach name="list" item="v" >
+			<li class="media">
+			  	<div class="media-body">
+			  	
+			    	<h4 class="media-heading"><{$v['title']}></h4>
+			    	<{$v['content']}>
+			    	<div class="media-footer">
+			    		<span class="m-time pull-left"><i class="jy jy-clock-o"></i><{$v['create_time']|time_format="Y-m-d"}></span>
+			    		<span class="m-btns pull-right">
+			    			<eq name="v['is_read']" value="1">
+			    			 	<a class="text-success" href="javascript:;">已读</a>
+			    			 <else />
+			    			 	<a href="<{:U('detail?type=notice&id='.$v['id'])}>">查看</a>
+			    			 </eq>
+			    		</span>
+			  		</div>
+			  	</div>
+			  	
+			</li>
+			</foreach>
+		</ul>
+		<ul class="horizontal_list clearfix mt_10 page_list"><{$_page}></ul>
+
+	</div>
+</div>
+</block>
+

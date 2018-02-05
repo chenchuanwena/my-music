@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <thead>
+       <th>学院</th>
+       <th>专业</th>
+       <th>生源地</th>
+    </thead>
+    <tbody>
+    <volist name="all" id="vo">
+        <tr>
+            <td>{$vo.name}</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </volist>
+
+    </tbody>
+</table>
+</body>
+
+<script>
+    var growTable = function () {
+        $('#goods_record tr').each(function (index, ele) {
+            if (index > 0) {
+                $(this).remove();
+            }
+        });
+
+        table_col = arrs.length;
+        $('#colByAttribute').attr('colspan', arrs.length);
+        for (var i = 0; i < arrs.length; i++) {
+            for (var j = 0; j < arrs[i].length; j++) {
+                content_rows = "";
+                if (i === 0) {
+                    //第一列每个属性添加一行
+                    var content_rows = String.format('<tr><td class="td{0}" id="{2}">{1}</td></tr>', i, arrs[i][j].value, arrs[i][j].id);
+                    $('#goods_record').append(content_rows);
+                } else {
+                    if (j === 0) {
+                        con = String.format('<td class="td{0}"  id="{2}">{1}</td>', i, arrs[i][j].value, arrs[i][j].id);
+                        $('#goods_record tr').each(function (index, row) {
+                            if (index > 0) {
+                                $(this).append(con);
+                            }
+                        });
+                    } else {
+                        var content_rows = String.format('<tr><td class="td{0}" id="{2}">{1}</td></tr>', i, arrs[i][j].value, arrs[i][j].id);
+                        $('#goods_record tr').each(function (index, row) {
+                            if (index > 0) {
+                                if (index % j === 0) {
+                                    $(this).after(content_rows);
+                                }
+                            }
+                        });
+                        //对于该跨行的列跨行
+                        for (var rowspan_set = 0; rowspan_set < i; rowspan_set++) {
+                            var countSpan = 1;
+                            for (var cou = rowspan_set + 1; cou <= i; cou++) {
+                                var len = arrs[cou].length;
+                                countSpan *= len;
+                            }
+                            if (countSpan > 1) {
+                                var td_index = rowspan_set;
+                                var td_str = td_index.toString();
+                                $('.td' + td_str).each(function (index, ele) {
+                                    if (countSpan > 1) {
+                                        $(this).attr("rowspan", countSpan);
+                                    }
+                                });
+
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+</script>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title><{$meta_title}></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta name="keywords" content="<{$meta_keywords}>" />
+	<meta name="description" content="<{$meta_description}>" />
+	<meta name="author" content="JYmusic">
+	<link type="text/css" rel="stylesheet" href="__TMPL__/Mobile/css/mobile.css?v=0721"/>
+	<link type="text/css" rel="stylesheet" href="__TMPL__/Mobile/css/style.css?v=0721"/>
+	<script type="text/javascript" src="//cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript">
+	(function(){
+		window.JY = {
+			"ROOT"   : "__ROOT__", //当前网站地址
+			"APP"    : "__APP__", //当前项目地址
+			"PUBLIC" : "__PUBLIC__", //项目公共目录地址
+			"DEEP"   : "<{:C('URL_PATHINFO_DEPR')}>", //PATHINFO分割符
+			"MODEL"  : ["<{:C('URL_MODEL')}>", "<{:C('URL_CASE_INSENSITIVE')}>", "<{:C('URL_HTML_SUFFIX')}>"],
+			"VAR"    : ["<{:C('VAR_MODULE')}>", "<{:C('VAR_CONTROLLER')}>", "<{:C('VAR_ACTION')}>"]
+		}
+	})();
+	</script>
+</head>
+<body>
+<div id="frame">
+	<div id="top">
+		<if condition="CONTROLLER_NAME neq 'Index'">
+		<a href="javascript:window.history.back();" id="goback">
+			<img align="top" src="__TMPL__/Mobile/images/goback.png">
+		</a>
+		</if>
+		<a id="title" href="<{:U('/')}>"><img align="top" src="__TMPL__/images/logo.png"></a>
+		<span id="list">		
+		   <a href="javascript:;" id="nav-btn"><img align="top" src="__TMPL__/Mobile/images/p0.png"></a>
+		</span>
+	</div>
+	<div class="disNav" id="disNav" style="display: none;">
+		<div class="arrow"><i></i></div>
+		<ul class="navList">
+			<li><a href="<{:U('/')}>" title="JYmusic">首页</a></li>
+			<li><a href="<{:U('/Ranks')}>" title="排行榜">排行榜</a></li>
+			<li><a href="<{:U('/Album')}>" title="专辑">专辑</a></li>
+			<li><a href="<{:U('/Artist')}>" title="歌手大全">歌手大全</a></li>
+			<JY:genre result="v" limit="8" order="add_time" cache_time="86400">
+			<li><a href="<{$v['url']}>" title="<{$v['name']}>"><{$v['name']}></a></li>
+			</JY:genre>
+		</ul>
+    </div>
+	
+	<div id="content">
+		<block name="topnav">
+		<div class="tm_div">
+			<div class="renqi_1">
+				<ul id="top10">
+					<li class="<if condition="CONTROLLER_NAME eq 'Index'">yesselected<else />noselected</if>"><a href="<{:U('/')}>">首页</a></li>
+					<li class="<if condition="CONTROLLER_NAME eq 'Album'">yesselected<else />noselected</if>" ><a href="<{:U('/Album')}>">专辑</a></li>
+					<li class="<if condition="CONTROLLER_NAME eq 'Artist'">yesselected<else />noselected</if>"><a href="<{:U('/Artist')}>">艺术家</a></li>
+					<li class="<if condition="CONTROLLER_NAME eq 'Ranks'">yesselected<else />noselected</if>"><a href="<{:U('/Ranks')}>">排行榜</a></li>
+				</ul>
+			</div>
+		</div>
+		</block>
+		<block name="content"></block>
+	</div>
+	<div id="footer"><a href="<{:U('/')}>">Powered byMYmusic© 2016</a></div>
+</div>
+<script type="text/javascript" src="__TMPL__/Mobile/js/common.js"></script>
+</body>
+</html>

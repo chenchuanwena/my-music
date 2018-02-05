@@ -1,0 +1,8 @@
+<volist name="list" id="v">
+<li>
+	<span class="numb"></span>
+	<a class="sname text-ellipsis" title="<{$v['name']}>" href="<{:U('Music/'.$v['id'])}>"><{$v['name']}></a>
+	<a class="gname text-ellipsis" title="<{$v['name']}>" href="<{:U('artist/'.$v['artist_id'])}>"><{$v['artist_name']}></a>
+	<a class="play" title="播放<{$v['name']}>" href="<{:U('Music/'.$v['id'])}>"></a>		
+</li>
+</volist>		

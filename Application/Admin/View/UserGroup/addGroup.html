@@ -1,0 +1,63 @@
+<form class="form-horizontal u-form" action="<{:U('/UserGroup/addUser')}>" method="post" enctype="application/x-www-form-urlencoded" >
+	<div class="col-lg-12 mb-lg"> 
+		<h4>前台管理组</h4>
+		<div class="panel widget p">
+			<div class="clearfix">
+				授权类型：
+				<volist name=":get_user_groups()" id="vo">
+				<div class="checkbox c-checkbox inline mr-sm">					
+					<label class="inline mr-sm">	
+						<input type="checkbox" value="<{$vo['id']}>" name="group_id[]">
+						<span class="fa fa-check"></span>
+							<{$vo['name']}>
+					</label>
+				</div>
+				</volist>
+			</div>
+			<div class="clearfix">
+				授权时间：
+				<div class="radio c-radio inline mr-sm">					
+					<label class="inline mr-sm">	
+						<input type="radio" value="1" name="end_time" checked="true">
+						<span class="fa fa-circle"></span>
+							一个月
+					</label>
+				</div>
+				<div class="radio c-radio inline mr-sm">					
+					<label class="inline mr-sm">	
+						<input type="radio" value="6" name="end_time">
+						<span class="fa fa-circle"></span>
+							半年
+					</label>
+				</div>
+				<div class="radio c-radio inline mr-sm">					
+					<label class="inline mr-sm">	
+						<input type="radio" value="12" name="end_time">
+						<span class="fa fa-circle"></span>
+							一年
+					</label>
+				</div>
+				
+				<div class="radio c-radio inline mr-sm">					
+					<label class="inline mr-sm">	
+						<input type="radio" value="600" name="end_time">
+						<span class="fa fa-circle"></span>
+							永久
+					</label>
+				</div>
+			
+			</div>
+		</div>
+		<input type="hidden" name="uid" value="<{:I('uid')}>">
+		<div class="form-group">
+			<div class="col-sm-4 col-sm-offset-2">
+				<button type="submit" class="btn btn-primary submit-btn ajax-post" target-form="u-form">确 定</button>
+				<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+			</div>
+		</div>
+
+	</div>
+</form>
+
+
+

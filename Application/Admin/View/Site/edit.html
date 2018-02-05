@@ -1,0 +1,73 @@
+<extend name="Public/base"/>
+<!-- 子导航 -->
+<block name="sidebar">
+    <include file="Article/sidemenu" />
+</block>
+<block name="content">
+<h3>关于网站</h3>
+<div class="panel panel-default">
+	<div class="panel-heading"><{:isset($data['id'])?'编辑':'新增'}>文档</div>
+ 	<div class="panel-body">
+		<form class="form-horizontal" enctype="multipart/form-data" action="<{:U()}>" method="post">													
+			<div class="form-group">	
+				<label class="col-sm-2 control-label">标题</label>
+				<div class="col-sm-3">
+					<input  type="text" name="title" class="form-control" value="<{$data.title|default=''}>" >					
+				</div>
+				<span class="help-inline">此项不能为空</span>	
+		    </div>		
+			<div class="form-group">	
+				<label class="col-sm-2 control-label">所属类型</label>
+				<div class="col-sm-2">
+					<select class="form-control" name="appname">
+						<empty name="data">
+						<option value="about"<eq name="type" value="about">selected="true"</eq>>关于</option>
+						<option value="help" <eq name="type" value="help">selected="true"</eq>>帮助</option>
+						<else/>
+						<option value="about" <eq name="data['appname']" value="about">selected="true"</eq>>关于</option>
+						<option value="help" <eq name="data['appname']" value="help">selected="true"</eq>>帮助</option>
+						</empty>
+					</select>					
+				</div>
+				<span class="help-inline">此项不能为空</span>	
+		    </div>	
+			
+			
+    		<div class="form-group">	
+    			<label class="col-sm-2 control-label">英文标示</label>
+				<div class="col-sm-2">
+					<input  type="text" name="name" class="form-control" value="<{$data.name|default=''}>" >					
+				</div>
+				<span class="help-inline">用于优化链接（-标示）只能为英文</span>	
+    		</div> 
+    		
+    		<div class="form-group">	
+				<label class=" col-sm-2 control-label">内容</label>
+				<div class="col-sm-8">
+					<textarea name="content" style="width:100%;height:80px;" ><{$data.content|default=''}></textarea>	
+				</div>
+				<{:hook('adminArticleEdit', array('name'=>'content','value'=>$data['content']))}>
+			</div>
+					 
+									
+    		<div class="form-group">
+    			<input type="hidden" name="status" value="<{$data.status|default=''}>">
+    			<input type="hidden" name="id" value="<{$data.id|default=''}>">      		
+            	<div class="col-sm-4 col-sm-offset-2">
+                	<button class="btn btn-default" type="button" onclick="javascript:history.back(-1);return false;">取消</button>
+                	<button class="btn btn-primary ajax-post" target-form="form-horizontal" type="submit">保存</button>
+            	</div>
+        	</div>
+        </form>
+	</div>
+</div> 
+</block>
+<block name="script">
+<script type="text/javascript">
+	//导航高亮
+	highlight_subnav("<{:U('Article/index')}>",<eq name="type" value="about">"<{:U('Site/index')}>"<else/>"<{:U('Site/index?type=help')}>"</eq>);
+
+</script>
+</block>	
+
+

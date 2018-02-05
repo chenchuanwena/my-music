@@ -1,0 +1,17 @@
+<extend name="Public/common"/>
+<block name="content">
+
+<div class="page_content_offset">
+	<div class="container">	
+		<div class="row clearfix">
+			<!--搜索列表-->			
+			<section class="col-sm-8 col-sm-offset-2" style="line-height:24px">
+				<h2 class="text-center mt_20 mb_20"><{:C('WEB_SITE_NAME')}>服务协议</h2>
+				<hr>
+				<{:nl2br(replace_sys_variate(C('REG_AGREE')))}>
+			</section>
+
+		</div>
+	</div>
+</div>
+</block>
