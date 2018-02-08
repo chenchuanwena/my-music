@@ -506,6 +506,9 @@ class IndexController extends HomeController
     }
     public function chatroom(){
         $self=$_SESSION['jy_home_']['user_auth'];
+        if(!$self){
+            echo "请登录";
+        }
         $self['nickname']=$self['username'];
         $self['userid']=$self['uid'];
         $self['login_time']=date('Y-m-d H:i:s',$self['last_login_time']);
