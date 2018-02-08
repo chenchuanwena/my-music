@@ -22,7 +22,7 @@ define('DB_TYPE','mysql'); // 数据库类型
 define('DB_HOST', '127.0.0.1');  // 服务器地址
 define('DB_NAME','music');  // 数据库名
 define('DB_USER', 'root');  // 用户名
-define('DB_PWD' ,'!@#$%12345qwert');  // 密码
+define('DB_PWD' ,'!@#$%12345werty');  // 密码
 define('DB_PORT' ,'3306') ; // 端口
 define('DB_PREFIX','jy_'); // 数据库表前缀
 	

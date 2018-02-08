@@ -1,0 +1,19 @@
+[ 2018-02-07T23:09:27+08:00 ] 180.76.15.26 /index.php?s=/User/auth/musician.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.000225s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000319s ]
+NOTIC: [8] Constant UC_AUTH_KEY already defined /www/web/my-music_cn/public_html/Data/Conf/conf.php 第 20 行.
+NOTIC: [8] Constant DB_TYPE already defined /www/web/my-music_cn/public_html/Data/Conf/conf.php 第 21 行.
+NOTIC: [8] Constant DB_HOST already defined /www/web/my-music_cn/public_html/Data/Conf/conf.php 第 22 行.
+NOTIC: [8] Constant DB_NAME already defined /www/web/my-music_cn/public_html/Data/Conf/conf.php 第 23 行.
+NOTIC: [8] Constant DB_USER already defined /www/web/my-music_cn/public_html/Data/Conf/conf.php 第 24 行.
+NOTIC: [8] Constant DB_PWD already defined /www/web/my-music_cn/public_html/Data/Conf/conf.php 第 25 行.
+NOTIC: [8] Constant DB_PORT already defined /www/web/my-music_cn/public_html/Data/Conf/conf.php 第 26 行.
+NOTIC: [8] Constant DB_PREFIX already defined /www/web/my-music_cn/public_html/Data/Conf/conf.php 第 27 行.
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000037s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000070s ]
+SQL: SHOW COLUMNS FROM `jy_config` [ RunTime:0.0005s ]
+SQL: SELECT `type`,`name`,`value` FROM `jy_config` WHERE `status` = 1  [ RunTime:0.0001s ]
+
