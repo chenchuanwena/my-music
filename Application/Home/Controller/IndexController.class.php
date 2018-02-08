@@ -508,6 +508,7 @@ class IndexController extends HomeController
         $self=$_SESSION['jy_home_']['user_auth'];
         if(!$self){
             echo "请登录";
+            exit;
         }
         $self['nickname']=$self['username'];
         $self['userid']=$self['uid'];
