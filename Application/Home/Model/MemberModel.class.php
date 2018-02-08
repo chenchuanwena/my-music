@@ -91,5 +91,25 @@ class MemberModel extends Model{
         session('user_auth', $auth);
         session('user_auth_sign', data_auth_sign($auth));
 
-    }    
+    }
+
+    public function joinTables($table1,$jointype,$joinkey1,$joinkey2,$field='*',$pageIndex=1,$pageSize=10,$fieldKey=false){
+        $preTable=C('DB_PREFIX');
+        $table1=$preTable.$table1;
+        $joinSql=format("{0} {1} on {2}={3}",$jointype,$table1,$joinkey1,$joinkey2);
+        $count=$this->alias('a')->join($joinSql)->field($field)->count();
+        $res= $this->alias('a')->join($joinSql)->field($field)->page("{$pageIndex},{$pageSize}")->select();
+        if($fieldKey!==false){
+            $resLast=array();
+            foreach($res as $value){
+                $resLast[$value[$fieldKey]]=$value;
+            }
+            $res=$resLast;
+        }
+        $returnData=array();
+        $returnData['result']=$res;
+        $returnData['count']=$count;
+        return $returnData;
+
+    }
 }

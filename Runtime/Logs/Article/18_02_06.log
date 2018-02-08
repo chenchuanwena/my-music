@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [ 2018-02-06T10:11:51+08:00 ] 116.93.37.75 /index.php?s=/article.html
 INFO: [ app_init ] --START--
 INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
@@ -130,3 +131,14 @@ INFO: Run Common\Behavior\FilterTmplBehavior [ RunTime:0.000036s ]
 INFO: Run Behavior\TokenBuildBehavior [ RunTime:0.000032s ]
 INFO: [ view_filter ] --END-- [ RunTime:0.000150s ]
 
+=======
+[ 2018-02-06T10:43:02+08:00 ] 127.0.0.1 /index.php?s=/article.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002501s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002501s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+>>>>>>> a3cee2f0dd3f3aaa0c37b16fdf04a643c10ddd14

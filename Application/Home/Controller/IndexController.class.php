@@ -485,6 +485,8 @@ class IndexController extends HomeController
         }
 
     }
+
+
     public function excel()
     {
         $name = I('name');
@@ -502,7 +504,43 @@ class IndexController extends HomeController
         $this->assign('all', $allNames);
         $this->display();
     }
+    public function chatroom(){
+        $self=$_SESSION['jy_home_']['user_auth'];
+        $self['nickname']=$self['username'];
+        $self['userid']=$self['uid'];
+        $self['login_time']=date('Y-m-d H:i:s',$self['last_login_time']);
+        $pictures=D('Picture');
+        $faceUrls= C('face_url');
+        $selfAtore=$pictures->getPictureByUidAndType($self['uid'],5,'uid,path,type',1,10);
 
+        $self['avatar']=$selfAtore?$selfAtore:$faceUrls['avataroffline'];
+        $dateObj=Date('Y-m-d H:i:s',NOW_TIME);
+        $member=D('Member');
+        $result=$member->joinTables("member_auth_musician b",'Left Join',"a.uid","b.uid","a.uid,a.nickname",1,10,'uid');
+        $uids=array_column($result['result'],'uid');
+
+        $userPic=$pictures->getPictureByUidAndType($uids,5,'uid,path,type',1,10);
+        foreach($userPic as $val){
+            $result['result'][$val['uid']]['avator']=$val['path'];
+        }
+
+        foreach( $result['result'] as &$val){
+            $val['avatar']=isset($val['path'])?$val['path']:$faceUrls['avataroffline'];
+            $val['userid']=$val['uid'];
+            $val['username']=$val['nickname'];
+        }
+        $this->assign('dateobj',$dateObj);
+         $result['result']=array_values($result['result']);
+         $this->assign('count',$result['count']);
+
+         $this->assign('users',$result['result']);
+         $this->assign('userjson',json_encode($result['result']));
+         $this->assign('faceUrl', $faceUrls);
+        $this->assign('self', $self);
+        $this->assign('selfjson', json_encode($self));
+         $this->assign('debug', 'true');
+         $this->display();
+    }
     //系统首页
     public function index()
     {
@@ -518,6 +556,39 @@ class IndexController extends HomeController
 
         $this->getSeoMeta();
         $this->display();
+    }
+
+    public function upload()
+    {
+        vendor('Swoole.autoload');
+        $upload=new \Swoole\Upload(C('upload_data'));
+        if ($_FILES)
+        {
+            // header("Content-type: application/json");
+            // 指定允许其他域名访问
+            header('Access-Control-Allow-Origin:*');
+// 响应类型
+            header('Access-Control-Allow-Methods:GET');
+// 响应头设置
+            header('Access-Control-Allow-Headers:x-requested-with,content-type');
+            header("Content-type: application/json");
+            $upload->thumb_width = 136;
+            $upload->thumb_height = 136;
+            $upload->thumb_qulitity = 100;
+            $up_pic = $upload->save('Filedata');
+            if (empty($up_pic))
+            {
+                echo '上传失败，请重新上传！ Error:' . $upload->error_msg;
+            }
+            $baseUrl=$this->get_url();
+            $up_pic['thumb']=$baseUrl.$up_pic['thumb'];
+            $up_pic['url']=$baseUrl.$up_pic['url'];
+            echo json_encode($up_pic);
+        }
+        else
+        {
+            echo "Bad Request\n";
+        }
     }
 
 }

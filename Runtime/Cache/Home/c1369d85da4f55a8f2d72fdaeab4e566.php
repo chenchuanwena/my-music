@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/Public/static/JYmusic/css/jy.css?1.0.0">
     <link rel="stylesheet" type="text/css" href="/Template/default/static/css/plugs.min.css" media="all">
-    <link rel="stylesheet" type="text/css" href="/Template/default/static/css/style.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Template/default/static/css/style.css?1.3" media="all">
     <!--js-->
     <script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
@@ -607,15 +607,8 @@
 <div class="hidden"><!-- 用于加载统计代码等隐藏元素 -->
     <?php echo C('WEB_SITE_STAT');?>
 </div>
-<ul class="social_widgets ">
-    <!--聊天室-->
-    <li class="relative d_xs_none">
+<ul class="social_widgets">
 
-        <div class="sw_content">
-聊天室
-
-        </div>
-    </li>
     <!--二维码 -->
     <li class="relative d_xs_none">
         <button class="sw_button t_align_c facebook"><i class="jy jy-qrcode"></i></button>
@@ -624,7 +617,16 @@
             <img src="/Template/default/static/images/jyuu.png" alt="JYmusic">
         </div>
     </li>
+    <li class="relative d_xs_none">
+        <button class="sw_button_extent t_align_c facebook"><img width="50" height="50" src="/Template/default/static/img/text-message12.png" /> </button>
+        <div class="sw_content">
+            <h3 class="mb_20">扫描二维码</h3>
+            <img src="/Template/default/static/images/jyuu.png" alt="JYmusic">
+        </div>
+    </li>
+
 </ul>
+
 <!--弹出登录-->
 <div class="popup_wrap d_none" id="login_popup">
     <section class="popup  shadow">

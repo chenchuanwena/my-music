@@ -58,7 +58,6 @@ $config =  array(
 	'URL_MAP_RULES'			=> array(
 		
 	),
-	'LOAD_EXT_CONFIG' => 'alioss',
-
+	'LOAD_EXT_CONFIG' => 'alioss,imageconfig,mimes',
 );
 return $config;
