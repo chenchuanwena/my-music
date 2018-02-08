@@ -4,7 +4,9 @@
 	padding: 0;
 	border: 0
 }
-
+.relative .sw_button .r_p_kefu {
+	background: #282828 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAGXRFW…U3X0GYiTKTVqRGTA59r94MekWoE1sIHbmauF7Rn3iPPgUYAIrQh0KGrnV4AAAAAElFTkSuQmCC) no-repeat 50%;
+}
 article,aside,audio,canvas,command,datalist,details,embed,figcaption,figure,footer,header,hgroup,keygen,meter,nav,output,progress,section,source,video,main {
 	display: block
 }
@@ -1264,6 +1266,24 @@ ul.users_nav  li span i{
 }
 
 .sw_button {
+	 width: 40px;
+	 height: 40px;
+	 color: #fff;
+	 font-size: 1.3em;
+	 -webkit-border-top-left-radius: 4px;
+	 -moz-border-top-left-radius: 4px;
+	 border-top-left-radius: 4px;
+	 -webkit-border-bottom-left-radius: 4px;
+	 -moz-border-bottom-left-radius: 4px;
+	 border-bottom-left-radius: 4px
+ }
+
+.sw_button:hover {
+	-webkit-animation: jump .4s ease;
+	-moz-animation: jump .4s ease;
+	animation: jump .4s ease
+}
+.sw_button_extent {
 	width: 40px;
 	height: 40px;
 	color: #fff;
@@ -1276,12 +1296,11 @@ ul.users_nav  li span i{
 	border-bottom-left-radius: 4px
 }
 
-.sw_button:hover {
+.sw_button_extent:hover {
 	-webkit-animation: jump .4s ease;
 	-moz-animation: jump .4s ease;
 	animation: jump .4s ease
 }
-
 #menu_button {
 	padding: 5px 10px;
 	width: 60px
@@ -1344,7 +1363,12 @@ ul.users_nav  li span i{
 .social_icons .html5:hover a,.sw_button.facebook {
 	background: #3b5998
 }
-
+.social_icons .html5:hover a,.sw_button_extent.facebook {
+	background: #f3f3f3
+}
+/*.sw_button_extent i.r_p_kefu {*/
+	/*background: #3b5998 url(/Template/default/static/img/text-message12.png) no-repeat 10%;*/
+/*}*/
 .social_icons .css3:hover a,.sw_button.twitter,.tw_color {
 	background: #2daae1
 }
