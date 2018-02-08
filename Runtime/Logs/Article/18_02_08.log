@@ -1,0 +1,59 @@
+[ 2018-02-08T07:29:23+08:00 ] 180.76.15.144 /index.php?s=/article/site/reg.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.000211s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000305s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000032s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000074s ]
+
+[ 2018-02-08T10:02:02+08:00 ] 180.76.15.148 /index.php?s=/article/site/about.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.000225s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000323s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000033s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000062s ]
+
+[ 2018-02-08T18:23:16+08:00 ] 220.181.108.99 /index.php?s=/article/type/baoliao.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.000236s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000337s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000035s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000068s ]
+
+[ 2018-02-08T18:32:45+08:00 ] 180.76.15.6 /index.php?s=/Article/Music/detail/id/5.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.000265s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000379s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000032s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000062s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000131s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000174s ]
+NOTIC: [8] Undefined variable: meta_title /www/web/my-music_cn/public_html/Runtime/Cache/Article/cd584b7927e3c1d118b338730528cd66.php 第 5 行.
+NOTIC: [8] Undefined variable: meta_keywords /www/web/my-music_cn/public_html/Runtime/Cache/Article/cd584b7927e3c1d118b338730528cd66.php 第 10 行.
+NOTIC: [8] Undefined variable: meta_description /www/web/my-music_cn/public_html/Runtime/Cache/Article/cd584b7927e3c1d118b338730528cd66.php 第 11 行.
+SQL: SHOW COLUMNS FROM `jy_channel` [ RunTime:0.0005s ]
+NOTIC: [8] Undefined index: HTTP_REFERER /www/web/my-music_cn/public_html/Application/Article/Common/function.php 第 82 行.
+NOTIC: [8] Undefined index: HTTP_REFERER /www/web/my-music_cn/public_html/Application/Article/Common/function.php 第 82 行.
+NOTIC: [8] Undefined index: HTTP_REFERER /www/web/my-music_cn/public_html/Application/Article/Common/function.php 第 82 行.
+NOTIC: [8] Undefined index: HTTP_REFERER /www/web/my-music_cn/public_html/Application/Article/Common/function.php 第 82 行.
+NOTIC: [8] Undefined index: HTTP_REFERER /www/web/my-music_cn/public_html/Application/Article/Common/function.php 第 82 行.
+SQL: SHOW COLUMNS FROM `jy_songs` [ RunTime:0.0005s ]
+SQL: SELECT * FROM jy_songs __MUSIC WHERE `status` = 1 AND (  position & 1 = 1 ) ORDER BY update_time desc LIMIT 6   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `jy_site` [ RunTime:0.0003s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.017219s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.017251s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000036s ]
+INFO: Run Common\Behavior\FilterTmplBehavior [ RunTime:0.000042s ]
+INFO: Run Behavior\TokenBuildBehavior [ RunTime:0.000052s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000194s ]
+

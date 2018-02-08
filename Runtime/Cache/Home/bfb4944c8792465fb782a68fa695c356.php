@@ -213,88 +213,76 @@
 	<div class="container">	
 		<div class="row clearfix">
 			<aside class="col-sm-4">
-				<figure class="t_align_c">
-					<div class="circle wrapper team_photo mb_15">
-						<img src="<?php echo ($data['cover_url']); ?>" alt="<?php echo ($data["name"]); ?>" height="200" width="200">
-					</div>
-					<figcaption>
-						<h2 class="mb_10 mt_10"><?php echo ($data["name"]); ?></h2>
-						<button class="btn_1  tr_all_hover mb_5 music-action-btn" data-id="<?php echo ($data['id']); ?>" data-action="like"  data-type="artist" ><i class="jy jy-like"></i>喜欢 (<?php echo ($data["likes"]); ?>)</button>
-						<button class="btn_1  tr_all_hover mb_5 music-action-btn" data-id="<?php echo ($data['id']); ?>" data-action="fav"  data-type="artist" ><i class="jy jy-fav"></i>收藏 (<?php echo ($data["favtimes"]); ?>)</button>
-						<ul class="horizontal_list l_width_divider row clearfix pt_10">
-							<li class="f_md_none  t_align_c col-lg-4">
-								<strong><?php $__COUNT__ = M("Songs")->where(array("status"=>1,"artist_id"=>$data['id']))->count();echo $__COUNT__; ?></strong>
-								<span>首歌曲</span>
-							</li>
-							<li class="f_md_none t_align_c col-lg-4">
-								<strong><?php $__COUNT__ = M("Album")->where(array("status"=>1,"artist_id"=>$data['id']))->count();echo $__COUNT__; ?></strong>
-								<span>张专辑</span>							
-							</li>
-							<li class="f_md_none col-lg-4 t_align_c">
-								<strong><?php echo ($data['hits']); ?></strong>
-								<span>次浏览</span>									
-							</li>
-						</ul>
-						<hr class="mb_10 ">
-					</figcaption>	
-				</figure>
-				<div class="sidebar_content">
-					<div class="mb_15 pt_10">
-						<p class="d_inline_b mr_20">所属类别: <?php echo ($data["type_name"]); ?></p>
-					
-						<p class="d_inline_b">所属地区: <?php echo ($data["region"]); ?></p>
-					</div>	
-					
-				</div>
+				<h2 class="pt_10">热门分类</h2>
+				<hr>													
+				<div class="sidebar_content">	
+					<div class="clearfix s_cats">
+						<?php $where=array();$where["status"]=1;$_result = M("Genre")->where($where)->limit(20)->select();if($_result):$i=0;foreach($_result as $key=>$vo):$vo['url']=U('/genre/'.$vo['id']);++$i;$mod = ($i % 2 );?><a title="<?php echo ($vo['name']); ?>"  target="_genre" href="<?php echo ($vo['url']); ?>"><?php echo ($vo['name']); ?></a><?php endforeach; endif;?>
+					</div>					
+				</div>	
+				
+<h2 class="pt_10">热门试听</h2>
+<hr>
+<div class="sidebar_content">
+	<?php $where=array();$where["status"]=1;$_result = M("Songs")->alias("__MUSIC")->where($where)->cache(true,86400)->limit("15")->order("listens desc")->select();if($_result):$i=0;foreach($_result as $key=>$v): $v['url']=U('/music/'.$v['id']); $v['down_url']=U('/down/'.$v['id']); $v['user_url']=U('/user/'.$v['up_uid']); $v['artist_url']=U('/artist/'.$v['artist_id']); $v['album_url']=U('/album/'.$v['album_id']); $v['genre_url']=!empty($v['genre_id']) ? U('/genre/'.$v['genre_id']) : U('/Genre'); $v['cover_url']= !empty($v['cover_url'])? $v['cover_url'] : "/Public/static/images/cover.png";++$i;$mod = ($i % 2 );?><div class="mb_10 clearfix relative play_box">
+		<div class="row clearfix song_list">								
+			<span class="col-sm-7 col-xs-8">	
+				<span class="ls_num <?php if(($i) < "4"): ?>ls_num_top<?php endif; ?>"><?php echo ($i); ?></span>									
+				<a class="text-ellipsis" target="_play" title="<?php echo ($v['name']); ?>" href="<?php echo ($v['url']); ?>"><?php echo ($v['name']); ?></a>									
+			</span>
+			<span class="col-sm-3 col-xs-4 hidden-xs">							
+				<a class="text-ellipsis" href="<?php echo ($v['artist_url']); ?>" target=_singer" title="<?php echo ($v['artist_name']); ?>"><?php echo ($v['artist_name']); ?></a>
+			</span>
+			<span class="col-sm-2 col-xs-4 ls_btns">							
+				<a class="jp-play-me" data-id="<?php echo ($v['id']); ?>" href="javascript:;"><i class="jy jy-play"></i>	</a>
+			</span>
+		</div>
+		<hr class="l_hr">
+	</div><?php endforeach; endif;?>
+</div>
+
 				
 			</aside>
 			<!--右侧歌曲列表-->			
-			<section class="col-sm-8 mb_10">
-				<div class="clearfix  pt_10">
-					<h3 class="f_left"> <?php echo ($data['name']); ?>- 全部歌曲</h3>
-					<ul class="tabs_nav f_right">
-						<li class="active"><a data-toggle="tab" role="tab"  href="#song-list" >歌曲列表</a></li>
-						<li><a href="<?php echo ($data['album_url']); ?>">专辑列表</a></li>
-						<li><a data-toggle="tab" role="tab"  href="#info">详细介绍</a></li>
+			<section class="col-sm-8">
+				<div class="clearfix pt_10">			
+					<ul class="f_right tabs_nav" role="tablist">
+						<li><a class="tr_delay_hover"  href="#new">热门试听</a></li>
+						<li class="active"><a class="tr_delay_hover"  href="#hot">最新添加</a></li>
 					</ul>
+				
+					<h3 class="f_left"> 风格分类-<?php if(!empty($data['name'])): echo ($data['name']); ?> <?php else: ?> 全部音乐<?php endif; ?></h3>	
 				</div>
-				<hr>
-				<div class="tab-content">							
-					<div id="song-list" class="tab-pane fade in active">
-						<?php $where=array();$where["status"]=1;$where["artist_id"]=$data['id'];$_result = M("Songs")->alias("__MUSIC")->where($where)->page(!empty($_GET["p"])?$_GET["p"]:1,20)->order("add_time desc")->select();if($_result):$i=0;foreach($_result as $key=>$lv): $lv['url']=U('/music/'.$lv['id']); $lv['down_url']=U('/down/'.$lv['id']); $lv['user_url']=U('/user/'.$lv['up_uid']); $lv['artist_url']=U('/artist/'.$lv['artist_id']); $lv['album_url']=U('/album/'.$lv['album_id']); $lv['genre_url']=!empty($lv['genre_id']) ? U('/genre/'.$lv['genre_id']) : U('/Genre'); $lv['cover_url']= !empty($lv['cover_url'])? $lv['cover_url'] : "/Public/static/images/cover.png";++$i;$mod = ($i % 2 );?><div class="mb_10 clearfix relative play_box">
-							<div class="row clearfix song_list">								
-								<span class="col-sm-5 col-xs-8">	
-									<span class="ls_num <?php if(($i) < "11"): ?>ls_num_top<?php endif; ?>"><?php echo ($i); ?></span>									
-									<a class="text-ellipsis" target="_play" href="<?php echo ($lv['url']); ?>"><?php echo ($lv['name']); ?></a>									
-								</span>
-								<span class="col-sm-3 col-xs-2 p_hr_0">
-									<a class="text-ellipsis singer" target="_sing" href="<?php echo ($lv['genre_url']); ?>"><?php echo ($lv['genre_name']); ?></a>	
-								</span>
-								<span class="col-sm-2 ls_listen hidden-xs"><?php echo number_format($lv['listens']);?></span>
-								<span class="col-sm-2 col-xs-2 ls_btns">	
-									<a class="hidden-xs " target="_down" href="<?php echo ($lv['down_url']); ?>"><i class="jy jy-cloud-down-f"></i></a>								
-									<a class="music-action-btn hidden-xs" data-id="<?php echo ($lv['id']); ?>" data-action="fav" href="javascript:;"><i class="jy jy-like"></i></a>
-									<a class="jp-play-me" data-id="<?php echo ($lv['id']); ?>" href="javascript:;"><i class="jy jy-play"></i></a>
-								</span>
-							</div>
-							<hr class="l_hr">
-						</div><?php endforeach; endif; $lv_total= M("Songs")->where($where)->count();$__PAGE__ = new \Think\Page($lv_total,20);$__PAGE__ ->rollPage = 5;$__PAGE__->setConfig("theme","%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END%");$__PAGE__->setConfig("prev", "上页");$__PAGE__->setConfig("next", "下页");$lv_page= $__PAGE__->show(); ?>
-						
-						<div class="row clearfix mb_5">
-							<div class="col-sm-4 clearfix ">
-								<span class="page_total">共<?php echo ($lv_total); ?>首歌曲</span>
-							</div>
-							<div class="col-sm-8 t_align_r">
-								<ul class="horizontal_list clearfix d_inline_middle ml_10 page_list"><?php echo ($lv_page); ?></ul>
-							</div>
+				<hr class="">
+				<div class="clearfix mt_10 ">
+					<?php $where=array();$where["status"]=1;$_result = M("Songs")->alias("__MUSIC")->where($where)->page(!empty($_GET["p"])?$_GET["p"]:1,20)->order("add_time desc")->select();if($_result):$i=0;foreach($_result as $key=>$lv): $lv['url']=U('/music/'.$lv['id']); $lv['down_url']=U('/down/'.$lv['id']); $lv['user_url']=U('/user/'.$lv['up_uid']); $lv['artist_url']=U('/artist/'.$lv['artist_id']); $lv['album_url']=U('/album/'.$lv['album_id']); $lv['genre_url']=!empty($lv['genre_id']) ? U('/genre/'.$lv['genre_id']) : U('/Genre'); $lv['cover_url']= !empty($lv['cover_url'])? $lv['cover_url'] : "/Public/static/images/cover.png";++$i;$mod = ($i % 2 );?><div class="mb_10 clearfix relative play_box">
+						<div class="row clearfix song_list">								
+							<span class="col-sm-5 col-xs-8">	
+								<span class="ls_num <?php if(($i) < "11"): ?>ls_num_top<?php endif; ?>"><?php echo ($i); ?></span>									
+								<a class="text-ellipsis" target="_play" href="<?php echo ($lv['url']); ?>"><?php echo ($lv['name']); ?></a>									
+							</span>
+							<span class="col-sm-3 col-xs-2 p_hr_0">
+								<a class="text-ellipsis singer" target="_sing" href="<?php echo ($lv['artist_url']); ?>"><?php echo ($lv['artist_name']); ?></a>	
+							</span>
+							<span class="col-sm-2 ls_listen hidden-xs"><?php echo number_format($lv['listens']);?></span>
+							<span class="col-sm-2 col-xs-2 ls_btns">	
+								<a class="hidden-xs " target="_down" href="<?php echo ($lv['down_url']); ?>"><i class="jy jy-cloud-down-f"></"></i></a>								
+								<a class="music-action-btn hidden-xs" data-id="<?php echo ($lv['id']); ?>" data-action="fav" href="javascript:;"><i class="jy jy-like"></i></a>
+								<a class="jp-play-me" data-id="<?php echo ($lv['id']); ?>" href="javascript:;"><i class="jy jy-play"></i></a>
+							</span>
 						</div>
+						<hr class="l_hr">
+					</div><?php endforeach; endif; $lv_total= M("Songs")->where($where)->count();$__PAGE__ = new \Think\Page($lv_total,20);$__PAGE__ ->rollPage = 5;$__PAGE__->setConfig("theme","%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END%");$__PAGE__->setConfig("prev", "上页");$__PAGE__->setConfig("next", "下页");$lv_page= $__PAGE__->show(); ?>
+				</div>
+				
+				<div class="row clearfix mb_5">
+					<div class="col-sm-4 clearfix ">
+						<span class="page_total">共<?php echo ($lv_total); ?>首歌曲</span>
 					</div>
-
-					<div id="info" class="tab-pane fade">
-						<p>简介：<?php if(empty($data['introduce'])): ?>暂无<?php else: ?> <?php echo ($data["introduce"]); endif; ?></p>
+					<div class="col-sm-8 t_align_r">
+					<ul class="horizontal_list clearfix d_inline_middle ml_10 page_list"><?php echo ($lv_page); ?></ul>
 					</div>
 				</div>
-			
 			</section>
 		</div>
 	</div>
