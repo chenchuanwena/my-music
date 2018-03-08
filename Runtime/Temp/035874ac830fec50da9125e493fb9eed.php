@@ -1,3 +1,0 @@
-<?php
-//000000000000a:3:{i:0;a:7:{s:2:"id";s:1:"1";s:4:"name";s:12:"普通会员";s:4:"icon";s:0:"";s:8:"app_name";s:6:"public";s:7:"is_auth";s:1:"0";s:5:"rules";s:0:"";s:11:"create_time";N;}i:1;a:7:{s:2:"id";s:1:"2";s:4:"name";s:9:"VIP会员";s:4:"icon";s:3:"vip";s:8:"app_name";s:6:"public";s:7:"is_auth";s:1:"0";s:5:"rules";s:67:"{"is_pay":"1","pay_mcoin":"10","pay_hycoin":"55","pay_ycoin":"100"}";s:11:"create_time";N;}i:2;a:7:{s:2:"id";s:1:"3";s:4:"name";s:15:"认证音乐人";s:4:"icon";s:6:"artist";s:8:"app_name";s:6:"public";s:7:"is_auth";s:1:"1";s:5:"rules";s:59:"{"is_pay":"","pay_mcoin":"","pay_hycoin":"","pay_ycoin":""}";s:11:"create_time";N;}}
-?>

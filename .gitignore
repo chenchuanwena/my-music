@@ -1,1 +1,3 @@
-Data/Conf/conf.php
+Data/Conf/
+Application/Common/Conf/
+Runtime/

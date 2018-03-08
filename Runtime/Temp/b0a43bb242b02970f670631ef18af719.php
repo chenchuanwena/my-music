@@ -1,3 +1,0 @@
-<?php
-//000000000000a:16:{s:2:"id";s:1:"4";s:5:"title";s:7:"通栏1";s:8:"position";s:1:"4";s:7:"advspic";s:1:"0";s:8:"advstext";s:0:"";s:8:"advshtml";s:135:"<div style="margin-bottom:15px "><a href="http://www.my-music.cn"><img width="100%" src="/Public/static/images/index-ad.jpg"></a></div>";s:4:"link";s:0:"";s:5:"level";s:1:"1";s:6:"status";s:1:"1";s:11:"create_time";s:16:"2016-01-07 08:45";s:8:"end_time";s:16:"2018-03-01 08:45";s:12:"positiontext";s:18:"首页通栏广告";s:10:"statustext";s:6:"正常";s:4:"type";s:1:"4";s:5:"width";s:4:"100%";s:6:"height";s:4:"auto";}
-?>
