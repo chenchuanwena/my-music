@@ -3,12 +3,835 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+            table ,tr td{
+                border:1px solid red
+            }
+        /*tbody {*/
+            /*display:block;*/
+            /*height:200px;*/
+            /*overflow:auto;*/
+        /*}*/
+        /*thead, tbody tr {*/
+            /*display:table;*/
+            /*width:100%;*/
+            /*table-layout:fixed;!* even columns width , fix width of table too*!*/
+        /*}*/
+        /*thead {*/
+            /*width: calc( 100% - 1em )!* scrollbar is average 1em/16px width, remove it from thead width *!*/
+        /*}*/
+        table {
+            width:100%;
+        }
+    </style>
 </head>
 <body>
 <form action="/index.php?s=/Index/exportExcel.html" enctype="multipart/form-data" method="post">
     <input type="file" name="export_excel">
     <input type="hidden" name="export" value="1">
     <input type="submit" value="导出转换后的表格">
+    <table>
+        <thead>
+        <tr>
+            <th>
+                列1
+            </th>
+            <th>
+                列2
+            </th>
+            <th>
+                列3
+            </th>
+        </tr>
+        </thead>
+    </table>
+    <div style="height:500px;overflow-y: scroll;">
+        <table class="am-table am-table-bordered am-text-nowrap" id="table-div" >
+
+            <tbody>
+            <tr>
+                <td rowspan="2">内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容1</td>
+                <td>内容1</td>
+                <td>内容1</td>
+            </tr>
+            <tr>
+                <td>内容3</td>
+                <td>内容3</td>
+                <td>内容3</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <table class="am-table am-table-bordered am-text-nowrap" id="table-div">
+        <thead>
+        <tr>
+            <th v-for="item in selectedList" style="width: 130px;line-height: 45px;">{{item}}</th>
+            <th style="width: 110px;line-height: 45px;">毕业生人数</th>
+            <th style="width: 80px;line-height: 45px;">就业率</th>
+            <th style="width: 80px;line-height: 45px;">签约率</th>
+            <th style="width: 80px;line-height: 45px;">升学率</th>
+            <th style="width: 80px;line-height: 45px;">创业率</th>
+            <th style="width: 128px;line-height: 45px;">暂不就业率</th>
+            <th style="width: 100px;line-height: 45px;">待就业率</th>
+            <th style="width: 120px"><div>签就业协议</div><div style="margin-top: -5px;">形式就业</div></th>
+            <th style="width: 120px"><div>签劳动合同</div><div style="margin-top: -5px;">形式就业</div></th>
+            <th style="width: 120px"><div>其他录用</div><div style="margin-top: -5px;">形式就业</div></th>
+            <th style="width: 100px;line-height: 45px;">科研助理</th>
+            <th style="width: 100px;"><div></div>应征<div style="margin-top: -5px;">义务兵</div></th>
+            <th style="width: 100px;"><div>国家</div><div style="margin-top: -5px;">基层项目</div></th>
+            <th style="width: 100px;"><div>地方</div><div style="margin-top: -5px;">基层项目</div></th>
+            <th style="width: 100px;line-height: 45px;">自主创业</th>
+            <th style="width: 101px;line-height: 45px;">自由职业</th>
+            <th style="width: 100px;line-height: 45px;">升学</th>
+            <th style="width: 100px;line-height: 45px;">出国、出境</th>
+            <th style="width: 100px;line-height: 45px;">待就业</th>
+            <th style="width: 100px"><div></div>不就业<div style="margin-top: -5px;">拟升学</div></th>
+            <th style="width: 100px"><div>其他</div><div style="margin-top: -5px;">暂不就业</div></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-if="graduInfoList.length>0" v-for="item in graduInfoList">
+            <td style="background-color: white;" v-if="item.select1" rowspan="{{item.rowspan1}}">1</td>
+            <td style="background-color: white;" v-if="item.select2" rowspan="{{item.rowspan2}}">2</td>
+            <td style="background-color: white;" v-if="item.select3">3</td>
+            <td v-text="item.count">4</td>
+            <td v-text="item.rate1">5</td>
+            <td v-text="item.rate2">6</td>
+            <td v-text="item.rate3">7</td>
+            <td v-text="item.rate4">8</td>
+            <td v-text="item.rate5">9</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.count">4</td>
+            <td v-text="item.rate1">5</td>
+            <td v-text="item.rate2">6</td>
+            <td v-text="item.rate3">7</td>
+            <td v-text="item.rate4">8</td>
+            <td v-text="item.rate5">9</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate3">7</td>
+            <td v-text="item.rate4">8</td>
+            <td v-text="item.rate5">9</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate6">10</td>
+        </tr>
+        <tr v-if="graduInfoList.length>0" v-for="item in graduInfoList">
+            <td style="background-color: white;" v-if="item.select1" rowspan="{{item.rowspan1}}">1</td>
+            <td style="background-color: white;" v-if="item.select2" rowspan="{{item.rowspan2}}">2</td>
+            <td style="background-color: white;" v-if="item.select3">3</td>
+            <td v-text="item.count">4</td>
+            <td v-text="item.rate1">5</td>
+            <td v-text="item.rate2">6</td>
+            <td v-text="item.rate3">7</td>
+            <td v-text="item.rate4">8</td>
+            <td v-text="item.rate5">9</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.count">4</td>
+            <td v-text="item.rate1">5</td>
+            <td v-text="item.rate2">6</td>
+            <td v-text="item.rate3">7</td>
+            <td v-text="item.rate4">8</td>
+            <td v-text="item.rate5">9</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate3">7</td>
+            <td v-text="item.rate4">8</td>
+            <td v-text="item.rate5">9</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate6">10</td>
+        </tr>
+        <tr v-if="graduInfoList.length>0" v-for="item in graduInfoList">
+            <td style="background-color: white;" v-if="item.select1" rowspan="{{item.rowspan1}}">1</td>
+            <td style="background-color: white;" v-if="item.select2" rowspan="{{item.rowspan2}}">2</td>
+            <td style="background-color: white;" v-if="item.select3">3</td>
+            <td v-text="item.count">4</td>
+            <td v-text="item.rate1">5</td>
+            <td v-text="item.rate2">6</td>
+            <td v-text="item.rate3">7</td>
+            <td v-text="item.rate4">8</td>
+            <td v-text="item.rate5">9</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.count">4</td>
+            <td v-text="item.rate1">5</td>
+            <td v-text="item.rate2">6</td>
+            <td v-text="item.rate3">7</td>
+            <td v-text="item.rate4">8</td>
+            <td v-text="item.rate5">9</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate3">7</td>
+            <td v-text="item.rate4">8</td>
+            <td v-text="item.rate5">9</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate6">10</td>
+        </tr>
+        <tr v-if="graduInfoList.length>0" v-for="item in graduInfoList">
+            <td style="background-color: white;" v-if="item.select1" rowspan="{{item.rowspan1}}">1</td>
+            <td style="background-color: white;" v-if="item.select2" rowspan="{{item.rowspan2}}">2</td>
+            <td style="background-color: white;" v-if="item.select3">3</td>
+            <td v-text="item.count">4</td>
+            <td v-text="item.rate1">5</td>
+            <td v-text="item.rate2">6</td>
+            <td v-text="item.rate3">7</td>
+            <td v-text="item.rate4">8</td>
+            <td v-text="item.rate5">9</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.count">4</td>
+            <td v-text="item.rate1">5</td>
+            <td v-text="item.rate2">6</td>
+            <td v-text="item.rate3">7</td>
+            <td v-text="item.rate4">8</td>
+            <td v-text="item.rate5">9</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate3">7</td>
+            <td v-text="item.rate4">8</td>
+            <td v-text="item.rate5">9</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate6">10</td>
+        </tr>
+        <tr v-if="graduInfoList.length>0" v-for="item in graduInfoList">
+            <td style="background-color: white;" v-if="item.select1" rowspan="{{item.rowspan1}}">1</td>
+            <td style="background-color: white;" v-if="item.select2" rowspan="{{item.rowspan2}}">2</td>
+            <td style="background-color: white;" v-if="item.select3">3</td>
+            <td v-text="item.count">4</td>
+            <td v-text="item.rate1">5</td>
+            <td v-text="item.rate2">6</td>
+            <td v-text="item.rate3">7</td>
+            <td v-text="item.rate4">8</td>
+            <td v-text="item.rate5">9</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.count">4</td>
+            <td v-text="item.rate1">5</td>
+            <td v-text="item.rate2">6</td>
+            <td v-text="item.rate3">7</td>
+            <td v-text="item.rate4">8</td>
+            <td v-text="item.rate5">9</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate3">7</td>
+            <td v-text="item.rate4">8</td>
+            <td v-text="item.rate5">9</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate6">10</td>
+        </tr>
+        <tr v-if="graduInfoList.length>0" v-for="item in graduInfoList">
+            <td style="background-color: white;" v-if="item.select1" rowspan="{{item.rowspan1}}">1</td>
+            <td style="background-color: white;" v-if="item.select2" rowspan="{{item.rowspan2}}">2</td>
+            <td style="background-color: white;" v-if="item.select3">3</td>
+            <td v-text="item.count">4</td>
+            <td v-text="item.rate1">5</td>
+            <td v-text="item.rate2">6</td>
+            <td v-text="item.rate3">7</td>
+            <td v-text="item.rate4">8</td>
+            <td v-text="item.rate5">9</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.count">4</td>
+            <td v-text="item.rate1">5</td>
+            <td v-text="item.rate2">6</td>
+            <td v-text="item.rate3">7</td>
+            <td v-text="item.rate4">8</td>
+            <td v-text="item.rate5">9</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate3">7</td>
+            <td v-text="item.rate4">8</td>
+            <td v-text="item.rate5">9</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate6">10</td>
+        </tr>
+        <tr v-if="graduInfoList.length>0" v-for="item in graduInfoList">
+            <td style="background-color: white;" v-if="item.select1" rowspan="{{item.rowspan1}}">1</td>
+            <td style="background-color: white;" v-if="item.select2" rowspan="{{item.rowspan2}}">2</td>
+            <td style="background-color: white;" v-if="item.select3">3</td>
+            <td v-text="item.count">4</td>
+            <td v-text="item.rate1">5</td>
+            <td v-text="item.rate2">6</td>
+            <td v-text="item.rate3">7</td>
+            <td v-text="item.rate4">8</td>
+            <td v-text="item.rate5">9</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.count">4</td>
+            <td v-text="item.rate1">5</td>
+            <td v-text="item.rate2">6</td>
+            <td v-text="item.rate3">7</td>
+            <td v-text="item.rate4">8</td>
+            <td v-text="item.rate5">9</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate3">7</td>
+            <td v-text="item.rate4">8</td>
+            <td v-text="item.rate5">9</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate6">10</td>
+        </tr>
+        <tr v-if="graduInfoList.length>0" v-for="item in graduInfoList">
+            <td style="background-color: white;" v-if="item.select1" rowspan="{{item.rowspan1}}">1</td>
+            <td style="background-color: white;" v-if="item.select2" rowspan="{{item.rowspan2}}">2</td>
+            <td style="background-color: white;" v-if="item.select3">3</td>
+            <td v-text="item.count">4</td>
+            <td v-text="item.rate1">5</td>
+            <td v-text="item.rate2">6</td>
+            <td v-text="item.rate3">7</td>
+            <td v-text="item.rate4">8</td>
+            <td v-text="item.rate5">9</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.count">4</td>
+            <td v-text="item.rate1">5</td>
+            <td v-text="item.rate2">6</td>
+            <td v-text="item.rate3">7</td>
+            <td v-text="item.rate4">8</td>
+            <td v-text="item.rate5">9</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate3">7</td>
+            <td v-text="item.rate4">8</td>
+            <td v-text="item.rate5">9</td>
+            <td v-text="item.rate6">10</td>
+            <td v-text="item.rate6">10</td>
+        </tr>
+    </table>
+
 </form>
 </body>
 </html>

@@ -143,4 +143,59 @@ class FileController extends UserController {
 		/* 返回JSON数据 */	
 		$this->ajaxReturn($return);
     }
+	/**
+	 * 上传图片
+	 */
+	/* 文件上传 */
+	public function uploadPicChat($type=null){
+		$sessionId = I('get.session_id');
+		$type = (int)I('get.type');
+		$return  = array('status' => 1, 'info' => '上传成功', 'data' => '');
+		if ($sessionId && $sessionId === session_id()){//防止恶意上传
+			//$map['uid'] = UID;
+			//$time = M('UserUp')->where($map)->field('add_time')->find();
+			/* 调用文件上传组件上传文件 */
+			$Picture 		= D('Picture');
+			$file_driver 	= C('USER_PICUP_DRIVER');
+			$userCon = C('USER_UPLOAD');
+			if ($type == 5){ //用户头像
+				//先清空当前用户的头像缓存
+				$file_driver  = "local";
+				$userCon['rootPath'] = './Uploads/Avatars/';
+				$userCon['subName']  = 'uid_'.UID;
+				$userCon['saveName'] = '128';
+				$userCon['replace'] = true;
+			}else{
+				$userCon['rootPath'] = trim(C('USER_UPPIC_PATH'));
+			}
+			$userCon['maxSize'] = trim(C('USER_UPPIC_MAX'));
+			$userCon['exts'] 	= trim(C('USER_UPPIC_EXTS'));
+			$info = $Picture->upload(
+				$_FILES,
+				$userCon,
+				C('USER_PICUP_DRIVER'),
+				C("UPLOAD_{$file_driver}_CONFIG"),
+				$type
+			);
+			/* 记录信息 */
+
+			if($info){
+				$return['status'] 	= 1;
+				$return['info']=array();
+				$return['info']['thumb']=$info['file']['path'];
+				$return['info']['url']=$info['file']['path'];
+				$return['info']['size']=$info['file']['size'];
+				$return['info']['type']=$info['file']['ext'];
+
+			} else {
+				$return['status'] = 0;
+				$return['info']   = $Picture->getError();
+			}
+		}else{
+			$return['status'] = 0;
+			$return['info']   = '非法请求';
+		}
+		/* 返回JSON数据 */
+		$this->ajaxReturn($return);
+	}
 }

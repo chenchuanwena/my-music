@@ -50,8 +50,11 @@ class PictureModel extends Model{
 				$value['savepath'] 	= $setting['rootPath'].$value['savepath'];  				
 				$value['path'] 		= $value['savepath'].$value['savename']; 
 				$value['path'] 		= ltrim($value['path'], '.');//在模板里的url路径
+				oss_upload($value['path']);
+				$value['path']=C('OSS_DOMAIN').ltrim($value['path'], '.');
+				$value['savepath']=C('OSS_DOMAIN').ltrim($value['savepath'], '.');
 				$value['server_id'] = $config['server_id'];
-				$value['type'] 		= $type;						
+				$value['type'] 		= $type;
 				if($this->create($value)){
 					if ($type == 5){
 						$uid			= UID;

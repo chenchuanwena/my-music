@@ -259,21 +259,25 @@ function selectUser(userid) {
  */
 function showOnlineList(dataObj) {
 
-    var childrenLength=dataObj.list.length;
-    if(childrenLength>=0){
-        $('#children_count').html(childrenLength);
-    }else{
-        $('#children_count').html(0);
-    }
+    //var childrenLength=dataObj.list.length;
+    //if(childrenLength>=0){
+    //    $('#children_count').html(childrenLength-1);
+    //}else{
+    //    $('#children_count').html(0);
+    //}
 
     for (var i = 0; i < dataObj.list.length; i++) {
         $('#inroom_' + dataObj.list[i].userid).attr('fd', dataObj.list[i].fd);
+        $('#inroom_' + dataObj.list[i].userid).addClass('online');
         $('#inroom_' + dataObj.list[i].userid).attr('userid', dataObj.list[i].userid);
         $('#inroom_' + dataObj.list[i].userid + ' img').attr('src', avatarworkeronline);
         //$('#left-userlist').preappend($('#inroom_' + dataObj.list[i].userid));
         $('#left-userlist h2:eq(0)').after($('#inroom_' + dataObj.list[i].userid));
         userlist[dataObj.list[i].userid] = dataObj.list[i].name;
     }
+    childrenLength=0;
+    var childrenLength=$('.online').length;
+    $('#children_count').html(childrenLength);
     // $('#left-userlist').prepend(li);
     // $('#userlist').html(option);
     //for (var i = 0; i < dataObj.list.length; i++) {
@@ -410,7 +414,7 @@ var lasttime='';
  */
 function showNewMsg(dataObj) {
     var content;
-    var contentLeftBegin = '<div class="message_accept clear"><img class="left" src="'+dataObj.avatar+'" alt=""><p class="message_text left">';
+    var contentLeftBegin = dataObj.username+'说：<div class="message_accept clear"><img class="left" src="'+dataObj.avatar+'" alt=""><p class="message_text left">';
     var contentEnd = '</p> </div>';
     var contentRightBegin='<div class="message_send clear"><img class="right" src="'+dataObj.avatar+'"  alt=""> <p class="message_text right">';
     if (!dataObj.type || dataObj.type == 'text') {

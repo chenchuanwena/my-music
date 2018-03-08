@@ -14,7 +14,7 @@
     <script src="__TMPL__/js/console.js"></script>
     <!--<script src="/config.js?timespan=12347" charset="utf-8"></script>-->
     <script src="__TMPL__/js/comet.js?timespan=123" charset="utf-8"></script>
-    <script src="__TMPL__/js/chat.js?timespan=124567911710721534" charset="utf-8"></script>
+    <script src="__TMPL__/js/chat.js?timespan=124567911710721539" charset="utf-8"></script>
     <!--<script type="text/javascript" src="__TMPL__/js/swfupload.js"></script>-->
     <!--<script type="text/javascript" src="__TMPL__/js/swfupload.queue.js"></script>-->
     <!--<script type="text/javascript" src="__TMPL__/js/fileprogress.js"></script>-->
@@ -36,14 +36,14 @@
 
         window.onload = function () {
             //普通图片上传
-            var sess = '<{$sess}>';
+            var session_id = '<{$session_id}>';
             layui.use('upload', function () {
                 var $ = layui.jquery,
                         upload = layui.upload;
                 //普通图片上传
                 var uploadInst = upload.render({
                     elem: '#upload_button_middle',
-                    url: "/index.php?s=/Index/upload.html" + sess,
+                    url: "/index.php?s=/User/File/uploadPicChat/session_id/" + session_id+".html",
                     before: function (obj) {
                         //预读本地文件示例，不支持ie8
                         obj.preview(function (index, file, result) {
@@ -52,10 +52,10 @@
                     }
                     , done: function (res) {
                         //如果上传失败
-                        if (res.status !=200) {
+                        if (res.status !=1) {
                             return layer.msg('上传失败');
                         }
-                        uploadSuccess('',res.repsoneContent);
+                        uploadSuccess('',res.info);
                         //上传成功
                     }
                     , error: function () {
@@ -119,6 +119,25 @@
 
                     </volist>
                 </div>
+                <!--<div class="layui-colla-item" id="left-userlist">-->
+
+                    <!--<h2 class="layui-colla-title">客服列表<span></span>/<{$count}></h2>-->
+                    <!--<volist name="users" id="v">-->
+                        <!--<if condition="$v['userid'] neq $self['userid']">-->
+                            <!--<div class="layui-colla-content layui-show user_name_info clear <{$v.not_read}>"  last_login="<{$v.last_login}>"-->
+                                 <!--onclick="selectUser(<{$v.userid}>)"-->
+                                 <!--userid="<{$v.userid}>" fd="-1" username="<{$v.username}>" not_read_number="<{$v.not_read_number}>">-->
+                                <!--<img class="left" src="<{$v.avatar}>" alt="">-->
+                                <!--<div class="user_text left">-->
+                                    <!--<p><{$v.username}></p>-->
+                                    <!--<p></p>-->
+                                <!--</div>-->
+                                <!--<span class="right"></span>-->
+                            <!--</div>-->
+                        <!--</if>-->
+
+                    <!--</volist>-->
+                <!--</div>-->
             </div>
         </div>
         <div class="group_content">

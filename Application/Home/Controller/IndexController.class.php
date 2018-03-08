@@ -200,6 +200,7 @@ class IndexController extends HomeController
         $objWriter->save('php://output');
         exit;
     }
+
     public function exportConvertExcel($expTitle, $expCellName, $expTableData){
         $xlsTitle = iconv('utf-8', 'gb2312', $expTitle);
         //文件名称
@@ -535,12 +536,13 @@ class IndexController extends HomeController
         }
         $this->assign('dateobj',$dateObj);
          $result['result']=array_values($result['result']);
-         $this->assign('count',$result['count']);
+         $this->assign('count',$result['count']-1);
 
          $this->assign('users',$result['result']);
          $this->assign('userjson',json_encode($result['result']));
          $this->assign('faceUrl', $faceUrls);
         $this->assign('self', $self);
+        $this->assign('session_id', session_id());
         $this->assign('selfjson', json_encode($self));
          $this->assign('debug', 'true');
          $this->display();
@@ -565,7 +567,8 @@ class IndexController extends HomeController
     public function upload()
     {
         vendor('Swoole.autoload');
-        $upload=new \Swoole\Upload(C('upload_data'));
+        $upload=new \Upload();
+        var_dump($upload);exit;
         if ($_FILES)
         {
             // header("Content-type: application/json");
