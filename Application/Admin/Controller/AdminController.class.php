@@ -30,6 +30,7 @@ class AdminController extends Controller {
         }
 
         $access =   $this->accessControl();
+
         if ( $access === false ) {
             $this->error('403:禁止访问');
         }elseif( $access === null ){
@@ -184,7 +185,8 @@ class AdminController extends Controller {
      * @author 朱亚杰  <xcoolcc@gmail.com>
      */
     final public function getMenus($controller=CONTROLLER_NAME){
-        //$menus  =   session('ADMIN_MENU_LIST'.$controller);
+        $menus  =   session('ADMIN_MENU_LIST'.$controller);
+
         if(empty($menus)){
             // 获取主菜单
             $where['pid']   =   0;
@@ -263,7 +265,7 @@ class AdminController extends Controller {
                     }
                 }
             }
-            //session('ADMIN_MENU_LIST'.$controller,$menus);
+            session('ADMIN_MENU_LIST'.$controller,$menus);
         }
         return $menus;
     }

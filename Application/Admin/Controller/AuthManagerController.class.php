@@ -115,7 +115,7 @@ class AuthManagerController extends AdminController{
      */
     public function editGroup(){
         $auth_group = M('AuthGroup')->find( (int)$_GET['id'] );
-       	//dump($auth_group);
+        //dump($auth_group);
         $this->assign('auth_group',$auth_group);
         $this->meta_title = '编辑用户组';
         $this->display();
@@ -127,16 +127,16 @@ class AuthManagerController extends AdminController{
      * @author 朱亚杰 <zhuyajie@topthink.net>
      */
     public function access(){
-		$this->error('此功能暂时不可用！');
+        //$this->error('此功能暂时不可用！');
         $this->updateRules();
         $auth_group = M('AuthGroup')->where( array('status'=>array('egt','0'),'module'=>'admin','type'=>AuthGroupModel::TYPE_ADMIN) )
-                                    ->getfield('id,id,title,rules');
+            ->getfield('id,id,title,rules');
         $node_list   = $this->returnNodes();
         $map         = array('module'=>'admin','type'=>AuthRuleModel::RULE_MAIN,'status'=>1);
         $main_rules  = M('AuthRule')->where($map)->getField('name,id');
         $map         = array('module'=>'admin','type'=>AuthRuleModel::RULE_URL,'status'=>1);
         $child_rules = M('AuthRule')->where($map)->getField('name,id');
-		//dump($node_list['1']['child']['0']['operator']);
+        //dump($node_list['1']['child']['0']['operator']);
         $this->assign('main_rules', $main_rules);
         $this->assign('auth_rules', $child_rules);
         $this->assign('node_list',  $node_list);
@@ -155,7 +155,7 @@ class AuthManagerController extends AdminController{
             sort($_POST['rules']);
             $_POST['rules']  = implode( ',' , array_unique($_POST['rules']));
         }
-        //$_POST['module'] =  'admin';
+        $_POST['module'] =  'admin';
         $_POST['type']   =  AuthGroupModel::TYPE_ADMIN;
         $AuthGroup       =  D('AuthGroup');
         $data = $AuthGroup->create();
@@ -203,7 +203,7 @@ class AuthManagerController extends AdminController{
      * @author 朱亚杰 <zhuyajie@topthink.net>
      */
     public function user($group_id){
-		$this->error('此功能暂时不可用！');
+        //$this->error('此功能暂时不可用！');
         if(empty($group_id)){
             $this->error('参数错误');
         }

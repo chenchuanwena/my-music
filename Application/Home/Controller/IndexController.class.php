@@ -1,6 +1,8 @@
 <?php
 
 namespace Home\Controller;
+use Admin\Controller\AuthController;
+
 /**
  * 前台首页控制器
  * 主要获取首页聚合数据
@@ -522,23 +524,45 @@ class IndexController extends HomeController
         $dateObj=Date('Y-m-d H:i:s',NOW_TIME);
         $member=D('Member');
         $result=$member->joinTables("member_auth_musician b",'Left Join',"a.uid","b.uid","a.uid,a.nickname",1,10,'uid');
+
         $uids=array_column($result['result'],'uid');
 
         $userPic=$pictures->getPictureByUidAndType($uids,5,'uid,path,type',1,10);
         foreach($userPic as $val){
             $result['result'][$val['uid']]['avator']=$val['path'];
         }
-
+        $userids=array();
         foreach( $result['result'] as &$val){
             $val['avatar']=isset($val['path'])?$val['path']:$faceUrls['avataroffline'];
             $val['userid']=$val['uid'];
             $val['username']=$val['nickname'];
+            array_push($userids,$val['uid']);
+
         }
+        $userids=implode(',',$userids);
+        $where['uid']=array('in',$userids);
+        $auth_access=M('auth_group_access')->where($where)->select();
+        $auth_access=array_column($auth_access,'group_id','uid');
+        $baseUsers=array();
+        $service=array();
+        foreach( $result['result'] as &$val){
+            $val['avatar']=isset($val['path'])?$val['path']:$faceUrls['avataroffline'];
+            $val['userid']=$val['uid'];
+            $val['username']=$val['nickname'];
+            if(isset($auth_access[$val['uid']])&&$auth_access[$val['uid']]==7){
+                array_push($service,$val);
+            }else{
+                array_push($baseUsers,$val);
+            }
+        }
+        $result['result']=$baseUsers;
+
         $this->assign('dateobj',$dateObj);
          $result['result']=array_values($result['result']);
          $this->assign('count',$result['count']-1);
-
+        $this->assign('count_service',count($service));
          $this->assign('users',$result['result']);
+        $this->assign('services',$service);
          $this->assign('userjson',json_encode($result['result']));
          $this->assign('faceUrl', $faceUrls);
         $this->assign('self', $self);

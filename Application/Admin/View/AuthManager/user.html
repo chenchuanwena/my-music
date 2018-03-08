@@ -15,7 +15,7 @@
        		<div class="panel-heading">
        				<ul class="nav nav-pills">
             			<li><a href="<{:U('AuthManager/access',array('group_name'=>I('group_name') ,'group_id'=> I('group_id')))}>">访问授权</a></li>
-                        <!--li><a href="<{:U('AuthManager/category',array('group_name'=>I('group_name') ,'group_id'=> I('group_id')))}>">分类授权</a></li-->
+                        <li><a href="<{:U('AuthManager/category',array('group_name'=>I('group_name') ,'group_id'=> I('group_id')))}>">分类授权</a></li>
             			<li class="active"><a href="<{:U('AuthManager/user',array('group_name'=>I('group_name') ,'group_id'=> I('group_id')))}>">成员授权</a></li>
             		</ul>
             </div>
@@ -51,7 +51,6 @@
                 	</tbody>
 				</table>
 			</div>
-			
 			<!-- 结束 表格 -->
     		<div class="panel-footer">
     			<div class="row">
@@ -59,6 +58,13 @@
 					<{$_page}>
 					</ul>
 				 </div>
+				<div id="add-to-group" class="tools fr">
+					<form class="add-user" action="<{:U('addToGroup')}>" method="post" enctype="application/x-www-form-urlencoded" >
+						<input class="text input-4x" type="text" name="uid" placeholder="请输入uid,多个用英文逗号分隔">
+						<input type="hidden" name="group_id" value="<{:I('group_id')}>">
+						<button type="submit" class="btn ajax-post" target-form="add-user">新 增</button>
+					</form>
+				</div>
             </div>
 		</div>
 	</div>

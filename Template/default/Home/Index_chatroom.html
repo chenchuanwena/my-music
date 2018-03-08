@@ -14,7 +14,7 @@
     <script src="__TMPL__/js/console.js"></script>
     <!--<script src="/config.js?timespan=12347" charset="utf-8"></script>-->
     <script src="__TMPL__/js/comet.js?timespan=123" charset="utf-8"></script>
-    <script src="__TMPL__/js/chat.js?timespan=124567911710721539" charset="utf-8"></script>
+    <script src="__TMPL__/js/chat.js?timespan=124567911710721540" charset="utf-8"></script>
     <!--<script type="text/javascript" src="__TMPL__/js/swfupload.js"></script>-->
     <!--<script type="text/javascript" src="__TMPL__/js/swfupload.queue.js"></script>-->
     <!--<script type="text/javascript" src="__TMPL__/js/fileprogress.js"></script>-->
@@ -119,25 +119,25 @@
 
                     </volist>
                 </div>
-                <!--<div class="layui-colla-item" id="left-userlist">-->
+                <div class="layui-colla-item" >
 
-                    <!--<h2 class="layui-colla-title">客服列表<span></span>/<{$count}></h2>-->
-                    <!--<volist name="users" id="v">-->
-                        <!--<if condition="$v['userid'] neq $self['userid']">-->
-                            <!--<div class="layui-colla-content layui-show user_name_info clear <{$v.not_read}>"  last_login="<{$v.last_login}>"-->
-                                 <!--onclick="selectUser(<{$v.userid}>)"-->
-                                 <!--userid="<{$v.userid}>" fd="-1" username="<{$v.username}>" not_read_number="<{$v.not_read_number}>">-->
-                                <!--<img class="left" src="<{$v.avatar}>" alt="">-->
-                                <!--<div class="user_text left">-->
-                                    <!--<p><{$v.username}></p>-->
-                                    <!--<p></p>-->
-                                <!--</div>-->
-                                <!--<span class="right"></span>-->
-                            <!--</div>-->
-                        <!--</if>-->
+                    <h2 class="layui-colla-title">客服列表<span id="service_count"></span>/<{$count_service}></h2>
+                    <volist name="services" id="v">
+                        <if condition="$v['userid'] neq $self['userid']">
+                            <div class="layui-colla-content layui-show user_name_info clear <{$v.not_read}>"  last_login="<{$v.last_login}>"
+                                 onclick="selectUser(<{$v.userid}>)" id="inroom_<{$v.userid}>"
+                                 userid="<{$v.userid}>" fd="-1" username="<{$v.username}>" not_read_number="<{$v.not_read_number}>">
+                                <img class="left" src="<{$v.avatar}>" alt="">
+                                <div class="user_text left">
+                                    <p><{$v.username}></p>
+                                    <p></p>
+                                </div>
+                                <span class="right"></span>
+                            </div>
+                        </if>
 
-                    <!--</volist>-->
-                <!--</div>-->
+                    </volist>
+                </div>
             </div>
         </div>
         <div class="group_content">

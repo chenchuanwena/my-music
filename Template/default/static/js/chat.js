@@ -390,7 +390,8 @@ function showNewUser(dataObj) {
     changeChildrenCount(1,'add');
     $('#inroom_' + dataObj.userid + " a").css('color', 'yellowgreen');
     $('#inroom_' + dataObj.userid).attr('fd', dataObj.fd);
-    $('#left-userlist h2:eq(0)').after($('#inroom_' + dataObj.userid));
+    $('#inroom_' + dataObj.userid).parent().find('h2').after($('#inroom_' + dataObj.userid));
+   // $('#left-userlist h2:eq(0)').after($('#inroom_' + dataObj.userid));
     // $('#left-userlist').prepend($('#inroom_' + dataObj.userid));
     var src = $('#inroom_' + dataObj.userid + " img:eq(0)").attr('src');
     if (src != undefined && src == avatarofflinemessage) {

@@ -41,7 +41,60 @@ class AuthController extends AdminController {
     	}
     
 	}
-    
+	/**
+	 * 管理员用户组数据写入/更新
+	 * @author 朱亚杰 <zhuyajie@topthink.net>
+	 */
+	public function writeGroup(){
+
+		if(isset($_POST['rules'])){
+			sort($_POST['rules']);
+			$_POST['rules']  = implode( ',' , array_unique($_POST['rules']));
+		}
+		$_POST['module'] =  'admin';
+		$_POST['type']   =  AuthGroupModel::TYPE_ADMIN;
+		$AuthGroup       =  D('AuthGroup');
+		$data = $AuthGroup->create();
+		if ( $data ) {
+			if ( empty($data['id']) ) {
+				$r = $AuthGroup->add();
+			}else{
+				$r = $AuthGroup->save();
+			}
+			if($r===false){
+				$this->error('操作失败'.$AuthGroup->getError());
+			} else{
+				$this->success('操作成功!',U('index'));
+			}
+		}else{
+			$this->error('操作失败'.$AuthGroup->getError());
+		}
+	}
+	public function addToGroup(){
+		$uid = I('uid');
+		$gid = I('group_id');
+		if( empty($uid) ){
+			$this->error('参数有误');
+		}
+		$AuthGroup = D('AuthGroup');
+		if(is_numeric($uid)){
+			if ( is_administrator($uid) ) {
+				$this->error('该用户为超级管理员');
+			}
+			if( !M('Member')->where(array('uid'=>$uid))->find() ){
+				$this->error('管理员用户不存在');
+			}
+		}
+
+		if( $gid && !$AuthGroup->checkGroupId($gid)){
+			$this->error($AuthGroup->error);
+		}
+		if ( $AuthGroup->addToGroup($uid,$gid) ){
+			$this->success('操作成功');
+		}else{
+			$this->error($AuthGroup->getError());
+		}
+	}
     //通过审核
     public function pass () {    	    	
     	if(IS_AJAX){
