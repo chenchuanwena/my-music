@@ -271,8 +271,9 @@ function showOnlineList(dataObj) {
         $('#inroom_' + dataObj.list[i].userid).addClass('online');
         $('#inroom_' + dataObj.list[i].userid).attr('userid', dataObj.list[i].userid);
         $('#inroom_' + dataObj.list[i].userid + ' img').attr('src', avatarworkeronline);
+        $('#inroom_' + dataObj.userid).parent().find('h2').after($('#inroom_' + dataObj.userid));
         //$('#left-userlist').preappend($('#inroom_' + dataObj.list[i].userid));
-        $('#left-userlist h2:eq(0)').after($('#inroom_' + dataObj.list[i].userid));
+        //$('#left-userlist h2:eq(0)').after($('#inroom_' + dataObj.list[i].userid));
         userlist[dataObj.list[i].userid] = dataObj.list[i].name;
     }
     childrenLength=0;

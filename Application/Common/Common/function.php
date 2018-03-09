@@ -17,25 +17,18 @@ function new_oss(){
 function oss_upload($path){
     // 获取配置项
     $bucket=C('ALIOSS_CONFIG.BUCKET');
-
     // 先统一去除左侧的.或者/ 再添加./
     $oss_path=ltrim($path,'./');
-
     $path='./'.$oss_path;
-
-
     if (file_exists($path)) {
-
         // 实例化oss类
         $oss=new_oss();
         // 上传到oss
-
         $oss->uploadFile($bucket,$oss_path,$path);
         // 如需上传到oss后 自动删除本地的文件 则删除下面的注释
         unlink($path);
         return true;
     }
-
     return false;
 }
 /**
