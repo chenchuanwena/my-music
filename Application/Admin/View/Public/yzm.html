@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="__STATIC__/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/jquery.cookie.js"></script>
+</head>
+<body>
+<div id="yfz">1秒后重试</div>
+</body>
+<script>
+    var int=self.setInterval("clock()",1000);
+    var nowTime= $.cookie('nowtime');
+
+    function clock()
+    {
+        //10分钟的
+//        var now = Date.parse(new Date());10
+//        var now=now/1000;
+//        var s=now-nowTime;
+//        var m=   s/60;
+//        var res=0;
+//        if(m<10){
+//            var live=10-m;
+//            res=live.toFixed(0);
+//
+//        }else{
+//            res=0;
+//        }
+//        console.log(res);
+//        $('#yfz').html(res+'分钟后重试');
+//1分钟的
+        var now = Date.parse(new Date());10
+        var now=now/1000;
+        var s=now-nowTime;
+        //var m=   s/60;
+        var res=0;
+        if(s<=60){
+            var live=60-s;
+            res=live.toFixed(0);
+        }else{
+            res=0;
+        }
+        console.log(res);
+        $('#yfz').html(res+'秒后重试');
+    }
+</script>
+</html>
