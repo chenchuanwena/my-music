@@ -152,19 +152,54 @@ class BaseTaskController extends Controller
         }
 
     }
+    function getUploadPathTest($path, $saveDirectory)
+    {
+        if(strpos($path,'http')){
+            $getUrl = $path;
+            $position= strpos($path,'/',8);
+            $path=substr($path,$position,200);
+        }else{
+            $getUrl = $this->domain . $path;
+        }
 
+        $getpathUrl=trim($getUrl);
+        $content = file_get_contents($getpathUrl);
+        $uid = 0;
+        $saveDirectory.=substr($path,0,strrpos($path,'/'));
+
+        $path = $this->saveLocation($content, basename($path), $saveDirectory);
+        $create_time = NOW_TIME;
+        $md5 = md5($content);
+        $sha1 = sha1($content);
+        $status = 1;
+        $picture = array(
+            'uid' => 0,
+            'path' => $path,
+            'url' => '',
+            'type' => 4,
+            'md5' => $md5,
+            'sha1' => $sha1,
+            'status' => 1,
+            'create_time' => $create_time
+        );
+        return $picture;
+    }
 //获得上传的云路径地址
 
     function getUploadPath($path, $saveDirectory)
     {
         if(strpos($path,'http')){
             $getUrl = $path;
+            $position= strpos($path,'/',8);
+            $path=substr($path,$position,200);
         }else{
             $getUrl = $this->domain . $path;
         }
         $getpathUrl=trim($getUrl);
-        $content = file_get_contents(trim($getUrl));
+        $content = file_get_contents($getpathUrl);
         $uid = 0;
+        $saveDirectory.=substr($path,0,strrpos($path,'/'));
+
         $path = $this->saveLocation($content, basename($path), $saveDirectory);
         $create_time = NOW_TIME;
         $md5 = md5($content);
@@ -202,23 +237,46 @@ class BaseTaskController extends Controller
 
     public function addPicture($picture)
     {
-        $pid = D('Picture')->add($picture, array(), true);
-        return $pid ? $pid : 0;
+        $where['path']=$picture['path'];
+        $res=D('Picture')->where($where)->find();
+        if($res){
+            return $res['id'];
+        }else{
+            $pid = D('Picture')->add($picture, array(), true);
+            return $pid ? $pid : 0;
+        }
+
     }
 
     public function addMember($member)
     {
+        $where['nickname']=$member['nickname'];
+        $res=D('Member')->where($where)->find();
+
+        if($res){
+            return $res['uid'];
+        }
         $uid = D('Member')->add($member, array(), true);
         return $uid ? $uid : 0;
     }
 
     public function addSong($song)
     {
-        $songId = D('Song')->add($song, array(), true);
+        $where['name']=$song['name'];
+        $where['artist_name']=$song['artist_name'];
+        $res=D('Songs')->where($where)->find();
+        if($res){
+            return $res['id'];
+        }
+        $songId = D('Songs')->add($song, array(), true);
         return $songId ? $songId : 0;
     }
     public function addSongExtend($songExtend)
     {
+        $res=D('SongsExtend')->find($songExtend['mid']);
+        if($res){
+            return $res['mid'];
+        }
         $songExtendId = D('SongsExtend')->add($songExtend, array(), true);
         return $songExtendId ? $songExtendId : 0;
     }

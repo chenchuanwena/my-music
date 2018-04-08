@@ -555,6 +555,7 @@ class CcguitarController extends BaseTaskController
         $user=pq('.more:eq(2)')->html();
         $user= iconv('gb2312','utf-8',$user);
         $artist_name = $this->getUserName($user, '给', '留言');
+
         $username = $artist_name;
         $password = 'f3ff819109883d0e309965755349fe81';
         $spans = pq('.pucenter:eq(0) span:eq(7)');
@@ -566,7 +567,9 @@ class CcguitarController extends BaseTaskController
         $title = pq('title');
         $name = pq($title)->html();
         $name = substr($name, 0, strpos($name, ' '));
+
         $name= iconv('gb2312','utf-8',$name);
+
         $genre_id = $type;
         $genre_name = $this->getType(1);
         $album_id = 0;
@@ -599,24 +602,39 @@ class CcguitarController extends BaseTaskController
         $coin = 0;
         $comment = 100;
         $song = pq('.tabs:eq(1)')->next()->html();
-        $lyrics = $this->getUserName($song, '词：', "<br>");
-        $composer = $this->getUserName($song, '曲：', "<br>");
-        $midi = $this->getUserName($song, '编曲：', "<br>");
+     //   $lyrics = $this->getUserName($song, '词：', "<br>");
+        $lyrics=$username;
+     //   $composer = $this->getUserName($song, '曲：', "<br>");
+        $composer=$username;
+       // $midi = $this->getUserName($song, '编曲：', "<br>");
+        $midi=$username;
         $add_time = NOW_TIME;
         $update_time = NOW_TIME;
         $staus = 1;
 
         //songs_extend
         $src = pq('audio:eq(0)')->attr('src');
-        if($imgurl){
-            $listen_url = parent::getUploadPath($imgurl, 'Music');
-            echo json_encode($listen_url);exit;
+        if($src){
+            $listen_url = parent::getUploadPath($src, 'Music');
+        }else{
+            $listen_url='';
         }
-        $jitapu=pq('.swiper-slide-active:eq(0)').find('img');
-        $jitapuOss=pq($jitapu).attr('src');
-        $jitapuOss=parent::getUploadPath($jitapuOss,'Music');
-
-        $introduce=format('<img src="{0}" alt="" />',$jitapuOss);
+        $jitapu=pq('.swiper-slide');
+        $jitapuArr=array();
+        foreach($jitapu as $val){
+            $onesrc= pq($val)->find('img')->attr('src');
+            array_push($jitapuArr,$onesrc);
+        }
+        $introducesList=array();
+       foreach($jitapuArr as $val){
+            $jipu=trim($val);
+           $jitapuOss=parent::getUploadPath($jipu,'Music');
+           array_push($introducesList,$jitapuOss);
+       }
+        $introduce='';
+        foreach($introducesList as $val){
+            $introduce.=format('<img src="{0}" alt="" /><br />',$val['path']);
+        }
         $down_url = $listen_url;
         $listen_file_id = 0;
         $down_file_id = 0;
@@ -633,9 +651,10 @@ class CcguitarController extends BaseTaskController
 
 
         $avatarPath = pq('.xspace-signavatar:eq(0)')->attr('src');
+
         $avatarOss = parent::getUploadPath($avatarPath, 'Avatar');
         $pic_id = parent::addPicture($avatarOss);
-        $qq = pq($spans)->get(6)->html();
+        $qq = '';
         $signature = '';
         $nickname = $artist_name;
         $location = '';
@@ -656,6 +675,7 @@ class CcguitarController extends BaseTaskController
 
         );
         $uid=parent::addMember($member);
+
         $song=array(
             'name'=>$name,
             'genre_id'=>$genre_id,
@@ -684,6 +704,8 @@ class CcguitarController extends BaseTaskController
             'update_time'=>$update_time,
             'status'=>1
         );
+
+
         $songId=parent::addSong($song);
         $songs_extend=array(
             'mid'=>$songId,
@@ -693,19 +715,20 @@ class CcguitarController extends BaseTaskController
             'disk_url'=>'',
             'disk_pass'=>'',
             'down_rule'=>'',
-            'lrc'=>$lrc,
-            'introduce'=>''
+            'lrc'=>'',
+            'introduce'=>$introduce
         );
         $songsExtendId=parent::addSongExtend($songs_extend);
+
         $ucenterMember=array(
             'username'=>$username,
             'password'=>$password,
             'email'=>$email,
             'mobile'=>'18305954587',
             'reg_time'=>NOW_TIME,
-            'reg_ip'=>'',
+            'reg_ip'=>'1520509301',
             'last_login_time'=>NOW_TIME,
-            'last_login_ip'=>'',
+            'last_login_ip'=>'1520509301',
             'update_time'=>NOW_TIME,
             'status'=>1,
 
@@ -714,6 +737,8 @@ class CcguitarController extends BaseTaskController
         $pictureData['id']=$pic_id;
         $pictureData['uid']=$uid;
         parent::updatePicture($pictureData);
+        echo 'success';exit;
+
     }
 
     public function getOne($detail, $type)
