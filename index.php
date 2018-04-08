@@ -4,7 +4,68 @@
 // | JYmusic
 // +---------------------------------------------------------------------
 if(version_compare(PHP_VERSION,'5.3.0','<'))  die('require PHP > 5.3.0 !');
+//总入口变量过滤，daddslashes函数已废弃
+function daddslashes_new($string) {
+	if(is_array($string)) {
+		foreach($string as $key => $val) {
+			$string[$key] = daddslashes_new($val);
+		}
+	} else {
+		$string = addslashes(htmlspecialchars(strip_tags($string))); // 新增去除html或者php标记和xss
+		$string = str_replace("&amp;", "&", $string);
+	}
+	return $string;
+}
+$_GET		= daddslashes_new($_GET);
+$_POST		= daddslashes_new($_POST);
+$_COOKIE	= daddslashes_new($_COOKIE);
+$_SERVER	= daddslashes_new($_SERVER);
+$_FILES		= daddslashes_new($_FILES);
+$_REQUEST	= daddslashes_new($_REQUEST);
 
+// 危险字符串定义
+$evilWords = array(
+	array('select','from'),
+	array('select','unhex'),
+	array('select','char'),
+	array('delete', 'from'),
+	array('update', 'set'),
+	array('insert', 'into'),
+	array('replace', 'into'),
+	array('information_schema')
+);
+
+// 递归检测请求数据中的危险字符串
+sanitizeRequestRecursive($_REQUEST, $evilWords);
+
+/**
+ * 递归检测请求数据中的危险字符串
+ * @param array $array
+ * @param array $words
+ * @return void
+ */
+function sanitizeRequestRecursive(array $array, $words = array()) {
+	foreach ($array as $key => $value) {
+		if (in_array($key, array('controller', 'action'))) continue;
+		if (is_numeric($value)) continue;
+
+		if (is_array($value)) {
+			call_user_func('sanitizeRequestRecursive', $value, $words);
+		} else {
+
+			foreach ($words as $group) {
+				$filterResult = array_filter($group, function($w) use ($value) {
+					return (stripos($value, $w) !== false ? true : false);
+				});
+
+				if (count($filterResult) == count($group)) {
+					echo "您输入的参数不合法";
+					exit;
+				}
+			}
+		}
+	}
+}
 /**
  *
  * 系统调试设置

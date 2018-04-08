@@ -578,7 +578,6 @@ class CcguitarController extends BaseTaskController
         $cover_id = 0;
             $imgurl = pq('.xspace-signavatar:eq(0)')->attr('src');
         $cover_url = parent::getUploadPath($imgurl, 'Avatars');
-        var_dump($cover_url);exit;
         $up_uid = $artist_id;
         $up_uname = $artist_name;
         $diHtml = pq('#un1num')->html();
@@ -611,6 +610,7 @@ class CcguitarController extends BaseTaskController
         $src = pq('audio:eq(0)')->attr('src');
         if($imgurl){
             $listen_url = parent::getUploadPath($imgurl, 'Music');
+            echo json_encode($listen_url);exit;
         }
         $jitapu=pq('.swiper-slide-active:eq(0)').find('img');
         $jitapuOss=pq($jitapu).attr('src');

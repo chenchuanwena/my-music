@@ -11,6 +11,7 @@ if(!empty($path)) {
 !empty($params)?$_GET['g']=array_shift($params):"";
 !empty($params)?$_GET['m']=array_shift($params):"";
 !empty($params)?$_GET['a']=array_shift($params):"";
+
 if(count($params)>1) {
 // 解析剩余参数 并采用GET方式获取
     preg_replace('@(\w+),([^,\/]+)@e', '$_GET[\'\\1\']="\\2";', implode(',',$params));

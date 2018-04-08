@@ -59,7 +59,6 @@ class FileModel extends Model{
 
 				$value['path'] = substr($setting['rootPath'], 1).$value['savepath'].$value['savename'];	//在模板里的url路径
 				$value['savepath']=str_replace('.',C('OSS_DOMAIN'),$value['savepath']);
-
 				oss_upload($value['path']);
 				$value['path']=C('OSS_DOMAIN').ltrim($value['path'], '.');
 				$value['savepath']=C('OSS_DOMAIN').ltrim($value['savepath'], '.');

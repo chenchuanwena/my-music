@@ -14,13 +14,18 @@ function new_oss(){
     $oss=new \OSS\OssClient($config['KEY_ID'],$config['KEY_SECRET'],$config['END_POINT']);
     return $oss;
 }
-function oss_upload($path){
+function oss_upload($path,$flag=true){
     // 获取配置项
-    $bucket=C('ALIOSS_CONFIG.BUCKET');
-    // 先统一去除左侧的.或者/ 再添加./
     $oss_path=ltrim($path,'./');
-    $path='./'.$oss_path;
+    if($flag){
+
+        // 先统一去除左侧的.或者/ 再添加./
+
+        $path='./'.$oss_path;
+
+    }
     if (file_exists($path)) {
+        $bucket=C('ALIOSS_CONFIG.BUCKET');
         // 实例化oss类
         $oss=new_oss();
         // 上传到oss
@@ -30,6 +35,53 @@ function oss_upload($path){
         return true;
     }
     return false;
+
+}
+
+function makeDir( $sfolderName )
+{
+    $reval = FALSE;
+    if( !file_exists($sfolderName) )
+    {
+        $atmp = array();
+        @umask(0); // 如果目录不存在则尝试创建该目录
+        preg_match_all('/([^\/]*)\/?/i', $sfolderName, $atmp); // 将目录路径拆分成数组
+        $base = ($atmp[0][0] == '/') ? '/' : ''; // 如果第一个字符为/则当作物理路径处理
+        foreach ($atmp[1] AS $val) // 遍历包含路径信息的数组
+        {
+            if( '' != $val )
+            {
+                $base .= $val;
+                if( '..' == $val || '.' == $val )
+                {
+                    /* 如果目录为.或者..则直接补/继续下一个循环 */
+                    $base .= '/';
+                    continue;
+                }
+            }
+            else
+            {
+                continue;
+            }
+            $base .= '/';
+            if( !file_exists($base) )
+            {
+                /* 尝试创建目录，如果创建失败则继续循环 */
+                if( @mkdir(rtrim($base, '/'), 0777) )
+                {
+                    @chmod($base, 0777);
+                    $reval = TRUE;
+                }
+            }
+        }
+    }
+    else
+    {
+        /* 路径已经存在。返回该路径是不是一个目录 */
+        $reval = is_dir($sfolderName);
+    }
+    clearstatcache();
+    return $reval;
 }
 /**
  * 系统公共库文件

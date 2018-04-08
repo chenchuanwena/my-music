@@ -1,6 +1,7 @@
 <?php
 
 namespace Home\Controller;
+
 use Admin\Controller\AuthController;
 
 /**
@@ -10,7 +11,8 @@ use Admin\Controller\AuthController;
 class IndexController extends HomeController
 {
 
-    public function export($data=array()){
+    public function export($data = array())
+    {
         # code...
         include_once(DIR_FS_DOCUMENT_ROOT . 'classes/PHPExcel/Writer/IWriter.php');
         include_once(DIR_FS_DOCUMENT_ROOT . 'classes/PHPExcel/Writer/Excel5.php');
@@ -73,56 +75,60 @@ class IndexController extends HomeController
         header("Pragma: no-cache");
         $obj_Writer->save('php://output');
     }
-    private function buildData() {
+
+    private function buildData()
+    {
         $rtnData = array(
             array(
-                'name'=>'YanCheng_01',
-                'age'=>'20',
-                'addr'=>array(
+                'name' => 'YanCheng_01',
+                'age' => '20',
+                'addr' => array(
                     array(
-                        'ab'=>array('country'=>'China', 'province'=>'ShanDong'),
-                         'ab'=>array('country'=>'China', 'province'=>'ShanDong'),
+                        'ab' => array('country' => 'China', 'province' => 'ShanDong'),
+                        'ab' => array('country' => 'China', 'province' => 'ShanDong'),
                     ),
                     array(
-                        'country'=>'China',
-                        'province'=>'BeiJing'
+                        'country' => 'China',
+                        'province' => 'BeiJing'
                     )
                 ),
-                '_DIMENSION'=>4
+                '_DIMENSION' => 4
             ),
             array(
-                'name'=>'YanCheng_02',
-                'age'=>'21',
-                'addr'=>array(
+                'name' => 'YanCheng_02',
+                'age' => '21',
+                'addr' => array(
                     array(
-                        'country'=>'China',
-                        'province'=>'LanZhou'
+                        'country' => 'China',
+                        'province' => 'LanZhou'
                     ),
                     array(
-                        'country'=>'China',
-                        'province'=>'NingXia'
+                        'country' => 'China',
+                        'province' => 'NingXia'
                     ), array(
-                        'country'=>'China1',
-                        'province'=>'NingXia'
+                        'country' => 'China1',
+                        'province' => 'NingXia'
                     )
                 ),
-                '_DIMENSION'=>3
+                '_DIMENSION' => 3
             ),
             array(
-                'name'=>'YanCheng_03',
-                'age'=>'22',
-                'addr'=>array(
+                'name' => 'YanCheng_03',
+                'age' => '22',
+                'addr' => array(
                     array(
-                        'country'=>'China',
-                        'province'=>'JiaYuGuan'
+                        'country' => 'China',
+                        'province' => 'JiaYuGuan'
                     )
                 ),
-                '_DIMENSION'=>1
+                '_DIMENSION' => 1
             )
         );
         return $rtnData;
     }
-    public function doExportData($dataArr) {
+
+    public function doExportData($dataArr)
+    {
         $phpObjExcel = new \PHPExcel();
         $worksSheet = $phpObjExcel->setActiveSheetIndex(0);
         //构造表头数据_Begin
@@ -130,7 +136,7 @@ class IndexController extends HomeController
         $firstDataEntry = $dataArr[0];
         //分配列索引
         $colIndex = 0;
-        foreach($firstDataEntry as $key => $val) {
+        foreach ($firstDataEntry as $key => $val) {
             if (preg_match('/^_/', $key)) {
                 continue;
             }
@@ -148,17 +154,17 @@ class IndexController extends HomeController
                 }
             } else {
                 $tmpColTitles[] = array(
-                    'key'=>$key,
-                    'colIndex'=>$colIndex
+                    'key' => $key,
+                    'colIndex' => $colIndex
                 );
                 $colIndex++;
             }
         }
-        for($i = 0; $i < count($tmpColTitles); $i++) {
+        for ($i = 0; $i < count($tmpColTitles); $i++) {
             $tmpObj = $tmpColTitles[$i];
             $key = $tmpObj['key'];
             $colIndex = $tmpObj['colIndex'];
-            $worksSheet->setCellValueByColumnAndRow($colIndex,1,$key);
+            $worksSheet->setCellValueByColumnAndRow($colIndex, 1, $key);
         }
         //构造表头数据_End
         //填充单元格数据
@@ -179,7 +185,7 @@ class IndexController extends HomeController
                 } else {
                     $tmpDataArr = $dataEntry[$parentKey];
                     $innerRow = $currRow;
-                    for($index = 0; $index < count($tmpDataArr); $index++) {
+                    for ($index = 0; $index < count($tmpDataArr); $index++) {
                         $innerDataEntry = $tmpDataArr[$index];
                         $value = $innerDataEntry[$key];
                         $worksSheet->setCellValueByColumnAndRow($colIndex, $innerRow, $value);
@@ -203,7 +209,8 @@ class IndexController extends HomeController
         exit;
     }
 
-    public function exportConvertExcel($expTitle, $expCellName, $expTableData){
+    public function exportConvertExcel($expTitle, $expCellName, $expTableData)
+    {
         $xlsTitle = iconv('utf-8', 'gb2312', $expTitle);
         //文件名称
         $fileName = $xlsTitle . date('_Ymd');
@@ -217,9 +224,9 @@ class IndexController extends HomeController
         for ($i = 0; $i < $cellNum; $i++) {
             $objPHPExcel->setActiveSheetIndex(0)->setCellValue($cellName[$i] . '1', $expCellName[$i][1]);
         }
-        $sameValues=array();
-        $begin['i']=2;
-        $begin['j']=0;
+        $sameValues = array();
+        $begin['i'] = 2;
+        $begin['j'] = 0;
 
         for ($i = 0; $i < $dataNum; $i++) {
             for ($j = 0; $j < $cellNum; $j++) {
@@ -243,27 +250,27 @@ class IndexController extends HomeController
             }
         }
         ////需要合并的维度这里是灵活的，下面的J控制维度
-        for ($j = 0; $j <2; $j++) {
-            $beginValue=(string)$expTableData[0][$expCellName[$j][0]];
-            $beginRow=2;
+        for ($j = 0; $j < 2; $j++) {
+            $beginValue = (string)$expTableData[0][$expCellName[$j][0]];
+            $beginRow = 2;
             for ($i = 1; $i < $dataNum; $i++) {
-                    if((string)$expTableData[$i][$expCellName[$j][0]]!=$beginValue ){
-                        $objPHPExcel->getActiveSheet(0)->mergeCellsByColumnAndRow($j, $beginRow,$j, $i+1)->getStyle($cellName[$j].$beginRow)->getAlignment()->setVertical(\PHPExcel_Style_Alignment::VERTICAL_CENTER);
-                        $beginValue=(string)$expTableData[$i][$expCellName[$j][0]];
-                        $beginRow=$i+2;
+                if ((string)$expTableData[$i][$expCellName[$j][0]] != $beginValue) {
+                    $objPHPExcel->getActiveSheet(0)->mergeCellsByColumnAndRow($j, $beginRow, $j, $i + 1)->getStyle($cellName[$j] . $beginRow)->getAlignment()->setVertical(\PHPExcel_Style_Alignment::VERTICAL_CENTER);
+                    $beginValue = (string)$expTableData[$i][$expCellName[$j][0]];
+                    $beginRow = $i + 2;
 
-                    }
-                    if($i==$dataNum-1){
-                        $objPHPExcel->getActiveSheet(0)->mergeCellsByColumnAndRow($j, $beginRow,$j, $i+2)->getStyle($cellName[$j].$beginRow)->getAlignment()->setVertical(\PHPExcel_Style_Alignment::VERTICAL_CENTER);
-                    }
+                }
+                if ($i == $dataNum - 1) {
+                    $objPHPExcel->getActiveSheet(0)->mergeCellsByColumnAndRow($j, $beginRow, $j, $i + 2)->getStyle($cellName[$j] . $beginRow)->getAlignment()->setVertical(\PHPExcel_Style_Alignment::VERTICAL_CENTER);
+                }
             }
         }
         //exit;
 
         //exit;
-       // $sameValues=array_values($sameValues);
-       // echo json_encode($sameValues);exit;
-       // $objPHPExcel->getActiveSheet(0)->mergeCellsByColumnAndRow(0, 2, 0, 5);
+        // $sameValues=array_values($sameValues);
+        // echo json_encode($sameValues);exit;
+        // $objPHPExcel->getActiveSheet(0)->mergeCellsByColumnAndRow(0, 2, 0, 5);
         header('pragma:public');
         header('Content-type:application/vnd.ms-excel;charset=utf-8;name="' . $xlsTitle . '.xlsx"');
         header("Content-Disposition:attachment;filename=$fileName.xlsx");
@@ -272,6 +279,7 @@ class IndexController extends HomeController
         $objWriter->save('php://output');
         exit;
     }
+
     public function exportOneShellExcel($expTitle, $expCellName, $expTableData)
     {
         $xlsTitle = iconv('utf-8', 'gb2312', $expTitle);
@@ -302,6 +310,7 @@ class IndexController extends HomeController
         $objWriter->save('php://output');
         exit;
     }
+
     private function readAllExcelDetail($filename, $file_type)
     {
         if ($file_type == 'xlsx') {
@@ -325,17 +334,20 @@ class IndexController extends HomeController
         }
         return $excelsData;
     }
+
     private function get_extension($file)
     {
         $info = pathinfo($file);
         return $info['extension'];
     }
+
     private function readExcel($filename, $encode = 'utf-8', $file_type)
     {
 
         return $this->readExcelDetail($filename, $file_type);
 
     }
+
     private function readExcelDetail($filename, $file_type)
     {
         if ($file_type == 'xlsx') {
@@ -349,7 +361,7 @@ class IndexController extends HomeController
             $highestColumnIndex = \PHPExcel_Cell::columnIndexFromString($highestColumn);
             $excelData = array();
         } else {
-            $objReader =\ PHPExcel_IOFactory::createReader('Excel5');
+            $objReader = \ PHPExcel_IOFactory::createReader('Excel5');
             $objReader->setReadDataOnly(true);
             $objPHPExcel = $objReader->load($filename);
             $objWorksheet = $objPHPExcel->getActiveSheet();
@@ -368,9 +380,11 @@ class IndexController extends HomeController
 
         return $excelData;
     }
-    public function exportExcel(){
-        $export=I('export',false);
-        if($export!==false){
+
+    public function exportExcel()
+    {
+        $export = I('export', false);
+        if ($export !== false) {
             include_once VENDOR_PATH . 'PHPExcel/PHPExcel.php';
             include_once VENDOR_PATH . 'PHPExcel/PHPExcel/Writer/Excel5.php';
             include VENDOR_PATH . 'PHPExcel/PHPExcel/Reader/Excel2007.php';
@@ -380,7 +394,7 @@ class IndexController extends HomeController
             $return_data = $this->readExcel('export_excel.xlsx', 'utf-8', 'xlsx');
 //        $matchs = $this->readAllExcelDetail('match.xlsx', 'xlsx');
 //        $this->match_data = $this->convertMatchData($matchs);
-            $cellName=array(
+            $cellName = array(
                 array(
                     0,
                     '维度1',
@@ -479,11 +493,11 @@ class IndexController extends HomeController
                 ),
             );
 
-            $return_data=array_values($return_data);
+            $return_data = array_values($return_data);
 //            $budata=$this->buildData();
 //            $this->doExportData($budata);exit;
-            $this->exportConvertExcel('exportExcel',$cellName,$return_data);
-        }else{
+            $this->exportConvertExcel('exportExcel', $cellName, $return_data);
+        } else {
             $this->display();
         }
 
@@ -507,70 +521,73 @@ class IndexController extends HomeController
         $this->assign('all', $allNames);
         $this->display();
     }
-    public function chatroom(){
-        $self=$_SESSION['jy_home_']['user_auth'];
-        if(!$self){
+
+    public function chatroom()
+    {
+        $self = $_SESSION['jy_home_']['user_auth'];
+        if (!$self) {
             echo "请登录";
             exit;
         }
-        $self['nickname']=$self['username'];
-        $self['userid']=$self['uid'];
-        $self['login_time']=date('Y-m-d H:i:s',$self['last_login_time']);
-        $pictures=D('Picture');
-        $faceUrls= C('face_url');
-        $selfAtore=$pictures->getPictureByUidAndType($self['uid'],5,'uid,path,type',1,10);
+        $self['nickname'] = $self['username'];
+        $self['userid'] = $self['uid'];
+        $self['login_time'] = date('Y-m-d H:i:s', $self['last_login_time']);
+        $pictures = D('Picture');
+        $faceUrls = C('face_url');
+        $selfAtore = $pictures->getPictureByUidAndType($self['uid'], 5, 'uid,path,type', 1, 10);
 
-        $self['avatar']=$selfAtore?$selfAtore:$faceUrls['avataroffline'];
-        $dateObj=Date('Y-m-d H:i:s',NOW_TIME);
-        $member=D('Member');
-        $result=$member->joinTables("member_auth_musician b",'Left Join',"a.uid","b.uid","a.uid,a.nickname",1,10,'uid');
+        $self['avatar'] = $selfAtore ? $selfAtore : $faceUrls['avataroffline'];
+        $dateObj = Date('Y-m-d H:i:s', NOW_TIME);
+        $member = D('Member');
+        $result = $member->joinTables("member_auth_musician b", 'Left Join', "a.uid", "b.uid", "a.uid,a.nickname", 1, 10, 'uid');
 
-        $uids=array_column($result['result'],'uid');
+        $uids = array_column($result['result'], 'uid');
 
-        $userPic=$pictures->getPictureByUidAndType($uids,5,'uid,path,type',1,10);
-        foreach($userPic as $val){
-            $result['result'][$val['uid']]['avator']=$val['path'];
+        $userPic = $pictures->getPictureByUidAndType($uids, 5, 'uid,path,type', 1, 10);
+        foreach ($userPic as $val) {
+            $result['result'][$val['uid']]['avator'] = $val['path'];
         }
-        $userids=array();
-        foreach( $result['result'] as &$val){
-            $val['avatar']=isset($val['path'])?$val['path']:$faceUrls['avataroffline'];
-            $val['userid']=$val['uid'];
-            $val['username']=$val['nickname'];
-            array_push($userids,$val['uid']);
+        $userids = array();
+        foreach ($result['result'] as &$val) {
+            $val['avatar'] = isset($val['path']) ? $val['path'] : $faceUrls['avataroffline'];
+            $val['userid'] = $val['uid'];
+            $val['username'] = $val['nickname'];
+            array_push($userids, $val['uid']);
 
         }
-        $userids=implode(',',$userids);
-        $where['uid']=array('in',$userids);
-        $auth_access=M('auth_group_access')->where($where)->select();
-        $auth_access=array_column($auth_access,'group_id','uid');
-        $baseUsers=array();
-        $service=array();
-        foreach( $result['result'] as &$val){
-            $val['avatar']=isset($val['path'])?$val['path']:$faceUrls['avataroffline'];
-            $val['userid']=$val['uid'];
-            $val['username']=$val['nickname'];
-            if(isset($auth_access[$val['uid']])&&$auth_access[$val['uid']]==7){
-                array_push($service,$val);
-            }else{
-                array_push($baseUsers,$val);
+        $userids = implode(',', $userids);
+        $where['uid'] = array('in', $userids);
+        $auth_access = M('auth_group_access')->where($where)->select();
+        $auth_access = array_column($auth_access, 'group_id', 'uid');
+        $baseUsers = array();
+        $service = array();
+        foreach ($result['result'] as &$val) {
+            $val['avatar'] = isset($val['path']) ? $val['path'] : $faceUrls['avataroffline'];
+            $val['userid'] = $val['uid'];
+            $val['username'] = $val['nickname'];
+            if (isset($auth_access[$val['uid']]) && $auth_access[$val['uid']] == 7) {
+                array_push($service, $val);
+            } else {
+                array_push($baseUsers, $val);
             }
         }
-        $result['result']=$baseUsers;
+        $result['result'] = $baseUsers;
 
-        $this->assign('dateobj',$dateObj);
-         $result['result']=array_values($result['result']);
-         $this->assign('count',$result['count']-1);
-        $this->assign('count_service',count($service));
-         $this->assign('users',$result['result']);
-        $this->assign('services',$service);
-         $this->assign('userjson',json_encode($result['result']));
-         $this->assign('faceUrl', $faceUrls);
+        $this->assign('dateobj', $dateObj);
+        $result['result'] = array_values($result['result']);
+        $this->assign('count', $result['count'] - 1);
+        $this->assign('count_service', count($service));
+        $this->assign('users', $result['result']);
+        $this->assign('services', $service);
+        $this->assign('userjson', json_encode($result['result']));
+        $this->assign('faceUrl', $faceUrls);
         $this->assign('self', $self);
         $this->assign('session_id', session_id());
         $this->assign('selfjson', json_encode($self));
-         $this->assign('debug', 'true');
-         $this->display();
+        $this->assign('debug', 'true');
+        $this->display();
     }
+
     //系统首页
     public function index()
     {
@@ -591,10 +608,10 @@ class IndexController extends HomeController
     public function upload()
     {
         vendor('Swoole.autoload');
-        $upload=new \Upload();
-        var_dump($upload);exit;
-        if ($_FILES)
-        {
+        $upload = new \Upload();
+        var_dump($upload);
+        exit;
+        if ($_FILES) {
             // header("Content-type: application/json");
             // 指定允许其他域名访问
             header('Access-Control-Allow-Origin:*');
@@ -607,19 +624,63 @@ class IndexController extends HomeController
             $upload->thumb_height = 136;
             $upload->thumb_qulitity = 100;
             $up_pic = $upload->save('Filedata');
-            if (empty($up_pic))
-            {
+            if (empty($up_pic)) {
                 echo '上传失败，请重新上传！ Error:' . $upload->error_msg;
             }
-            $baseUrl=$this->get_url();
-            $up_pic['thumb']=$baseUrl.$up_pic['thumb'];
-            $up_pic['url']=$baseUrl.$up_pic['url'];
+            $baseUrl = $this->get_url();
+            $up_pic['thumb'] = $baseUrl . $up_pic['thumb'];
+            $up_pic['url'] = $baseUrl . $up_pic['url'];
             echo json_encode($up_pic);
-        }
-        else
-        {
+        } else {
             echo "Bad Request\n";
         }
     }
+
+    private function getRegByRange($oneIps)
+    {
+        $dights['begin'] = explode('.', $oneIps['begin']);
+        $dights['end'] = explode('.', $oneIps['end']);
+        $regBase = $dights['begin'][0] . '\.' . $dights['begin'][1] . '\.' . $dights['begin'][2] . '\.';
+        $lastDight = '(';
+        for ($i = $dights['begin'][3]; $i <= $dights['end'][3]; $i++) {
+            $lastDight .= $i . '|';
+        }
+        $lastDight = trim($lastDight, '|');
+        $lastDight .= ')';
+        $reg = $regBase . $lastDight;
+        return $reg;
+    }
+
+    public function testReg()
+    {
+        $ips = array(
+            array(
+                'begin' => '192.168.1.100',
+                'end' => '192.168.1.110',
+            ),
+            array(
+                'begin' => '192.168.2.100',
+                'end' => '192.168.2.110',
+            ),
+            array(
+                'begin' => '192.168.3.100',
+                'end' => '192.168.3.110',
+            ),
+        );
+        $regs = array();
+        foreach ($ips as $val) {
+            $reg = $this->getRegByRange($val);
+            array_push($regs, $reg);
+        }
+        $matchIp='192.168.1.105';//(假设这是进来的ip)
+        $regsStr=implode('|',$regs);
+        if(preg_match("/{$regsStr}/i",$matchIp)){
+            echo 'true';
+        }else{
+            echo 'false';
+        }
+        exit;
+    }
+
 
 }

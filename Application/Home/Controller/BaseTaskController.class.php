@@ -40,6 +40,7 @@ class BaseTaskController extends Controller
     {
         $this->drawsoure = D('Drawsource');
         $this->drawDetail = D('DrawsourceDetail');
+
     }
 
     public function addPage($val, $url)
@@ -107,13 +108,16 @@ class BaseTaskController extends Controller
             $this->setDatas = $this->pageUrlList;
         }
         foreach ($this->setDatas as &$value) {
+           // header("Content-Type:text/html;charset=gbk;");
+
+
             $sql = format("select count(*) as COUNT from jy_drawsource_detail where type={0} and DATE_FORMAT(FROM_UNIXTIME(gmt_create), '%Y-%m-%d')='{1}'", $value['my_music_id'], date('Y-m-d', NOW_TIME));
             $res = $this->drawDetail->query($sql);
             if ($res[0]['count'] > 0) {
-                echo '网站名称:' . $this->websitName . "\r\n";
-                echo '网站域名:' . $this->websitName . "\r\n";
-                echo '类型:' . $this->getType($value['my_music_id']) . "\r\n";
-                echo '今天已经抓取过了' . "\r\n";
+                echo 'websit name:' . iconv('UTF-8','gbk',$this->websitName) . "\r\n";
+                echo 'websit domain:' . iconv('UTF-8','gbk',$this->websitName) . "\r\n";
+                echo 'type:' .iconv('UTF-8','gbk',$this->getType($value['my_music_id']))  . "\r\n";
+                echo 'today already done' . "\r\n";
             } else {
                 for ($i = $value['page']; $i <= $value['draw_page_count']; $i++) {
                     $url = format($value['format_url'], $i);
@@ -122,9 +126,9 @@ class BaseTaskController extends Controller
                     $this->detailLists = array();
                     $this->urlToDetailLinks($getUrl, $value['my_music_id']);
                     $this->drawDetail->addAll($this->detailLists, array(), true);
-                    echo '网站名称:' . $this->websitName . "\r\n";
-                    echo '网站域名:' . $this->websitName . "\r\n";
-                    echo '请求链接:' . $getUrl . "\r\n";
+                    echo 'websit name:' . iconv('UTF-8','gbk',$this->websitName) . "\r\n";
+                    echo 'websit domain:' .  iconv('UTF-8','gbk',$this->websitName) . "\r\n";
+                    echo 'request:' . iconv('UTF-8','gbk',$getUrl)  . "\r\n";
                     echo 'success' . "\r\n";
                 }
             }
@@ -133,21 +137,33 @@ class BaseTaskController extends Controller
 
     protected function saveLocation($content, $fileName, $saveDirectory)
     {
+        $base_upload_root= C('BASE_UPLOAD_ROOT');
         $date = date('Y-m-d', NOW_TIME);
-        echo $_SERVER['DOCUMENT_ROOT'];exit;
-        $savePath = BASE_UPLOAD_PATH . $saveDirectory . "/{$date}/" . $fileName;
-        echo $savePath;exit;
-        file_put_contents($savePath, $content);
-        $ossPath = oss_upload($savePath);
-        return $ossPath;
+        $realDirectory= $base_upload_root . $saveDirectory . "/{$date}/";
+        if(makeDir($realDirectory)){
+            $savePath = $realDirectory . $fileName;
+            file_put_contents($savePath, $content);
+            $savePath='/Uploads/'.$saveDirectory . "/{$date}/".$fileName;
+            $ossPath = oss_upload($savePath);
+            $ossImage=C('OSS_DOMAIN').'/Uploads/'.$saveDirectory . "/{$date}/".$fileName;
+            return $ossImage;
+        }else{
+            return '';
+        }
+
     }
 
 //获得上传的云路径地址
 
     function getUploadPath($path, $saveDirectory)
     {
-        $getUrl = $this->domain . $path;
-        $content = file_get_contents($getUrl);
+        if(strpos($path,'http')){
+            $getUrl = $path;
+        }else{
+            $getUrl = $this->domain . $path;
+        }
+        $getpathUrl=trim($getUrl);
+        $content = file_get_contents(trim($getUrl));
         $uid = 0;
         $path = $this->saveLocation($content, basename($path), $saveDirectory);
         $create_time = NOW_TIME;

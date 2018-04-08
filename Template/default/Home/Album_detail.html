@@ -95,5 +95,21 @@
 		</div>	
 	</div>
 </div>
+	<script>
+		if(data.success) {
+			window.location.href="resetPasswordSuccess.html";
+		} else {
+			if(data.status == 1){//为1是代表与原密码相同了
+				var group = $("#newPassswrod").closest('.am-form-group');
+				var $alert = group.find('.am-text-danger');
+				if(!$alert.length) {
+					$alert = $('<div class="am-text-danger am-text-middle am-text-xs" style="margin-left:130px;"><span class="am-text-middle" style="color:#ea6948;font-size:16px;"></span></div>').hide();
+					$alert.appendTo(group);
+				}
+				$alert.find('span').text(data.error);
+				$alert.show();
+			}
+		}
+	</script>
 </block>
 <block name="player"><include file="Player/default"/></block> 
